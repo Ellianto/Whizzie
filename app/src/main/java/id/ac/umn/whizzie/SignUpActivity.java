@@ -5,28 +5,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up);
 
-        Button loginButton = findViewById(R.id.btnLoggingIn);
-        Button signUpButton = findViewById(R.id.btnMoveToSignUp);
+        Button loginButton = findViewById(R.id.btnMoveToLogin);
+        Button signUpButton = findViewById(R.id.btnSigningUp);
 
-        final IntentMovement intentMovement = new IntentMovement(MainActivity.this);
+        final IntentMovement intentMovement = new IntentMovement(SignUpActivity.this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //intentMovement.moveToTargetNormal(HomeActivity.class);
+                intentMovement.moveToTargetNormal(MainActivity.class);
             }
         });
 
         signUpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                // Sign Up, lalu kalau sukses pindah ke Main Activity
+
+                // Untuk Sekarang tetap ke diri sendiri dulu
                 intentMovement.moveToTargetNormal(SignUpActivity.class);
             }
         });

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:id="+@id/home_bottom_menu"
+        />
+    <item android:title="Timeline"
+        android:id="+@id/timeline_bottom_menu"/>
+    <item android:title="Wish It!"
+        android:id="+@id/post_bottom_menu"/>
+    <item android:title="Notifications"
+        android:id="+@id/notification_bottom_menu"/>
+    <item android:title="Profile"
+        android:id="+@id/profile_bottom_menu"/>
+</menu>
