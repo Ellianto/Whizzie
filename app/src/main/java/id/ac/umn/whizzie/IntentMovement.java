@@ -10,6 +10,8 @@ public class IntentMovement {
         this.ctx = ctx;
     }
 
+    // TODO: 4/13/2019 Implement Intent Movement with Extras 
+
     public void moveToTargetNormal(Class target){
         ctx.startActivity(new Intent(ctx, target));
     }

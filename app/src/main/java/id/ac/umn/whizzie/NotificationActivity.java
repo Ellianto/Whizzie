@@ -1,0 +1,57 @@
+package id.ac.umn.whizzie;
+
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotificationActivity extends AppCompatActivity {
+
+    BottomNavigationView btmNavView;
+    RecyclerView rvNotifications;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notification);
+
+        btmNavView = findViewById(R.id.btmNavNotifications);
+
+        final IntentMovement im = new IntentMovement(NotificationActivity.this);
+
+        btmNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                switch (menuItem.getItemId()){
+                    case R.id.home_bottom_menu: im.moveToTargetNormal(HomeActivity.class);
+                    case R.id.timeline_bottom_menu: im.moveToTargetNormal(TimelineActivity.class);
+                    case R.id.post_bottom_menu: im.moveToTargetNormal(PostActivity.class);
+                    case R.id.notification_bottom_menu: im.moveToTargetNormal(NotificationActivity.class);
+                    case R.id.profile_bottom_menu: im.moveToTargetNormal(ProfileActivity.class);
+                }
+
+                return true;
+            }
+        });
+
+        rvNotifications = findViewById(R.id.rvNotifications);
+
+        rvNotifications.setHasFixedSize(true);
+
+        List<Notifications> notifList = new ArrayList<>();
+
+        notifList.add(new Notifications("Ini pemberitahuan pertama!!!"));
+        notifList.add(new Notifications("Artinya, ini yang kedua"));
+        notifList.add(new Notifications("Berarti ini yang ketiga dong"));
+
+        NotificationsAdapter notifAdapter = new NotificationsAdapter(this, notifList);
+
+        rvNotifications.setAdapter(notifAdapter);
+    }
+}

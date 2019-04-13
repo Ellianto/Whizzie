@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
-        android:id="+@id/home_bottom_menu"
-        />
-    <item android:title="Timeline"
-        android:id="+@id/timeline_bottom_menu"/>
-    <item android:title="Wish It!"
-        android:id="+@id/post_bottom_menu"/>
-    <item android:title="Notifications"
-        android:id="+@id/notification_bottom_menu"/>
-    <item android:title="Profile"
-        android:id="+@id/profile_bottom_menu"/>
+    <item
+        android:id="@+id/home_bottom_menu"
+        android:title="Home" />
+    <item
+        android:id="@+id/timeline_bottom_menu"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="Timeline" />
+    <item
+        android:id="@+id/notification_bottom_menu"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/post_bottom_menu"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Wish It!" />
+    <item
+        android:id="@+id/profile_bottom_menu"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Profile" />
 </menu>

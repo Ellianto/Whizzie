@@ -87,8 +87,9 @@
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/btmNavLogin"
         android:layout_width="match_parent"
-        android:layout_height="77dp"
+        android:layout_height="59dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

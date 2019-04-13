@@ -15,12 +15,14 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.btnLoggingIn);
         Button signUpButton = findViewById(R.id.btnMoveToSignUp);
 
+
+
         final IntentMovement intentMovement = new IntentMovement(MainActivity.this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //intentMovement.moveToTargetNormal(HomeActivity.class);
+                intentMovement.moveToTargetNormal(HomeActivity.class);
             }
         });
 
