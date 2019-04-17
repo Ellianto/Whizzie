@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Timeline;
 
 public class TimelineItems {
     private String profileName;

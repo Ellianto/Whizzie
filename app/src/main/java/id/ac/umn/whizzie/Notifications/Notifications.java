@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Notifications;
 
 public class Notifications {
     private String desc;
