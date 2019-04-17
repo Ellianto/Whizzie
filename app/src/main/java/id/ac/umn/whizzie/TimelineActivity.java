@@ -28,11 +28,11 @@ public class TimelineActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 switch (menuItem.getItemId()){
-                    case R.id.home_bottom_menu: im.moveToTargetNormal(HomeActivity.class);
-                    case R.id.timeline_bottom_menu: im.moveToTargetNormal(TimelineActivity.class);
-                    case R.id.post_bottom_menu: im.moveToTargetNormal(PostActivity.class);
-                    case R.id.notification_bottom_menu: im.moveToTargetNormal(NotificationActivity.class);
-                    case R.id.profile_bottom_menu: im.moveToTargetNormal(ProfileActivity.class);
+                    case R.id.home_bottom_menu: im.moveToTargetNormal(HomeActivity.class); break;
+                    case R.id.timeline_bottom_menu: im.moveToTargetNormal(TimelineActivity.class); break;
+                    case R.id.post_bottom_menu: im.moveToTargetNormal(PostActivity.class); break;
+                    case R.id.notification_bottom_menu: im.moveToTargetNormal(NotificationActivity.class); break;
+                    case R.id.profile_bottom_menu: im.moveToTargetNormal(ProfileActivity.class); break;
                 }
 
                 return true;
