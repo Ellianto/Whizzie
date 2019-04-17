@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Home;
 
 public class HomeCard {
     private String creatorName;

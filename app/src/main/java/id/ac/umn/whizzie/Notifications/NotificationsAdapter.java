@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Notifications;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import id.ac.umn.whizzie.R;
 
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationsHolder> {
 

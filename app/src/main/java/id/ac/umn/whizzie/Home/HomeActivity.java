@@ -1,8 +1,8 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Home;
 
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,13 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import id.ac.umn.whizzie.IntentMovement;
+import id.ac.umn.whizzie.Notifications.NotificationActivity;
+import id.ac.umn.whizzie.PostActivity;
+import id.ac.umn.whizzie.ProfileActivity;
+import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.Timeline.TimelineActivity;
 
 
 public class HomeActivity extends AppCompatActivity {

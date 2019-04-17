@@ -1,27 +1,35 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Notifications;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimelineActivity extends AppCompatActivity {
+import id.ac.umn.whizzie.Home.HomeActivity;
+import id.ac.umn.whizzie.IntentMovement;
+import id.ac.umn.whizzie.PostActivity;
+import id.ac.umn.whizzie.ProfileActivity;
+import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.Timeline.TimelineActivity;
+
+public class NotificationActivity extends AppCompatActivity {
+
     BottomNavigationView btmNavView;
-    RecyclerView rvTimelineItems;
+    RecyclerView rvNotifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        setContentView(R.layout.activity_notification);
 
-        btmNavView = findViewById(R.id.btmNavTimeline);
+        btmNavView = findViewById(R.id.btmNavNotifications);
 
-        final IntentMovement im = new IntentMovement(TimelineActivity.this);
+        final IntentMovement im = new IntentMovement(NotificationActivity.this);
 
         btmNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
@@ -39,17 +47,18 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
-        rvTimelineItems = findViewById(R.id.rvTimelineItems);
+        rvNotifications = findViewById(R.id.rvNotifications);
 
-        rvTimelineItems.setHasFixedSize(true);
+        rvNotifications.setHasFixedSize(true);
 
-        List<TimelineItems> tiList = new ArrayList<>();
+        List<Notifications> notifList = new ArrayList<>();
 
-        tiList.add(new TimelineItems("Ellianto", "Cuma coba coba", 100000));
-        tiList.add(new TimelineItems("Alexander", "Tes Test testing", 25000));
-        tiList.add(new TimelineItems("Ellianto", "Cek cek cek", 10101));
+        notifList.add(new Notifications("Ini pemberitahuan pertama!!!"));
+        notifList.add(new Notifications("Artinya, ini yang kedua"));
+        notifList.add(new Notifications("Berarti ini yang ketiga dong"));
 
-        TimelineItemsAdapter tiAdapter = new TimelineItemsAdapter(this, tiList);
-        rvTimelineItems.setAdapter(tiAdapter);
+        NotificationsAdapter notifAdapter = new NotificationsAdapter(this, notifList);
+
+        rvNotifications.setAdapter(notifAdapter);
     }
 }

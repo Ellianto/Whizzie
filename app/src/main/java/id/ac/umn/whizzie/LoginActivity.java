@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import id.ac.umn.whizzie.Home.HomeActivity;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override

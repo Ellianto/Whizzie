@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import id.ac.umn.whizzie.Home.HomeActivity;
+import id.ac.umn.whizzie.Notifications.NotificationActivity;
+import id.ac.umn.whizzie.Timeline.TimelineActivity;
+
 public class PostActivity extends AppCompatActivity {
 
     BottomNavigationView btmNavView;
