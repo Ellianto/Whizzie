@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "633354683228",
+    "firebase_url": "https://whizzie-umn.firebaseio.com",
+    "project_id": "whizzie-umn",
+    "storage_bucket": "whizzie-umn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633354683228:android:bbd72137fed962bd",
+        "android_client_info": {
+          "package_name": "id.ac.umn.whizzie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633354683228-3mi9soh70kiinn9jtoqvhs364jcnbd5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9zewMSdfHPZNnPyeRFNu7lEhiemeYFPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633354683228-3mi9soh70kiinn9jtoqvhs364jcnbd5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
