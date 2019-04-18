@@ -11,6 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/sign_up_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@mipmap/close_cross"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.977"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="70dp"
@@ -50,7 +64,7 @@
             android:backgroundTint="@color/colorWhite"
             android:ems="10"
             android:hint="Full Name"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             android:textColorHint="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -66,7 +80,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/colorWhite"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Password (at least 8 characters)"
             android:inputType="textPassword"
             android:textColorHint="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,8 +114,9 @@
             android:layout_marginEnd="16dp"
             android:background="@color/colorOrange"
             android:text="Sign Up"
+            android:enabled="false"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
+            android:textColor="#6A542D"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +172,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/sign_up_progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="30dp"
             android:layout_height="30dp"
