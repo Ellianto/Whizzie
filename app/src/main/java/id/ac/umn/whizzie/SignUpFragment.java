@@ -194,7 +194,7 @@ public class SignUpFragment extends Fragment {
     }
     private void checkEmailAndPassword(){
         if (email.getText().toString().matches(emailPattern)){
-            if (password.getText().toString().equals(confirmPassword.getText())){
+            if (password.getText().toString().equals(confirmPassword.getText().toString())){
 
                 progressBar.setVisibility(View.VISIBLE);
                 signUpBtn.setEnabled(false);
