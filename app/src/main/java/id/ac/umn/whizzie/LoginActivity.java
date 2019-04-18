@@ -17,8 +17,6 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.btnLoggingIn);
         Button signUpButton = findViewById(R.id.btnMoveToSignUp);
 
-
-
         final IntentMovement intentMovement = new IntentMovement(LoginActivity.this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
