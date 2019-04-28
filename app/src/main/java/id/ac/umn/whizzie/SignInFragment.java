@@ -58,7 +58,7 @@ public class SignInFragment extends Fragment {
             }
         });
 
-        final IntentMovement im = new IntentMovement(getContext());
+        final IntentMovement im = new IntentMovement(view.getContext());
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override

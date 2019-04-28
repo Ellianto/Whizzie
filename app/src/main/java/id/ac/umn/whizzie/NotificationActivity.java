@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -27,14 +28,13 @@ public class NotificationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // BottomNavigationView Initiation
-        btmNavView = findViewById(R.id.navigation);
+        btmNavView = findViewById(R.id.btmNavNotifications);
 
         final IntentMovement im = new IntentMovement(NotificationActivity.this);
 
         btmNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
                 switch (menuItem.getItemId()){
                     case R.id.home_bottom_menu:  im.moveToTargetNormal(HomeActivity.class); break;
                     case R.id.timeline_bottom_menu: im.moveToTargetNormal(TimelineActivity.class); break;
@@ -60,5 +60,12 @@ public class NotificationActivity extends AppCompatActivity {
         NotificationsAdapter notifAdapter = new NotificationsAdapter(this, notifList);
 
         rvNotifications.setAdapter(notifAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 }
