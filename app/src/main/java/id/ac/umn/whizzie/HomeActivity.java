@@ -50,11 +50,11 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // BottomNavigationView Initiation
-        btmNavView = findViewById(R.id.btmNavHome);
+        btmNavView = findViewById(R.id.wisher_bottom_nav);
         btmNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Recycler View Initiation
-        rvHomeBottomGrid = findViewById(R.id.rvHomeBottomGrid);
+        rvHomeBottomGrid = findViewById(R.id.home_bottom_grid);
 
         rvHomeBottomGrid.setHasFixedSize(true);
 

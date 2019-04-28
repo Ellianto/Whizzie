@@ -47,7 +47,7 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
-        rvTimelineItems = findViewById(R.id.rvTimelineItems);
+        rvTimelineItems = findViewById(R.id.timeline_recycler_view);
 
         rvTimelineItems.setHasFixedSize(true);
 

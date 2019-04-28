@@ -11,8 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import id.ac.umn.whizzie.IntentMovement;
-
 import java.util.List;
 
 
@@ -48,6 +46,7 @@ public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCa
         homeCardHolder.btnHomeCardBigButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO : Implement Home Card Profile Button
                 IntentMovement im = new IntentMovement(ctx);
 
                 im.moveToTargetNormal(ProfileActivity.class);
@@ -57,7 +56,7 @@ public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCa
         homeCardHolder.imagebuttonHomeCardSmallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Akan memfollow
+                // TODO : Implement Home Card Follow Button
 
             }
         });

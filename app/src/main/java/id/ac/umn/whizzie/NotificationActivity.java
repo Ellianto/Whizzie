@@ -47,7 +47,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-        rvNotifications = findViewById(R.id.rvNotifications);
+        rvNotifications = findViewById(R.id.notification_recycler_view);
 
         rvNotifications.setHasFixedSize(true);
 

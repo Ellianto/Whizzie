@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvNotifications"
+        android:id="@+id/notification_recycler_view"
         android:layout_width="403dp"
         android:layout_height="611dp"
         android:layout_marginStart="8dp"
@@ -24,7 +24,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btmNavNotifications"
         app:layout_constraintEnd_toEndOf="@id/btmNavNotifications"
-        app:layout_constraintStart_toStartOf="@id/include"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <android.support.design.widget.BottomNavigationView

@@ -63,7 +63,7 @@ public class SignInFragment extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                im.moveToTargetNormal(HomeActivity.class);
+                im.moveToTargetNormal(WisherActivity.class);
             }
         });
     }
