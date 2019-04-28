@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class SignInFragment extends Fragment {
 
     private TextView dontHaveAnAccount;
     private FrameLayout parentFrameLayout;
+    private ImageButton closeButton;
 
 
     @Override
@@ -33,6 +35,7 @@ public class SignInFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         dontHaveAnAccount = view.findViewById(R.id.tv_dont_have_an_account);
+        closeButton = view.findViewById(R.id.sign_in_close_btn);
         parentFrameLayout =  getActivity().findViewById(R.id.register_framelayout);
         return view;
     }
@@ -52,6 +55,15 @@ public class SignInFragment extends Fragment {
                 fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
                 fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
                 fragmentTransaction.commit();
+            }
+        });
+
+        final IntentMovement im = new IntentMovement(getContext());
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                im.moveToTargetNormal(HomeActivity.class);
             }
         });
     }

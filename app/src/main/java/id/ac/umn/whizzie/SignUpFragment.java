@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUserMetadata;
 
 import org.w3c.dom.Text;
 
@@ -217,7 +219,6 @@ public class SignUpFragment extends Fragment {
                                 }
                             }
                         });
-
             }else {
                 confirmPassword.setError("Password doesn't matched!");
             }
