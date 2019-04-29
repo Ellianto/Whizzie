@@ -3,6 +3,9 @@ package id.ac.umn.whizzie.Home;
 public class HomeCard {
     private String creatorName;
 
+    public HomeCard() {
+    }
+
     public HomeCard(String creatorName) {
         this.creatorName = creatorName;
     }
