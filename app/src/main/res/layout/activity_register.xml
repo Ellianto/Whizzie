@@ -7,7 +7,7 @@
     tools:context=".Activity.RegisterActivity">
 
     <FrameLayout
-        android:id="@+id/register_framelayout"
+        android:id="@+id/register_frame_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

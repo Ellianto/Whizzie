@@ -38,7 +38,7 @@ public class WisherActivity extends AppCompatActivity {
                 case R.id.profile_bottom_menu:      setFragment(new ProfileFragment()); break;
             }
             
-            return false;
+            return true;
         }
     };
 

@@ -38,9 +38,9 @@ public class SignInFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-        dontHaveAnAccount = view.findViewById(R.id.tv_dont_have_an_account);
+        dontHaveAnAccount = view.findViewById(R.id.sign_in_redirect_sign_up);
         closeButton = view.findViewById(R.id.sign_in_close_btn);
-        parentFrameLayout =  getActivity().findViewById(R.id.register_framelayout);
+        parentFrameLayout =  getActivity().findViewById(R.id.register_frame_layout);
         return view;
     }
 

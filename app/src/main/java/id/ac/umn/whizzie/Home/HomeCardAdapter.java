@@ -73,10 +73,10 @@ public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCa
         public HomeCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvHomeCardTitle = itemView.findViewById(R.id.tvHomeCardTitle);
-            imageviewHomeCardImage = itemView.findViewById(R.id.imageviewHomeCardImage);
-            btnHomeCardBigButton = itemView.findViewById(R.id.btnHomeCardBigButton);
-            imagebuttonHomeCardSmallButton = itemView.findViewById(R.id.imagebuttonHomeCardSmallButton);
+            tvHomeCardTitle = itemView.findViewById(R.id.home_card_title);
+            imageviewHomeCardImage = itemView.findViewById(R.id.home_card_image);
+            btnHomeCardBigButton = itemView.findViewById(R.id.home_card_button_portofolio);
+            imagebuttonHomeCardSmallButton = itemView.findViewById(R.id.home_card_button_add);
         }
     }
 }

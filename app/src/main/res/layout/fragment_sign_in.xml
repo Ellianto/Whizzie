@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/whizzie_logo"
             android:layout_width="70dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
@@ -101,7 +101,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/or_text_divider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -110,13 +110,13 @@
             android:layout_marginBottom="16dp"
             android:text="or"
             android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toTopOf="@+id/tv_dont_have_an_account"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_redirect_sign_up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
 
         <TextView
-            android:id="@+id/tv_dont_have_an_account"
+            android:id="@+id/sign_in_redirect_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
@@ -129,14 +129,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <View
-            android:id="@+id/divider"
+            android:id="@+id/divider1"
             android:layout_width="100dp"
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
             android:background="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/or_text_divider"
+            app:layout_constraintEnd_toStartOf="@+id/or_text_divider"
+            app:layout_constraintTop_toTopOf="@+id/or_text_divider" />
 
         <View
             android:id="@+id/divider2"
@@ -144,9 +144,9 @@
             android:layout_height="1dp"
             android:layout_marginStart="8dp"
             android:background="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/or_text_divider"
+            app:layout_constraintStart_toEndOf="@+id/or_text_divider"
+            app:layout_constraintTop_toTopOf="@+id/or_text_divider" />
 
         <ProgressBar
             android:id="@+id/sign_in_progressBar"
