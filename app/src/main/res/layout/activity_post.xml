@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,13 +7,24 @@
     tools:context=".PostActivity"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cvPostTopImageUpload"
+    <include
+        android:id="@+id/include"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/post_card_view_image_uploads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <ImageButton
-            android:id="@+id/imagebuttonPostAddImage"
+            android:id="@+id/post_image_button_add"
             android:layout_width="117dp"
             android:layout_height="119dp"
             android:layout_margin="8dp"
@@ -22,16 +33,21 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cvPostBottomForm"
+        android:id="@+id/post_card_view_bottom"
         android:layout_width="match_parent"
-        android:layout_height="523dp">
+        android:layout_height="475dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btmNavPost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_card_view_image_uploads">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvPostItemName"
+                android:id="@+id/post_text_view_item_name"
                 android:layout_width="96dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
@@ -44,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/edtPostItemName"
+                android:id="@+id/post_edit_text_item_name"
                 android:layout_width="291dp"
                 android:layout_height="43dp"
                 android:layout_marginTop="8dp"
@@ -56,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvPostCategory"
+                android:id="@+id/post_text_view_category"
                 android:layout_width="96dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
@@ -66,19 +82,19 @@
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPostItemName" />
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_item_name" />
 
             <Spinner
-                android:id="@+id/comboboxPostCategory"
+                android:id="@+id/post_combo_box_category"
                 android:layout_width="291dp"
                 android:layout_height="43dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPostItemName" />
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_item_name" />
 
             <TextView
-                android:id="@+id/tvPostQuantity"
+                android:id="@+id/post_text_view_quantity"
                 android:layout_width="96dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
@@ -88,10 +104,10 @@
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/comboboxPostCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/post_combo_box_category" />
 
             <EditText
-                android:id="@+id/edtPostQuantity"
+                android:id="@+id/post_edit_text_quantity"
                 android:layout_width="291dp"
                 android:layout_height="43dp"
                 android:layout_marginTop="8dp"
@@ -101,10 +117,10 @@
                 android:inputType="number"
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/comboboxPostCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/post_combo_box_category" />
 
             <TextView
-                android:id="@+id/tvPostPrice"
+                android:id="@+id/post_text_view_price"
                 android:layout_width="96dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
@@ -114,10 +130,10 @@
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPostQuantity" />
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_quantity" />
 
             <EditText
-                android:id="@+id/edtPostPrice"
+                android:id="@+id/post_edit_text_price"
                 android:layout_width="291dp"
                 android:layout_height="43dp"
                 android:layout_marginTop="8dp"
@@ -127,10 +143,10 @@
                 android:inputType="number"
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPostQuantity" />
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_quantity" />
 
             <TextView
-                android:id="@+id/tvPostTags"
+                android:id="@+id/post_text_view_tags"
                 android:layout_width="96dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
@@ -140,10 +156,10 @@
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPostPrice" />
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_price" />
 
             <EditText
-                android:id="@+id/edtPostTags"
+                android:id="@+id/post_edit_text_tags"
                 android:layout_width="0dp"
                 android:layout_height="76dp"
                 android:layout_marginStart="8dp"
@@ -155,10 +171,10 @@
                 android:singleLine="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPostTags" />
+                app:layout_constraintTop_toBottomOf="@+id/post_text_view_tags" />
 
             <Button
-                android:id="@+id/btnPostWishIt"
+                android:id="@+id/post_button_wish"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -167,7 +183,7 @@
                 android:text="WISH IT!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPostTags" />
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_tags" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
@@ -176,12 +192,10 @@
         android:id="@+id/btmNavPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvPostBottomForm"
-        app:menu="@menu/bottom_menu">
+        app:menu="@menu/navigation">
 
     </android.support.design.widget.BottomNavigationView>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

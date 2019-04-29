@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_bottom_menu"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+    <item
+        android:id="@+id/timeline_bottom_menu"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Timeline" />
+
+    <item
+        android:id="@+id/post_bottom_menu"
+        android:icon="@drawable/ic_control_point_black_24dp"
+        android:title="Wish It!" />
+
+    <item
+        android:id="@+id/notification_bottom_menu"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Notifications" />
+
+    <item
+        android:id="@+id/profile_bottom_menu"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Profile" />
+
+</menu>
