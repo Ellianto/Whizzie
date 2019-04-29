@@ -1,7 +1,6 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Register;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,10 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseUserMetadata;
 
-import org.w3c.dom.Text;
+import id.ac.umn.whizzie.R;
 
 
 /**
@@ -207,9 +204,10 @@ public class SignUpFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(mainIntent);
-                                    getActivity().finish();
+                                    // TODO: Redirect after Sign Up here
+//                                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+//                                    startActivity(mainIntent);
+//                                    getActivity().finish();
                                 }else{
                                     progressBar.setVisibility(View.INVISIBLE);
                                     signUpBtn.setEnabled(true);

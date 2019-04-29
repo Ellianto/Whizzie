@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Home;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import id.ac.umn.whizzie.R;
 
 
 public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCardHolder> {
@@ -47,9 +49,9 @@ public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCa
             @Override
             public void onClick(View v) {
                 // TODO : Implement Home Card Profile Button
-                IntentMovement im = new IntentMovement(ctx);
+//                IntentMovement im = new IntentMovement(ctx);
 
-                im.moveToTargetNormal(ProfileActivity.class);
+//                im.moveToTargetNormal(ProfileActivity.class);
             }
         });
 

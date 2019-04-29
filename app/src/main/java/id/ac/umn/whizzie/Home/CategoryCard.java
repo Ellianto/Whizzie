@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Home;
 
 public class CategoryCard {
     private String categoryName;

@@ -1,9 +1,11 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Activity;
 
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import id.ac.umn.whizzie.R;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".Home.HomeFragment">
 
     <ImageView
         android:id="@+id/home_top_banner"
-        android:layout_width="407dp"
-        android:layout_height="205dp"
+        android:layout_width="415dp"
+        android:layout_height="277dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
@@ -20,8 +20,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_middle_category"
-        android:layout_width="394dp"
-        android:layout_height="241dp"
+        android:layout_width="0dp"
+        android:layout_height="206dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -31,13 +31,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_bottom_grid"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="399dp"
+        android:layout_height="314dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_middle_category" />

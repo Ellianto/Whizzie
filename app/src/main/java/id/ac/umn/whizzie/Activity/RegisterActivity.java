@@ -1,10 +1,13 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+
+import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.Register.SignInFragment;
 
 public class RegisterActivity extends AppCompatActivity {
 

@@ -1,6 +1,7 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Register;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,9 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import id.ac.umn.whizzie.Activity.WisherActivity;
+import id.ac.umn.whizzie.R;
 
 
 /**
@@ -58,12 +62,10 @@ public class SignInFragment extends Fragment {
             }
         });
 
-        final IntentMovement im = new IntentMovement(view.getContext());
-
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                im.moveToTargetNormal(WisherActivity.class);
+                startActivity(new Intent(getContext(), WisherActivity.class));
             }
         });
     }

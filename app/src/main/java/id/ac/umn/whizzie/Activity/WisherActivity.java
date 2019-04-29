@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import id.ac.umn.whizzie.Home.HomeFragment;
+import id.ac.umn.whizzie.Notifications.NotificationFragment;
+import id.ac.umn.whizzie.Post.PostFragment;
+import id.ac.umn.whizzie.Profile.ProfileFragment;
+import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.Timeline.TimelineFragment;
 
 public class WisherActivity extends AppCompatActivity {
 

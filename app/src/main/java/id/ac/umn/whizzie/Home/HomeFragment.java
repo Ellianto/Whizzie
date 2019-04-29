@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie;
+package id.ac.umn.whizzie.Home;
 
 
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import id.ac.umn.whizzie.R;
 
 
 /**
