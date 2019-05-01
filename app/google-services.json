@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "633354683228-8l2m1hp8mok29om74a7u71bsgse6emof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.ac.umn.whizzie",
+            "certificate_hash": "f4154a6ced1ab721d9caba8dfee63f903ca29758"
+          }
+        },
+        {
           "client_id": "633354683228-3mi9soh70kiinn9jtoqvhs364jcnbd5g.apps.googleusercontent.com",
           "client_type": 3
         }

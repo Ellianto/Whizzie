@@ -5,12 +5,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +32,11 @@ import id.ac.umn.whizzie.R;
  */
 public class HomeFragment extends Fragment {
 
-    RecyclerView home_middle_category, home_bottom_grid;
+    RecyclerView home_middle_category;
     ImageView home_top_banner;
+    FrameLayout home_bottom_layout;
 
+    private List<CategoryCard> ccList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -39,7 +50,7 @@ public class HomeFragment extends Fragment {
 
         home_top_banner = view.findViewById(R.id.home_top_banner);
         home_middle_category = view.findViewById(R.id.home_middle_category);
-        home_bottom_grid = view.findViewById(R.id.home_bottom_grid);
+        home_bottom_layout = view.findViewById(R.id.home_bottom_layout);
 
         return view;
     }
@@ -50,40 +61,61 @@ public class HomeFragment extends Fragment {
 
         // TODO: Load Category CardViews
 
-        // Middle Cateogry List Data Load
+        // Middle Category List Data Load
         home_middle_category.setHasFixedSize(true);
 
         home_middle_category.setLayoutManager(new GridLayoutManager(this.getContext(), 2, GridLayoutManager.HORIZONTAL, false));
 
-        List<CategoryCard> ccList = new ArrayList<>();
+        ccList = new ArrayList<>();
 
-        ccList.add(new CategoryCard("Furniture"));
-        ccList.add(new CategoryCard("Collectibles"));
-        ccList.add(new CategoryCard("Artwork"));
-        ccList.add(new CategoryCard("Machinery"));
-        ccList.add(new CategoryCard("Tools"));
-        ccList.add(new CategoryCard("Software"));
-        ccList.add(new CategoryCard("Fashion"));
+        //Testing Fetch Data
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRef = db.getReference();
+
+        // Query Must be done using Event Listeners
+        dbRef.child("categories").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loadCategoryCard(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+//        ccList.add(new CategoryCard("Furniture"));
+//        ccList.add(new CategoryCard("Collectibles"));
+//        ccList.add(new CategoryCard("Artwork"));
+//        ccList.add(new CategoryCard("Machinery"));
+//        ccList.add(new CategoryCard("Tools"));
+//        ccList.add(new CategoryCard("Software"));
+//        ccList.add(new CategoryCard("Fashion"));
+
+
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(home_bottom_layout.getId(), fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void loadCategoryCard(DataSnapshot dataSS){
+        for(DataSnapshot temp : dataSS.getChildren()){
+            Log.d("DATA", temp.getValue().toString());
+
+            CategoryCard cc = temp.getValue(CategoryCard.class);
+            Log.d("CLASS", cc.getCategoryName());
+            Log.d("CLASS", String.valueOf(cc.getImageID()));
+
+            ccList.add(cc);
+        }
 
         CategoryCardAdapter ccAdapter = new CategoryCardAdapter(this.getContext(), ccList);
 
         home_middle_category.setAdapter(ccAdapter);
-
-        // Bottom Grid RecView Data Load
-        home_bottom_grid.setHasFixedSize(true);
-
-        home_bottom_grid.setLayoutManager(new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false));
-
-        List<HomeCard> hcList = new ArrayList<>();
-
-        hcList.add(new HomeCard("Testing 1"));
-        hcList.add(new HomeCard("Testing 2"));
-        hcList.add(new HomeCard("Testing 3"));
-        hcList.add(new HomeCard("Testing 4"));
-        hcList.add(new HomeCard("Testing 5"));
-
-        HomeCardAdapter hcAdapter = new HomeCardAdapter(this.getContext(), hcList);
-
-        home_bottom_grid.setAdapter(hcAdapter);
     }
+
 }

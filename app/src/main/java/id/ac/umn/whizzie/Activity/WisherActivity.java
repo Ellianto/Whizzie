@@ -63,6 +63,8 @@ public class WisherActivity extends AppCompatActivity {
         btmNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         frameLayout = findViewById(R.id.wisher_frame_layout);
+
+        //Set Initial Fragment
         setFragment(new HomeFragment());
     }
 
