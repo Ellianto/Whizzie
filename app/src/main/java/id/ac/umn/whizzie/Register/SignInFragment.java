@@ -69,4 +69,7 @@ public class SignInFragment extends Fragment {
             }
         });
     }
+
+    // TODO: Implement Auto Login aftar Sign Up
+    // TODO: Also implement auto insert to Realtime Database
 }

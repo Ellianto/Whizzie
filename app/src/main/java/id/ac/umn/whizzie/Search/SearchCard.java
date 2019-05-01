@@ -1,12 +1,12 @@
-package id.ac.umn.whizzie.Home;
+package id.ac.umn.whizzie.Search;
 
-public class HomeCard {
+public class SearchCard {
     private String creatorName;
 
-    public HomeCard() {
+    public SearchCard() {
     }
 
-    public HomeCard(String creatorName) {
+    public SearchCard(String creatorName) {
         this.creatorName = creatorName;
     }
 

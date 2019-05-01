@@ -43,7 +43,12 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
 
         categoryCardHolder.categoryName.setText(temp.getCategoryName());
 
-        // TODO : Implement Image View Path Binding
+        // Ini untuk tau nomor dari R.drawable
+//        Log.d("ANGKA", "Furniture : " + String.valueOf(R.drawable.furniture));
+//        Log.d("ANGKA", "Appliances: " + String.valueOf(R.drawable.appliances));
+//        Log.d("ANGKA", "Fashion   : " + String.valueOf(R.drawable.fashion));
+
+        categoryCardHolder.categoryImage.setImageResource(temp.getImageID());
 
         categoryCardHolder.categoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,14 +59,14 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
     }
 
     class CategoryCardHolder extends RecyclerView.ViewHolder{
-        ImageView cateogryImage;
+        ImageView categoryImage;
         TextView categoryName;
         CardView categoryCard;
 
         public CategoryCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            cateogryImage = itemView.findViewById(R.id.category_image_view);
+            categoryImage = itemView.findViewById(R.id.category_image_view);
             categoryName = itemView.findViewById(R.id.category_text_view);
             categoryCard = itemView.findViewById(R.id.category_card_view);
         }
