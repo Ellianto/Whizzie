@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Jennifer Lawrence"
         android:textStyle="bold"
@@ -49,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Wishes"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/profile_display_image"
@@ -62,15 +63,17 @@
         android:layout_marginStart="20dp"
         android:text="9"
         android:textAlignment="center"
+        app:layout_column="1"
         app:layout_constraintStart_toEndOf="@+id/profile_display_image"
-        app:layout_constraintTop_toBottomOf="@+id/profile_text_view_wishes" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_text_view_wishes"
+        app:layout_row="1" />
 
     <TextView
         android:id="@+id/profile_text_view_followers"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:text="Followers"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/profile_text_view_wishes"
@@ -78,38 +81,32 @@
 
     <TextView
         android:id="@+id/profile_followers_count"
-        android:layout_width="47dp"
+        android:layout_width="59dp"
         android:layout_height="16dp"
-        android:layout_marginStart="88dp"
+        android:layout_marginStart="20dp"
         android:text="2381"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/profile_display_image"
+        app:layout_constraintStart_toEndOf="@+id/profile_wishes_count"
         app:layout_constraintTop_toBottomOf="@+id/profile_text_view_followers" />
 
     <TextView
         android:id="@+id/profile_text_view_following"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:text="Following"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toEndOf="@+id/profile_text_view_followers"
         app:layout_constraintTop_toBottomOf="@+id/profile_user_tag" />
 
     <TextView
         android:id="@+id/profile_following_count"
-        android:layout_width="47dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="59dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="20dp"
         android:text="322"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toEndOf="@+id/profile_followers_count"
         app:layout_constraintTop_toBottomOf="@+id/profile_text_view_following" />
 

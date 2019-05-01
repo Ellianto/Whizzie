@@ -28,7 +28,7 @@ public class TimelineItemsAdapter extends RecyclerView.Adapter<TimelineItemsAdap
     @Override
     public TimelineItemsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.timeline_items, null);
+        View view = inflater.inflate(R.layout.card_timeline, null);
         TimelineItemsAdapter.TimelineItemsHolder holder = new TimelineItemsAdapter.TimelineItemsHolder(view);
         return holder;
     }
