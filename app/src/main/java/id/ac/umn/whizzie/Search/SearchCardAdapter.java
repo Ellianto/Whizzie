@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie.Home;
+package id.ac.umn.whizzie.Search;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,32 +16,32 @@ import java.util.List;
 import id.ac.umn.whizzie.R;
 
 
-public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCardHolder> {
+public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.HomeCardHolder> {
     private Context ctx;
-    private List<HomeCard> hcList;
+    private List<SearchCard> scList;
 
-    public HomeCardAdapter(Context ctx, List<HomeCard> hcList) {
+    public SearchCardAdapter(Context ctx, List<SearchCard> hcList) {
         this.ctx = ctx;
-        this.hcList = hcList;
+        this.scList = hcList;
     }
 
     @NonNull
     @Override
     public HomeCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.home_card, null);
+        View view = inflater.inflate(R.layout.search_card, null);
         HomeCardHolder holder = new HomeCardHolder(view);
         return holder;
     }
 
     @Override
     public int getItemCount() {
-        return hcList.size();
+        return scList.size();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeCardAdapter.HomeCardHolder homeCardHolder, int i) {
-        HomeCard temp = hcList.get(i);
+    public void onBindViewHolder(@NonNull SearchCardAdapter.HomeCardHolder homeCardHolder, int i) {
+        SearchCard temp = scList.get(i);
 
         homeCardHolder.tvHomeCardTitle.setText(temp.getCreatorName());
 
@@ -73,10 +73,10 @@ public class HomeCardAdapter extends RecyclerView.Adapter<HomeCardAdapter.HomeCa
         public HomeCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvHomeCardTitle = itemView.findViewById(R.id.tvHomeCardTitle);
-            imageviewHomeCardImage = itemView.findViewById(R.id.imageviewHomeCardImage);
-            btnHomeCardBigButton = itemView.findViewById(R.id.btnHomeCardBigButton);
-            imagebuttonHomeCardSmallButton = itemView.findViewById(R.id.imagebuttonHomeCardSmallButton);
+            tvHomeCardTitle = itemView.findViewById(R.id.home_card_title);
+            imageviewHomeCardImage = itemView.findViewById(R.id.home_card_image);
+            btnHomeCardBigButton = itemView.findViewById(R.id.home_card_button_portofolio);
+            imagebuttonHomeCardSmallButton = itemView.findViewById(R.id.home_card_button_add);
         }
     }
 }

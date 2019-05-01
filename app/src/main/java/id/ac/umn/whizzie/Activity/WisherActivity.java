@@ -38,7 +38,7 @@ public class WisherActivity extends AppCompatActivity {
                 case R.id.profile_bottom_menu:      setFragment(new ProfileFragment()); break;
             }
             
-            return false;
+            return true;
         }
     };
 
@@ -63,6 +63,8 @@ public class WisherActivity extends AppCompatActivity {
         btmNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         frameLayout = findViewById(R.id.wisher_frame_layout);
+
+        //Set Initial Fragment
         setFragment(new HomeFragment());
     }
 

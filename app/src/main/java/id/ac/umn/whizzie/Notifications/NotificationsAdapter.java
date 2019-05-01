@@ -54,7 +54,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             profPic = itemView.findViewById(R.id.imageviewNotificationsCardProfPic);
             notifImg = itemView.findViewById(R.id.imageviewNotificationsCardNotifPic);
             tvDesc = itemView.findViewById(R.id.tvNotificationsCardDesc);
-
         }
     }
 }

@@ -39,7 +39,7 @@ public class TimelineItemsAdapter extends RecyclerView.Adapter<TimelineItemsAdap
 
         viewHolder.tvProfName.setText(temp.getProfileName());
         viewHolder.tvProdDesc.setText(temp.getProductDesc());
-        viewHolder.tvProdPrice.setText(temp.getProductPrice());
+        viewHolder.tvProdPrice.setText(String.valueOf(temp.getProductPrice()));
 
         viewHolder.cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,13 +62,13 @@ public class TimelineItemsAdapter extends RecyclerView.Adapter<TimelineItemsAdap
         public TimelineItemsHolder(@NonNull View itemView) {
             super(itemView);
 
-            profPic = itemView.findViewById(R.id.imageviewTimelineItemsProfilePicture);
-            productImg = itemView.findViewById(R.id.imageviewProductImage);
-            productImg2 = itemView.findViewById(R.id.imageviewProductImage2);
-            tvProfName = itemView.findViewById(R.id.tvTimelineItemsProfileName);
-            tvProdDesc = itemView.findViewById(R.id.tvTimelineItemsProductDesc);
-            tvProdPrice = itemView.findViewById(R.id.tvTimelineItemsProductPrice);
-            cartButton = itemView.findViewById(R.id.imagebuttonTimelineItemsCartButton);
+            profPic = itemView.findViewById(R.id.timeline_items_display_picture);
+            productImg = itemView.findViewById(R.id.timeline_items_product_image_1);
+            productImg2 = itemView.findViewById(R.id.timeline_items_product_image_2);
+            tvProfName = itemView.findViewById(R.id.timeline_items_display_name);
+            tvProdDesc = itemView.findViewById(R.id.timeline_items_product_desc);
+            tvProdPrice = itemView.findViewById(R.id.timeline_items_product_price);
+            cartButton = itemView.findViewById(R.id.timeline_items_button_cart);
         }
     }
 }
