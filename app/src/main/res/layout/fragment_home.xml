@@ -34,13 +34,11 @@
 
             </android.support.v7.widget.RecyclerView>
 
-            <FrameLayout
-                android:id="@+id/home_bottom_layout"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_bottom_featured_genies"
                 android:layout_width="match_parent"
-                android:layout_height="216dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_height="231dp" />
+
         </LinearLayout>
     </ScrollView>
 

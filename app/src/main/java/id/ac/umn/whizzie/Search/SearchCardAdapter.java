@@ -29,7 +29,7 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Ho
     @Override
     public HomeCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.search_card, null);
+        View view = inflater.inflate(R.layout.card_search, null);
         HomeCardHolder holder = new HomeCardHolder(view);
         return holder;
     }
@@ -73,10 +73,9 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Ho
         public HomeCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvHomeCardTitle = itemView.findViewById(R.id.home_card_title);
-            imageviewHomeCardImage = itemView.findViewById(R.id.home_card_image);
-            btnHomeCardBigButton = itemView.findViewById(R.id.home_card_button_portofolio);
-            imagebuttonHomeCardSmallButton = itemView.findViewById(R.id.home_card_button_add);
+            tvHomeCardTitle = itemView.findViewById(R.id.featured_genie_card_title);
+            imageviewHomeCardImage = itemView.findViewById(R.id.featured_genie_card_image);
+            btnHomeCardBigButton = itemView.findViewById(R.id.featured_genie_card_button_follow);
         }
     }
 }

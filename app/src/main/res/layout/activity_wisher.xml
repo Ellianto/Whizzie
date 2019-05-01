@@ -7,7 +7,7 @@
     tools:context=".Activity.WisherActivity">
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/wisher_app_bar"
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@+id/wisher_bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2">
+        app:layout_constraintTop_toBottomOf="@+id/wisher_app_bar">
 
     </FrameLayout>
 

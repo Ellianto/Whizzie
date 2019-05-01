@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,11 +30,11 @@ import id.ac.umn.whizzie.R;
  */
 public class HomeFragment extends Fragment {
 
-    RecyclerView home_middle_category;
+    RecyclerView home_middle_category, home_bottom_grid;
     ImageView home_top_banner;
-    FrameLayout home_bottom_layout;
 
     private List<CategoryCard> ccList;
+    private List<FeaturedGenieCard> fgList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -50,7 +48,7 @@ public class HomeFragment extends Fragment {
 
         home_top_banner = view.findViewById(R.id.home_top_banner);
         home_middle_category = view.findViewById(R.id.home_middle_category);
-        home_bottom_layout = view.findViewById(R.id.home_bottom_layout);
+        home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);
 
         return view;
     }
@@ -59,12 +57,10 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TODO: Load Category CardViews
-
         // Middle Category List Data Load
         home_middle_category.setHasFixedSize(true);
 
-        home_middle_category.setLayoutManager(new GridLayoutManager(this.getContext(), 2, GridLayoutManager.HORIZONTAL, false));
+        home_middle_category.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
 
         ccList = new ArrayList<>();
 
@@ -93,13 +89,21 @@ public class HomeFragment extends Fragment {
 //        ccList.add(new CategoryCard("Software"));
 //        ccList.add(new CategoryCard("Fashion"));
 
+        // TODO: Load Featured Genies Grid
+        // Middle Category List Data Load
+        home_bottom_grid.setHasFixedSize(true);
 
-    }
+        home_bottom_grid.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
 
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(home_bottom_layout.getId(), fragment);
-        fragmentTransaction.commit();
+        fgList = new ArrayList<>();
+
+        fgList.add(new FeaturedGenieCard("Alexander"));
+        fgList.add(new FeaturedGenieCard("Ellianto"));
+        fgList.add(new FeaturedGenieCard("Karissa"));
+        fgList.add(new FeaturedGenieCard("Leonardo"));
+
+        FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
+        home_bottom_grid.setAdapter(fgAdapter);
     }
 
     private void loadCategoryCard(DataSnapshot dataSS){
