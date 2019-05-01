@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
@@ -49,6 +50,8 @@ public class HomeFragment extends Fragment {
         home_top_banner = view.findViewById(R.id.home_top_banner);
         home_middle_category = view.findViewById(R.id.home_middle_category);
         home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);
+
+        ((WisherActivity) getActivity()).showActionBar();
 
         return view;
     }
@@ -104,6 +107,8 @@ public class HomeFragment extends Fragment {
 
         FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
         home_bottom_grid.setAdapter(fgAdapter);
+
+
     }
 
     private void loadCategoryCard(DataSnapshot dataSS){

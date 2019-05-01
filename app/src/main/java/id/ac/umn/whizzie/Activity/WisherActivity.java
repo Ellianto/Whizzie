@@ -68,6 +68,14 @@ public class WisherActivity extends AppCompatActivity {
         setFragment(new HomeFragment());
     }
 
+    public void hideActionBar(){
+        getSupportActionBar().hide();
+    }
+
+    public void showActionBar(){
+        getSupportActionBar().show();
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);

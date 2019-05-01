@@ -18,7 +18,7 @@
             <ImageView
                 android:id="@+id/home_top_banner"
                 android:layout_width="match_parent"
-                android:layout_height="277dp"
+                android:layout_height="240dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="1dp"
@@ -27,17 +27,15 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/home_middle_category"
                 android:layout_width="match_parent"
-                android:layout_height="206dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/home_bottom_featured_genies"
                 android:layout_width="match_parent"
-                android:layout_height="231dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
     </ScrollView>

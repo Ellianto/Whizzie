@@ -1,11 +1,11 @@
 package id.ac.umn.whizzie.Timeline;
 
-public class TimelineItems {
+public class TimelineCard {
     private String profileName;
     private String productDesc;
     private int productPrice;
 
-    public TimelineItems(String profileName, String productDesc, int productPrice) {
+    public TimelineCard(String profileName, String productDesc, int productPrice) {
         this.profileName = profileName;
         this.productDesc = productDesc;
         this.productPrice = productPrice;

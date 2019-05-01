@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
@@ -40,6 +41,10 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((WisherActivity) getActivity()).showActionBar();
+
+
+        // TODO : Re-implement the Search with Cards
         // Bottom Grid RecView Data Load
 //        search_result_grid.setHasFixedSize(true);
 //

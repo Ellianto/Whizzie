@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
@@ -27,9 +28,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // TODO: Fix and experiment on this
-        // Kempesin Action Bar
-        view.getRootView().findViewById(R.id.wisher_app_bar).getLayoutParams().height = 0;
+        ((WisherActivity) getActivity()).hideActionBar();
 
         return view;
     }
