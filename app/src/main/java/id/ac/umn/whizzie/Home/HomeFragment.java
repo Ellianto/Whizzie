@@ -1,6 +1,5 @@
 package id.ac.umn.whizzie.Home;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -108,6 +107,7 @@ public class HomeFragment extends Fragment {
         FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
         home_bottom_grid.setAdapter(fgAdapter);
 
+        // TODO : Set on click listener of Search
 
     }
 

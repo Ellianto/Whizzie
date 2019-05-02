@@ -56,22 +56,22 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeline_offer_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/search_badge_icon" />
 
         <TextView
-            android:id="@+id/search_offer_count"
+            android:id="@+id/search_badge_count"
             android:layout_width="22dp"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="10"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/timeline_offer_icon"
+            app:layout_constraintStart_toEndOf="@+id/search_badge_icon"
             app:layout_constraintTop_toBottomOf="@+id/search_card_image" />
 
         <ImageView
-            android:id="@+id/timeline_offer_icon"
+            android:id="@+id/search_badge_icon"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_marginStart="8dp"

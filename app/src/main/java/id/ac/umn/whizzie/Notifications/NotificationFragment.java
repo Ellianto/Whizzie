@@ -37,8 +37,7 @@ public class NotificationFragment extends Fragment {
 
         notification_recview = view.findViewById(R.id.notification_recycler_view);
 
-        ((WisherActivity) getActivity()).showActionBar();
-
+        ((WisherActivity) getActivity()).hideActionBar();
 
         return view;
     }

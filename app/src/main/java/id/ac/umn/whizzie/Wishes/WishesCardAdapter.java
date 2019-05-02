@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie.Timeline;
+package id.ac.umn.whizzie.Wishes;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,41 +13,43 @@ import java.util.List;
 
 import id.ac.umn.whizzie.R;
 
-public class TimelineCardAdapter extends RecyclerView.Adapter<TimelineCardAdapter.TimelineItemsHolder> {
+public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.TimelineCardHolder> {
 
     private Context ctx;
-    List<TimelineCard> tiList;
+    List<WishesCard> tcList;
 
-    public TimelineCardAdapter(Context ctx, List<TimelineCard> tiList) {
+    public WishesCardAdapter(Context ctx, List<WishesCard> tcList) {
         this.ctx = ctx;
-        this.tiList = tiList;
+        this.tcList = tcList;
     }
 
     @NonNull
     @Override
-    public TimelineItemsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public TimelineCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
         View view = inflater.inflate(R.layout.card_timeline, null);
-        TimelineCardAdapter.TimelineItemsHolder holder = new TimelineCardAdapter.TimelineItemsHolder(view);
+        WishesCardAdapter.TimelineCardHolder holder = new WishesCardAdapter.TimelineCardHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TimelineItemsHolder viewHolder, int i) {
-        TimelineCard temp = tiList.get(i);
-        // TODO : Re-implement this and fix the naming
+    public void onBindViewHolder(@NonNull TimelineCardHolder viewHolder, int i) {
+        WishesCard temp = tcList.get(i);
+
+        viewHolder.tvDispName.setText(temp.getProfileName());
+        viewHolder.tvWishTitle.setText(temp.getWishesName());
     }
 
     @Override
     public int getItemCount() {
-        return tiList.size();
+        return tcList.size();
     }
 
-    class TimelineItemsHolder extends RecyclerView.ViewHolder{
+    class TimelineCardHolder extends RecyclerView.ViewHolder{
         ImageView profPic, wishImg;
         TextView tvDispName, tvWishTitle, tvOfferCount;
 
-        public TimelineItemsHolder(@NonNull View itemView) {
+        public TimelineCardHolder(@NonNull View itemView) {
             super(itemView);
 
             profPic = itemView.findViewById(R.id.timeline_card_profile_picture);
