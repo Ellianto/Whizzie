@@ -27,7 +27,7 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Ti
     @Override
     public TimelineCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.card_timeline, null);
+        View view = inflater.inflate(R.layout.card_wishes, null);
         WishesCardAdapter.TimelineCardHolder holder = new WishesCardAdapter.TimelineCardHolder(view);
         return holder;
     }
@@ -52,12 +52,12 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Ti
         public TimelineCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            profPic = itemView.findViewById(R.id.timeline_card_profile_picture);
-            wishImg = itemView.findViewById(R.id.timeline_card_image);
+            profPic = itemView.findViewById(R.id.wishes_card_profile_picture);
+            wishImg = itemView.findViewById(R.id.wishes_card_image);
 
-            tvDispName = itemView.findViewById(R.id.timeline_card_display_name);
-            tvOfferCount = itemView.findViewById(R.id.timeline_offer_count);
-            tvWishTitle = itemView.findViewById(R.id.timeline_card_title);
+            tvDispName = itemView.findViewById(R.id.wishes_card_display_name);
+            tvOfferCount = itemView.findViewById(R.id.wishes_offer_count);
+            tvWishTitle = itemView.findViewById(R.id.wishes_card_title);
         }
     }
 }

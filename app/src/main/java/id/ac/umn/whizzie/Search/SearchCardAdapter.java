@@ -43,7 +43,7 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
 
         holder.tvCardTitle.setText(temp.getCardName());
         holder.tvDispName.setText(temp.getProfileName());
-        holder.tvCardCount.setText(temp.getCardCount());
+        holder.tvCardCount.setText(String.valueOf(temp.getCardCount()));
     }
 
     class SearchCardHolder extends RecyclerView.ViewHolder{

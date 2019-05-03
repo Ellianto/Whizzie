@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/timeline_card_profile_picture"
+            android:id="@+id/wishes_card_profile_picture"
             android:layout_width="54dp"
             android:layout_height="47dp"
             android:layout_marginStart="8dp"
@@ -20,18 +20,18 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/timeline_card_display_name"
+            android:id="@+id/wishes_card_display_name"
             android:layout_width="257dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="Nama Orang"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/timeline_card_profile_picture"
+            app:layout_constraintStart_toEndOf="@+id/wishes_card_profile_picture"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/timeline_card_image"
+            android:id="@+id/wishes_card_image"
             android:layout_width="409dp"
             android:layout_height="409dp"
             android:layout_marginStart="8dp"
@@ -39,11 +39,11 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeline_card_profile_picture"
+            app:layout_constraintTop_toBottomOf="@+id/wishes_card_profile_picture"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/timeline_card_title"
+            android:id="@+id/wishes_card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,10 +51,10 @@
             android:text="Nama Produk"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeline_offer_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/wishes_offer_icon" />
 
         <TextView
-            android:id="@+id/timeline_offer_count"
+            android:id="@+id/wishes_offer_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -62,17 +62,17 @@
             android:text="10"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/timeline_offer_icon"
-            app:layout_constraintTop_toBottomOf="@+id/timeline_card_image" />
+            app:layout_constraintStart_toEndOf="@+id/wishes_offer_icon"
+            app:layout_constraintTop_toBottomOf="@+id/wishes_card_image" />
 
         <ImageView
-            android:id="@+id/timeline_offer_icon"
+            android:id="@+id/wishes_offer_icon"
             android:layout_width="32dp"
             android:layout_height="34dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeline_card_image"
+            app:layout_constraintTop_toBottomOf="@+id/wishes_card_image"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     </android.support.constraint.ConstraintLayout>

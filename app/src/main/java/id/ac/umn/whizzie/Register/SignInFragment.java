@@ -1,6 +1,5 @@
 package id.ac.umn.whizzie.Register;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +26,6 @@ import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 import static android.support.constraint.Constraints.TAG;
-
 
 /**
  * A simple {@link Fragment} subclass.
