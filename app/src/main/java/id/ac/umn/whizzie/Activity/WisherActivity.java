@@ -16,7 +16,7 @@ import id.ac.umn.whizzie.Notifications.NotificationFragment;
 import id.ac.umn.whizzie.Post.PostFragment;
 import id.ac.umn.whizzie.Profile.ProfileFragment;
 import id.ac.umn.whizzie.R;
-import id.ac.umn.whizzie.Timeline.TimelineFragment;
+import id.ac.umn.whizzie.Wishes.WishesFragment;
 
 public class WisherActivity extends AppCompatActivity {
 
@@ -26,13 +26,11 @@ public class WisherActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()){
                 case R.id.home_bottom_menu:         setFragment(new HomeFragment()); break;
-                case R.id.timeline_bottom_menu:     setFragment(new TimelineFragment()); break;
+                case R.id.timeline_bottom_menu:     setFragment(new WishesFragment()); break;
                 case R.id.post_bottom_menu:         setFragment(new PostFragment()); break;
                 case R.id.notification_bottom_menu: setFragment(new NotificationFragment()); break;
                 case R.id.profile_bottom_menu:      setFragment(new ProfileFragment()); break;
@@ -66,6 +64,14 @@ public class WisherActivity extends AppCompatActivity {
 
         //Set Initial Fragment
         setFragment(new HomeFragment());
+    }
+
+    public void hideActionBar(){
+        getSupportActionBar().hide();
+    }
+
+    public void showActionBar(){
+        getSupportActionBar().show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

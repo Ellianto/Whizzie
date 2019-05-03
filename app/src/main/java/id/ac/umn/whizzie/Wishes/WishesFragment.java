@@ -1,4 +1,4 @@
-package id.ac.umn.whizzie.Timeline;
+package id.ac.umn.whizzie.Wishes;
 
 
 import android.os.Bundle;
@@ -14,17 +14,18 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TimelineFragment extends Fragment {
+public class WishesFragment extends Fragment {
 
     RecyclerView timeline_recview;
 
-    public TimelineFragment() {
+    public WishesFragment() {
         // Required empty public constructor
     }
 
@@ -36,6 +37,8 @@ public class TimelineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_timeline, container, false);
         timeline_recview = view.findViewById(R.id.timeline_recycler_view);
 
+        ((WisherActivity) getActivity()).showActionBar();
+
         return view;
     }
 
@@ -46,13 +49,13 @@ public class TimelineFragment extends Fragment {
         timeline_recview.setHasFixedSize(true);
         timeline_recview.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        List<TimelineItems> tiList = new ArrayList<>();
+        List<WishesCard> tiList = new ArrayList<>();
 
-        tiList.add(new TimelineItems("Ellianto", "Cuma coba coba", 100000));
-        tiList.add(new TimelineItems("Alexander", "Tes Test testing", 25000));
-        tiList.add(new TimelineItems("Ellianto", "Cek cek cek", 10101));
+        // TODO : Query Random Wishes here to be rendered
 
-        TimelineItemsAdapter tiAdapter = new TimelineItemsAdapter(this.getContext(), tiList);
+        // TODO : Set on click listener of Search
+
+        WishesCardAdapter tiAdapter = new WishesCardAdapter(this.getContext(), tiList);
         timeline_recview.setAdapter(tiAdapter);
     }
 }

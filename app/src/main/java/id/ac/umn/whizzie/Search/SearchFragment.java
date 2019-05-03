@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
@@ -23,11 +22,10 @@ import id.ac.umn.whizzie.R;
 public class SearchFragment extends Fragment {
 
     private RecyclerView search_result_grid;
+    private List<SearchCard> scList;
 
     public SearchFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +35,8 @@ public class SearchFragment extends Fragment {
 
         search_result_grid = view.findViewById(R.id.search_result_grid);
 
+        ((WisherActivity) getActivity()).showActionBar();
+
         return view;
     }
 
@@ -44,21 +44,7 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Bottom Grid RecView Data Load
-        search_result_grid.setHasFixedSize(true);
-
-        search_result_grid.setLayoutManager(new GridLayoutManager(this.getContext(), 2, GridLayoutManager.VERTICAL, false));
-
-        List<SearchCard> scList = new ArrayList<>();
-
-        scList.add(new SearchCard("Testing 1"));
-        scList.add(new SearchCard("Testing 2"));
-        scList.add(new SearchCard("Testing 3"));
-        scList.add(new SearchCard("Testing 4"));
-        scList.add(new SearchCard("Testing 5"));
-
-        SearchCardAdapter scAdapter = new SearchCardAdapter(this.getContext(), scList);
-
-        search_result_grid.setAdapter(scAdapter);
+        // TODO : Search with Cards query
+        // TODO : Before that, implement manipulating onOptionsItemMenuSelected from Fragment
     }
 }

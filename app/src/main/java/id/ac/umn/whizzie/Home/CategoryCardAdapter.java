@@ -27,7 +27,7 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
     @Override
     public CategoryCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.category_card, null);
+        View view = inflater.inflate(R.layout.card_category, null);
         CategoryCardHolder holder = new CategoryCardHolder(view);
         return holder;
     }

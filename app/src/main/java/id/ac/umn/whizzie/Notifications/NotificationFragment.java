@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
@@ -35,6 +36,8 @@ public class NotificationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
         notification_recview = view.findViewById(R.id.notification_recycler_view);
+
+        ((WisherActivity) getActivity()).hideActionBar();
 
         return view;
     }

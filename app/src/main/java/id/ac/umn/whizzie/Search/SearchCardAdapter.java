@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +14,7 @@ import java.util.List;
 import id.ac.umn.whizzie.R;
 
 
-public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.HomeCardHolder> {
+public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.SearchCardHolder> {
     private Context ctx;
     private List<SearchCard> scList;
 
@@ -27,10 +25,10 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Ho
 
     @NonNull
     @Override
-    public HomeCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SearchCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.search_card, null);
-        HomeCardHolder holder = new HomeCardHolder(view);
+        View view = inflater.inflate(R.layout.card_search, null);
+        SearchCardHolder holder = new SearchCardHolder(view);
         return holder;
     }
 
@@ -40,43 +38,28 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Ho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchCardAdapter.HomeCardHolder homeCardHolder, int i) {
+    public void onBindViewHolder(@NonNull SearchCardAdapter.SearchCardHolder holder, int i) {
         SearchCard temp = scList.get(i);
 
-        homeCardHolder.tvHomeCardTitle.setText(temp.getCreatorName());
-
-        homeCardHolder.btnHomeCardBigButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO : Implement Home Card Profile Button
-//                IntentMovement im = new IntentMovement(ctx);
-
-//                im.moveToTargetNormal(ProfileActivity.class);
-            }
-        });
-
-        homeCardHolder.imagebuttonHomeCardSmallButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO : Implement Home Card Follow Button
-
-            }
-        });
+        holder.tvCardTitle.setText(temp.getCardName());
+        holder.tvDispName.setText(temp.getProfileName());
+        holder.tvCardCount.setText(temp.getCardCount());
     }
 
-    class HomeCardHolder extends RecyclerView.ViewHolder{
-        TextView tvHomeCardTitle;
-        ImageView imageviewHomeCardImage;
-        Button btnHomeCardBigButton;
-        ImageButton imagebuttonHomeCardSmallButton;
+    class SearchCardHolder extends RecyclerView.ViewHolder{
+        ImageView profPic, cardPic;
+        TextView tvDispName, tvCardTitle, tvCardCount;
 
-        public HomeCardHolder(@NonNull View itemView) {
+
+        public SearchCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvHomeCardTitle = itemView.findViewById(R.id.home_card_title);
-            imageviewHomeCardImage = itemView.findViewById(R.id.home_card_image);
-            btnHomeCardBigButton = itemView.findViewById(R.id.home_card_button_portofolio);
-            imagebuttonHomeCardSmallButton = itemView.findViewById(R.id.home_card_button_add);
+            profPic = itemView.findViewById(R.id.search_card_profile_picture);
+            cardPic = itemView.findViewById(R.id.search_card_image);
+
+            tvDispName = itemView.findViewById(R.id.search_card_display_name);
+            tvCardTitle = itemView.findViewById(R.id.search_card_title);
+            tvCardCount = itemView.findViewById(R.id.search_badge_count);
         }
     }
 }
