@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -70,6 +71,8 @@ public class HomeFragment extends Fragment {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = db.getReference();
 
+        Log.d("R ID", "FASHION : " + R.drawable.fashion);
+
         // Query Must be done using Event Listeners
         dbRef.child("categories").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -112,15 +115,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadCategoryCard(DataSnapshot dataSS){
-        for(DataSnapshot temp : dataSS.getChildren()){
-            Log.d("DATA", temp.getValue().toString());
+        for(DataSnapshot temp : dataSS.getChildren()) {
+            String catName = temp.getKey();
+            int imageID = 0;
 
-            CategoryCard cc = temp.getValue(CategoryCard.class);
-            Log.d("CLASS", cc.getCategoryName());
-            Log.d("CLASS", String.valueOf(cc.getImageID()));
+            for(DataSnapshot child : temp.getChildren()){
+                GenericTypeIndicator<Integer> gti = new GenericTypeIndicator<Integer>() {};
+                imageID = child.getValue(gti);
+            }
 
-            ccList.add(cc);
+            Log.d("NAH", catName + " : " + imageID);
+
+            ccList.add(new CategoryCard(imageID, catName));
         }
+
 
         CategoryCardAdapter ccAdapter = new CategoryCardAdapter(this.getContext(), ccList);
 
