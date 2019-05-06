@@ -82,19 +82,35 @@
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_item_name" />
+                app:layout_constraintTop_toBottomOf="@+id/post_text_view_item_name" />
 
+            <!--
             <Spinner
                 android:id="@+id/post_combo_box_category"
-                android:layout_width="253dp"
-                android:layout_height="62dp"
+                android:layout_width="249dp"
+                android:layout_height="41dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:alpha="100"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/post_text_view_category"
+                app:layout_constraintTop_toBottomOf="@+id/post_edit_text_item_name" />
+            -->
+
+            <AutoCompleteTextView
+                android:id="@+id/post_combo_box"
+                android:layout_width="250dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:editable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Choose a Category"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/post_text_view_category"
                 app:layout_constraintTop_toBottomOf="@+id/post_edit_text_item_name" />
 
@@ -109,7 +125,7 @@
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_combo_box_category" />
+                app:layout_constraintTop_toBottomOf="@+id/post_text_view_category" />
 
             <EditText
                 android:id="@+id/post_edit_text_quantity"
@@ -124,7 +140,7 @@
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/post_text_view_quantity"
-                app:layout_constraintTop_toBottomOf="@+id/post_combo_box_category" />
+                app:layout_constraintTop_toBottomOf="@+id/post_combo_box" />
 
             <TextView
                 android:id="@+id/post_text_view_desc"
@@ -141,8 +157,8 @@
 
             <EditText
                 android:id="@+id/post_edit_text_desc"
-                android:layout_width="352dp"
-                android:layout_height="181dp"
+                android:layout_width="359dp"
+                android:layout_height="125dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
