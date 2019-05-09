@@ -1,19 +1,16 @@
 package id.ac.umn.whizzie.Home;
 
-import id.ac.umn.whizzie.R;
-
 public class CategoryCard {
     private String categoryName;
-    private int imageID;
+    private String imageID;
 
     public CategoryCard() {
 
     }
 
-    public CategoryCard(int imageID, String categoryName) {
+    public CategoryCard(String imageID, String categoryName) {
         this.categoryName = categoryName;
         this.imageID = imageID;
-
     }
 
     public String getCategoryName() {
@@ -23,9 +20,9 @@ public class CategoryCard {
 
     public void setCategoryName(String categoryName) {this.categoryName = categoryName;}
 
-    public int getImageID() {
+    public String getImageID() {
         return imageID;
     }
 
-    public void setImageID(int imageID) {this.imageID = imageID;}
+    public void setImageID(String imageID) {this.imageID = imageID;}
 }

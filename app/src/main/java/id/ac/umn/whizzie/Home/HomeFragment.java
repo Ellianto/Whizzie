@@ -13,16 +13,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -71,17 +68,19 @@ public class HomeFragment extends Fragment {
         bannerSliderViewPager =  view.findViewById(R.id.banner_slider_view_pager);
         sliderModelList = new ArrayList<SliderModel>();
 
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes));
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes4));
+        // TODO : Add Mipmaps
 
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes3));
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
-
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes3));
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes4));
-
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes));
-        sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes));
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes4));
+//
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes3));
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
+//
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes3));
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes4));
+//
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes));
+//        sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
 
         SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
         bannerSliderViewPager.setAdapter(sliderAdapter);
@@ -109,6 +108,8 @@ public class HomeFragment extends Fragment {
         bannerSliderViewPager.addOnPageChangeListener(onPageChangeListener);
 
         startBannerSlideShow();
+
+        // TODO: Kemungkinan ada yg harus di override, investigate
         bannerSliderViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -123,6 +124,8 @@ public class HomeFragment extends Fragment {
         // Banner Slider //
 
         return view;
+
+        // TODO : Reimplement Adapters
     }
 
     // Banner Slider //
@@ -191,14 +194,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        ccList.add(new CategoryCard("Furniture"));
-//        ccList.add(new CategoryCard("Collectibles"));
-//        ccList.add(new CategoryCard("Artwork"));
-//        ccList.add(new CategoryCard("Machinery"));
-//        ccList.add(new CategoryCard("Tools"));
-//        ccList.add(new CategoryCard("Software"));
-//        ccList.add(new CategoryCard("Fashion"));
-
         // TODO: Load Featured Genies Grid
         // Middle Category List Data Load
         home_bottom_grid.setHasFixedSize(true);
@@ -223,11 +218,10 @@ public class HomeFragment extends Fragment {
     private void loadCategoryCard(DataSnapshot dataSS){
         for(DataSnapshot temp : dataSS.getChildren()) {
             String catName = temp.getKey();
-            int imageID = 0;
+            String imageID = "";
 
             for(DataSnapshot child : temp.getChildren()){
-                GenericTypeIndicator<Integer> gti = new GenericTypeIndicator<Integer>() {};
-                imageID = child.getValue(gti);
+                imageID = child.getValue().toString();
             }
 
             ccList.add(new CategoryCard(imageID, catName));

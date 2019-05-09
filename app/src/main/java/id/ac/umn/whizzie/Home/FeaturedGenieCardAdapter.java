@@ -14,7 +14,7 @@ import java.util.List;
 
 import id.ac.umn.whizzie.R;
 
-public class FeaturedGenieCardAdapter extends RecyclerView.Adapter<FeaturedGenieCardAdapter.FeaturedGenieCardHolder> {
+public class FeaturedGenieCardAdapter extends RecyclerView.Adapter<FeaturedGenieCardAdapter.TempFeaturedGenieCardHolder> {
 
     private List<FeaturedGenieCard> fgList;
     private Context ctx;
@@ -28,7 +28,7 @@ public class FeaturedGenieCardAdapter extends RecyclerView.Adapter<FeaturedGenie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FeaturedGenieCardHolder view, int i) {
+    public void onBindViewHolder(@NonNull TempFeaturedGenieCardHolder view, int i) {
         FeaturedGenieCard temp = fgList.get(i);
 
         view.featured_genie_card_name.setText(temp.getGenie_name());
@@ -36,10 +36,10 @@ public class FeaturedGenieCardAdapter extends RecyclerView.Adapter<FeaturedGenie
 
     @NonNull
     @Override
-    public FeaturedGenieCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public TempFeaturedGenieCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
         View view = inflater.inflate(R.layout.card_featured_genies, null);
-        FeaturedGenieCardHolder holder = new FeaturedGenieCardHolder(view);
+        TempFeaturedGenieCardHolder holder = new TempFeaturedGenieCardHolder(view);
         return holder;
     }
 
@@ -48,12 +48,12 @@ public class FeaturedGenieCardAdapter extends RecyclerView.Adapter<FeaturedGenie
         return fgList.size();
     }
 
-    class FeaturedGenieCardHolder extends RecyclerView.ViewHolder{
+    class TempFeaturedGenieCardHolder extends RecyclerView.ViewHolder{
         TextView featured_genie_card_name;
         ImageView featured_genie_card_image;
         Button featured_genie_card_follow;
 
-        public FeaturedGenieCardHolder(@NonNull View itemView) {
+        public TempFeaturedGenieCardHolder(@NonNull View itemView) {
             super(itemView);
 
             featured_genie_card_name = itemView.findViewById(R.id.featured_genie_card_title);

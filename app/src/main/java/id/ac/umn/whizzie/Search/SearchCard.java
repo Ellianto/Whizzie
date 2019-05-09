@@ -5,16 +5,17 @@ public class SearchCard {
     private String cardName;
     private String cardDesc;
     private long cardCount;
-    private int cardBudget;
+    private long cardPrice;
 
     public SearchCard() {
     }
 
-    public SearchCard(String profileName, String cardName, String cardDesc, long cardCount) {
+    public SearchCard(String profileName, String cardName, String cardDesc, long cardCount, long cardPrice) {
         this.profileName = profileName;
         this.cardName = cardName;
         this.cardDesc = cardDesc;
         this.cardCount = cardCount;
+        this.cardPrice = cardPrice;
     }
 
     public String getProfileName() {
@@ -42,18 +43,18 @@ public class SearchCard {
     }
 
     public long getCardCount() {
-        return this.cardCount;
+        return cardCount;
     }
 
     public void setCardCount(long cardCount) {
         this.cardCount = cardCount;
     }
 
-    public int getCardBudget() {
-        return cardBudget;
+    public long getCardPrice() {
+        return cardPrice;
     }
 
-    public void setCardBudget(int cardBudget) {
-        this.cardBudget = cardBudget;
+    public void setCardPrice(long cardPrice) {
+        this.cardPrice = cardPrice;
     }
 }

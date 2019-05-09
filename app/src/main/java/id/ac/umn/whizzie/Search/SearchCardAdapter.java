@@ -43,13 +43,18 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
 
         holder.tvCardTitle.setText(temp.getCardName());
         holder.tvDispName.setText(temp.getProfileName());
+
+        String priceText = "";
+
+        if(temp.getCardPrice() != 0) priceText = String.valueOf(temp.getCardPrice());
+
+        holder.tvCardPrice.setText(priceText);
         holder.tvCardCount.setText(String.valueOf(temp.getCardCount()));
     }
 
     class SearchCardHolder extends RecyclerView.ViewHolder{
         ImageView profPic, cardPic;
-        TextView tvDispName, tvCardTitle, tvCardCount;
-
+        TextView tvDispName, tvCardTitle, tvCardCount, tvCardPrice;
 
         public SearchCardHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +65,7 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
             tvDispName = itemView.findViewById(R.id.search_card_display_name);
             tvCardTitle = itemView.findViewById(R.id.search_card_title);
             tvCardCount = itemView.findViewById(R.id.search_badge_count);
+            tvCardPrice = itemView.findViewById(R.id.search_card_price);
         }
     }
 }

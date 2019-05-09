@@ -6,23 +6,24 @@ public class Product {
     private int massProduct;
     private String nameProduct;
     private String pictureProduct;
+    private int priceProduct;
     private String timeProduct;
     private String uidUpProduct;
-    private int wishesCount;
+    private long wishesCount;
 
     public Product() {
     }
 
-    // Constructor tidak termasuk wishesCount karena wishesCount akan di set manual melalui Query terpisah
-    public Product(String category, String descProduct, int massProduct, String nameProduct, String pictureProduct, String timeProduct, String uidUpProduct) {
+    public Product(String category, String descProduct, int massProduct, String nameProduct, String pictureProduct, int priceProduct, String timeProduct, String uidUpProduct, long wishesCount) {
         this.category = category;
         this.descProduct = descProduct;
         this.massProduct = massProduct;
         this.nameProduct = nameProduct;
         this.pictureProduct = pictureProduct;
+        this.priceProduct = priceProduct;
         this.timeProduct = timeProduct;
         this.uidUpProduct = uidUpProduct;
-        this.wishesCount = 0;
+        this.wishesCount = wishesCount;
     }
 
     public String getCategory() {
@@ -65,6 +66,14 @@ public class Product {
         this.pictureProduct = pictureProduct;
     }
 
+    public int getPriceProduct() {
+        return priceProduct;
+    }
+
+    public void setPriceProduct(int priceProduct) {
+        this.priceProduct = priceProduct;
+    }
+
     public String getTimeProduct() {
         return timeProduct;
     }
@@ -81,11 +90,11 @@ public class Product {
         this.uidUpProduct = uidUpProduct;
     }
 
-    public int getWishesCount() {
+    public long getWishesCount() {
         return wishesCount;
     }
 
-    public void setWishesCount(int wishesCount) {
+    public void setWishesCount(long wishesCount) {
         this.wishesCount = wishesCount;
     }
 }

@@ -1,26 +1,43 @@
 package id.ac.umn.whizzie.Home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
 
 public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapter.CategoryCardHolder> {
-    private Context ctx;
-    private List<CategoryCard> categoryCards;
+    Context ctx;
+    List<CategoryCard> lcc;
+    StorageReference sr = FirebaseStorage.getInstance().getReference("whizzie_assets/categories/");
 
-    public CategoryCardAdapter(Context ctx, List<CategoryCard> categoryCards) {
+    public CategoryCardAdapter() {
+    }
+
+    public CategoryCardAdapter(Context ctx, List<CategoryCard> lcc) {
+        this.lcc = lcc;
         this.ctx = ctx;
-        this.categoryCards = categoryCards;
     }
 
     @NonNull
@@ -33,42 +50,82 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
     }
 
     @Override
-    public int getItemCount() {
-        return categoryCards.size();
+    public void onBindViewHolder(@NonNull final CategoryCardHolder view, int i) {
+        CategoryCard temp = lcc.get(i);
+
+        view.category_card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        // TODO : Implement fetch image from Firebase Storage Here
+
+        // view.category_image_view
+        sr.child(temp.getImageID()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+//                Log.d("DEBUG", "Download URI : " + uri);
+                    new loadImage().execute(uri.toString());
+            }
+
+            // Cara Fetch Image from Firebase Storage
+            // Operasi-operasi network harus dilakukan di thread berbeda
+            class loadImage extends AsyncTask<String, String, String>{
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    Log.d("DEBUG", "Fetching...");
+                }
+
+                @Override
+                protected String doInBackground(String... strings) {
+                    try{
+                        URL url = new URL(strings[0]);
+                        final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                        Handler h = new Handler(Looper.getMainLooper());
+
+                        // Operasi yang mengubah View harus di Main Thread
+                        // Karena akan dijalankan di dalam fragment, pakai handler
+                        h.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d("DEBUG", "testing");
+                                view.category_image_view.setImageBitmap(pic);
+                            }
+                        });
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+                    return null;
+                }
+            }
+        });
+
+        view.category_text_view.setText(temp.getCategoryName());
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryCardHolder categoryCardHolder, int i) {
-        CategoryCard temp = categoryCards.get(i);
-
-        categoryCardHolder.categoryName.setText(temp.getCategoryName());
-
-        // Ini untuk tau nomor dari R.drawable
-//        Log.d("ANGKA", "Furniture : " + String.valueOf(R.drawable.furniture));
-//        Log.d("ANGKA", "Appliances: " + String.valueOf(R.drawable.appliances));
-//        Log.d("ANGKA", "Fashion   : " + String.valueOf(R.drawable.fashion));
-
-        categoryCardHolder.categoryImage.setImageResource(temp.getImageID());
-
-        categoryCardHolder.categoryCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO : Implement Category Card View On Click
-            }
-        });
+    public int getItemCount() {
+        return lcc.size();
     }
 
+
+
     class CategoryCardHolder extends RecyclerView.ViewHolder{
-        ImageView categoryImage;
-        TextView categoryName;
-        CardView categoryCard;
+        CardView category_card_view;
+        ImageView category_image_view;
+        TextView category_text_view;
 
         public CategoryCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            categoryImage = itemView.findViewById(R.id.category_image_view);
-            categoryName = itemView.findViewById(R.id.category_text_view);
-            categoryCard = itemView.findViewById(R.id.category_card_view);
+            category_card_view = itemView.findViewById(R.id.category_card_view);
+            category_image_view = itemView.findViewById(R.id.category_image_view);
+            category_text_view = itemView.findViewById(R.id.category_text_view);
         }
     }
 }

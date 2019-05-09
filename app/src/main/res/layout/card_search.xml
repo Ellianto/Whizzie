@@ -68,9 +68,23 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="10"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/search_badge_icon"
+            app:layout_constraintTop_toBottomOf="@+id/search_card_image" />
+
+        <TextView
+            android:id="@+id/search_card_price"
+            android:layout_width="0dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Harga"
+            android:textAlignment="textEnd"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/search_badge_count"
             app:layout_constraintTop_toBottomOf="@+id/search_card_image" />
 
         <ImageView

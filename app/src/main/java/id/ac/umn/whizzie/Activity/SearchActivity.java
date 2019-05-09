@@ -30,7 +30,6 @@ public class SearchActivity extends AppCompatActivity {
     private EditText edtKeyword;
 
     private List<SearchCard> scList;
-//    private List<Pair<String, String>> unamePair;
     private ArrayMap<String, String> unamePair;
 
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
@@ -44,7 +43,6 @@ public class SearchActivity extends AppCompatActivity {
         searchBtn = findViewById(R.id.search_button);
         edtKeyword = findViewById(R.id.search_keyword);
 
-//        unamePair = new ArrayList<>();
         unamePair = new ArrayMap<>();
 
         dbRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,8 +110,6 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             unamePair.put(user_id, username);
-
-//            unamePair.add(new Pair<String, String>(user_id, username));
         }
     }
 
@@ -121,15 +117,7 @@ public class SearchActivity extends AppCompatActivity {
         for(DataSnapshot product : ds.getChildren()){
             Product temp = product.getValue(Product.class);
 
-//            List Implementation
-//            for(Pair<String,String> pairs : unamePair){
-//                if(pairs.first.equals(temp.getUidUpProduct())){
-//                    uname = pairs.second;
-//                    break;
-//                }
-//            }
-
-            scList.add(new SearchCard(unamePair.get(temp.getUidUpProduct()), temp.getNameProduct(), temp.getDescProduct(), temp.getWishesCount()));
+            scList.add(new SearchCard(unamePair.get(temp.getUidUpProduct()), temp.getNameProduct(), temp.getDescProduct(), temp.getWishesCount(), temp.getPriceProduct()));
         }
     }
 
@@ -137,15 +125,9 @@ public class SearchActivity extends AppCompatActivity {
         for(DataSnapshot wishes : ds.getChildren()){
             Wishes temp = wishes.getValue(Wishes.class);
 
-//            List Implementation
-//            for(Pair<String, String> pairs : unamePair){
-//                if(pairs.first.equals(temp.getUidUpWish())){
-//                    uname = pairs.second;
-//                    break;
-//                }
-//            }
-
-            scList.add(new SearchCard(unamePair.get(temp.getUidUpWish()), temp.getTitleWish(), temp.getDescWish(), temp.getOfferCount()));
+            // Untuk Wish, harganya kosong
+            // TODO : Implement if(Price == 0) hide TextView
+            scList.add(new SearchCard(unamePair.get(temp.getUidUpWish()), temp.getTitleWish(), temp.getDescWish(), temp.getOfferCount(), 0));
         }
     }
 }

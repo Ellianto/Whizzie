@@ -81,7 +81,7 @@ public class ProfileWishFragment extends Fragment {
                                 lsc.add(new SearchCard(dispName,
                                         wish_title,
                                         wish_desc,
-                                        offerCount));
+                                        offerCount, 0));
 
                                 setRecView();
                             }
