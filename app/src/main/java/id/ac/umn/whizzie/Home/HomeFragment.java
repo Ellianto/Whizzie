@@ -124,8 +124,6 @@ public class HomeFragment extends Fragment {
                 imageID = child.getValue(gti);
             }
 
-            Log.d("NAH", catName + " : " + imageID);
-
             ccList.add(new CategoryCard(imageID, catName));
         }
 
