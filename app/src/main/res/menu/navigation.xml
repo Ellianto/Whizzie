@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/timeline_bottom_menu"
+        android:id="@+id/wishes_bottom_menu"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Timeline" />
+        android:title="Wishes" />
 
     <item
         android:id="@+id/post_bottom_menu"

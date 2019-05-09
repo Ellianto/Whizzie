@@ -1,6 +1,5 @@
 package id.ac.umn.whizzie.Home;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,11 +16,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
@@ -50,6 +51,8 @@ public class HomeFragment extends Fragment {
         home_middle_category = view.findViewById(R.id.home_middle_category);
         home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);
 
+        ((WisherActivity) getActivity()).showActionBar();
+
         return view;
     }
 
@@ -67,6 +70,8 @@ public class HomeFragment extends Fragment {
         //Testing Fetch Data
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = db.getReference();
+
+        Log.d("R ID", "FASHION : " + R.drawable.fashion);
 
         // Query Must be done using Event Listeners
         dbRef.child("categories").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -104,18 +109,24 @@ public class HomeFragment extends Fragment {
 
         FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
         home_bottom_grid.setAdapter(fgAdapter);
+
+        // TODO : Set on click listener of Search
+
     }
 
     private void loadCategoryCard(DataSnapshot dataSS){
-        for(DataSnapshot temp : dataSS.getChildren()){
-            Log.d("DATA", temp.getValue().toString());
+        for(DataSnapshot temp : dataSS.getChildren()) {
+            String catName = temp.getKey();
+            int imageID = 0;
 
-            CategoryCard cc = temp.getValue(CategoryCard.class);
-            Log.d("CLASS", cc.getCategoryName());
-            Log.d("CLASS", String.valueOf(cc.getImageID()));
+            for(DataSnapshot child : temp.getChildren()){
+                GenericTypeIndicator<Integer> gti = new GenericTypeIndicator<Integer>() {};
+                imageID = child.getValue(gti);
+            }
 
-            ccList.add(cc);
+            ccList.add(new CategoryCard(imageID, catName));
         }
+
 
         CategoryCardAdapter ccAdapter = new CategoryCardAdapter(this.getContext(), ccList);
 

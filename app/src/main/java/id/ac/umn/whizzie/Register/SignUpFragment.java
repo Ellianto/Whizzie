@@ -1,6 +1,7 @@
 package id.ac.umn.whizzie.Register;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,13 +26,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
+// TODO : Fix the sign up button
 public class SignUpFragment extends Fragment {
 
 
@@ -52,8 +58,7 @@ public class SignUpFragment extends Fragment {
     private ProgressBar progressBar;
 
     private FirebaseAuth firebaseAuth;
-    private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
-
+    private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+(\\.[a-z]+)+";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -167,47 +172,47 @@ public class SignUpFragment extends Fragment {
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
         fragmentTransaction.commit();
     }
+
     private void checkInputs(){
-        if (!TextUtils.isEmpty(email.getText())){
-            if (!TextUtils.isEmpty(fullName.getText())){
-                if (!TextUtils.isEmpty(password.getText()) && password.length() >= 8){
-                    if (!TextUtils.isEmpty(confirmPassword.getText())){
-                        signUpBtn.setEnabled(true);
-                        signUpBtn.setTextColor(Color.rgb(255,255,255));
-                    }else {
-                        signUpBtn.setEnabled(false);
-                        signUpBtn.setTextColor(Color.argb(50,255,255,255));
-                    }
-                }else {
-                    signUpBtn.setEnabled(false);
-                    signUpBtn.setTextColor(Color.argb(50,255,255,255));
-                }
-            }else {
-                signUpBtn.setEnabled(false);
-                signUpBtn.setTextColor(Color.argb(50,255,255,255));
-            }
-        }else {
+        if (TextUtils.isEmpty(email.getText()) || TextUtils.isEmpty(fullName.getText()) || TextUtils.isEmpty(confirmPassword.getText()) || TextUtils.isEmpty(password.getText()) || password.length() < 8){
             signUpBtn.setEnabled(false);
             signUpBtn.setTextColor(Color.argb(50,255,255,255));
+        }else {
+            signUpBtn.setEnabled(true);
+            signUpBtn.setTextColor(Color.rgb(255,255,255));
         }
     }
+
     private void checkEmailAndPassword(){
-        if (email.getText().toString().matches(emailPattern)){
-            if (password.getText().toString().equals(confirmPassword.getText().toString())){
+        final String textEmail = email.getText().toString();
+        final String textPass = password.getText().toString();
+
+        if (textEmail.matches(emailPattern)){
+            if (textPass.equals(confirmPassword.getText().toString())){
 
                 progressBar.setVisibility(View.VISIBLE);
                 signUpBtn.setEnabled(false);
                 signUpBtn.setTextColor(Color.argb(50,255,255,255));
 
-                firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                firebaseAuth.createUserWithEmailAndPassword(textEmail, textPass)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    // TODO: Redirect after Sign Up here
-//                                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-//                                    startActivity(mainIntent);
-//                                    getActivity().finish();
+                                    // TODO: Auto Login And Insert to Database
+
+                                    firebaseAuth.signInWithEmailAndPassword(textEmail, textPass);
+
+                                    String uid = firebaseAuth.getCurrentUser().getUid();
+
+                                    DatabaseReference fdb = FirebaseDatabase.getInstance().getReference();
+
+                                    fdb.child("users").child(uid).child("email").setValue(textEmail);
+                                    fdb.child("users").child(uid).child("name").setValue(fullName.getText().toString());
+
+                                    Intent mainIntent = new Intent(getActivity(), WisherActivity.class);
+                                    startActivity(mainIntent);
+                                    getActivity().finish();
                                 }else{
                                     progressBar.setVisibility(View.INVISIBLE);
                                     signUpBtn.setEnabled(true);

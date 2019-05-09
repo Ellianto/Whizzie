@@ -1,5 +1,6 @@
 package id.ac.umn.whizzie.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,31 +17,77 @@ import id.ac.umn.whizzie.Notifications.NotificationFragment;
 import id.ac.umn.whizzie.Post.PostFragment;
 import id.ac.umn.whizzie.Profile.ProfileFragment;
 import id.ac.umn.whizzie.R;
-import id.ac.umn.whizzie.Timeline.TimelineFragment;
+import id.ac.umn.whizzie.Wishes.WishesFragment;
 
 public class WisherActivity extends AppCompatActivity {
 
     BottomNavigationView btmNavView;
     private FrameLayout frameLayout;
+    private boolean search_product = true;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()){
-                case R.id.home_bottom_menu:         setFragment(new HomeFragment()); break;
-                case R.id.timeline_bottom_menu:     setFragment(new TimelineFragment()); break;
-                case R.id.post_bottom_menu:         setFragment(new PostFragment()); break;
-                case R.id.notification_bottom_menu: setFragment(new NotificationFragment()); break;
-                case R.id.profile_bottom_menu:      setFragment(new ProfileFragment()); break;
+                case R.id.home_bottom_menu: {
+                    setFragment(new HomeFragment());
+                    search_product = true;
+                    break;
+                }
+
+                case R.id.wishes_bottom_menu:{
+                    setFragment(new WishesFragment());
+                    search_product = false;
+                    break;
+                }
+
+                case R.id.post_bottom_menu:{
+                    setFragment(new PostFragment());
+                    break;
+                }
+
+                case R.id.notification_bottom_menu: {
+                    setFragment(new NotificationFragment());
+                    break;
+                }
+
+                case R.id.profile_bottom_menu:{
+                    setFragment(new ProfileFragment());
+                    break;
+                }
             }
             
             return true;
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.main_search_icon: {
+                Intent i = new Intent(this, SearchActivity.class);
+
+                if(search_product) i.putExtra("type", "product");
+                else i.putExtra("type", "wish");
+
+                startActivity(i);
+
+                break;
+            }
+            case R.id.main_cart_icon: {
+                // TODO : Implement Move to Cart Activity
+                break;
+            }
+            case R.id.main_chat: {
+                // TODO : Implement Chat function
+                break;
+            }
+        }
+
+        return true;
+    }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -66,6 +113,14 @@ public class WisherActivity extends AppCompatActivity {
 
         //Set Initial Fragment
         setFragment(new HomeFragment());
+    }
+
+    public void hideActionBar(){
+        getSupportActionBar().hide();
+    }
+
+    public void showActionBar(){
+        getSupportActionBar().show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
