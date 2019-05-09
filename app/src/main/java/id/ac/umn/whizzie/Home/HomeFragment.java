@@ -1,13 +1,16 @@
 package id.ac.umn.whizzie.Home;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,8 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
@@ -41,6 +47,15 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    ///////////// Banner Slider
+    private ViewPager bannerSliderViewPager;
+    private List<SliderModel> sliderModelList;
+    private int currentPage = 2;
+    private Timer timer;
+    final private long DELAY_TIME = 3000;
+    final private long PERIOD_TIME = 3000;
+    ///////////// Banner Slider
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,8 +69,101 @@ public class HomeFragment extends Fragment {
 
         ((WisherActivity) getActivity()).showActionBar();
 
+        ///////////// Banner Slider
+        bannerSliderViewPager =  view.findViewById(R.id.banner_slider_view_pager);
+        sliderModelList = new ArrayList<SliderModel>();
+
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes));
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes4));
+
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes3));
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
+
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes3));
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes4));
+
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes));
+        sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
+
+
+        SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
+        bannerSliderViewPager.setAdapter(sliderAdapter);
+        bannerSliderViewPager.setClipToPadding(false);
+        bannerSliderViewPager.setPageMargin(20);
+
+        ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                currentPage = i;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+                if (i == ViewPager.SCROLL_STATE_IDLE){
+                    pageLooper();
+                }
+            }
+        };
+        bannerSliderViewPager.addOnPageChangeListener(onPageChangeListener);
+
+        startBannerSlideShow();
+        bannerSliderViewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                pageLooper();
+                stopBannerSlideShow();
+                if (event.getAction() == MotionEvent.ACTION_UP){
+                    startBannerSlideShow();
+                }
+                return false;
+            }
+        });
+
+        ///////////// Banner Slider
+
         return view;
     }
+
+    ///////////// Banner Slider
+    private void pageLooper(){
+        if (currentPage == sliderModelList.size() - 2){
+            currentPage = 2;
+            bannerSliderViewPager.setCurrentItem(currentPage,false);
+        }
+        if (currentPage == 1){
+            currentPage = sliderModelList.size() - 3;
+            bannerSliderViewPager.setCurrentItem(currentPage,false);
+        }
+    }
+
+    private void startBannerSlideShow(){
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                if (currentPage >= sliderModelList.size()){
+                    currentPage = 1;
+                }
+                bannerSliderViewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, DELAY_TIME, PERIOD_TIME);
+    }
+    private void stopBannerSlideShow(){
+        timer.cancel();
+    }
+    ///////////// Banner Slider
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
