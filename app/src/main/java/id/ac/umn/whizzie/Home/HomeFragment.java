@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment {
         home_top_banner = view.findViewById(R.id.home_top_banner);
         home_middle_category = view.findViewById(R.id.home_middle_category);
         home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);
+        // Button onClick for setting
 
         ((WisherActivity) getActivity()).showActionBar();
 
@@ -111,6 +112,9 @@ public class HomeFragment extends Fragment {
         home_bottom_grid.setAdapter(fgAdapter);
 
         // TODO : Set on click listener of Search
+
+
+
 
     }
 

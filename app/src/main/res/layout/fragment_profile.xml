@@ -11,7 +11,7 @@
         android:layout_width="99dp"
         android:layout_height="101dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.101"
@@ -36,12 +36,12 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="Jennifer Lawrence"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/profile_display_image"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,6 +68,22 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_text_view_wishes"
         app:layout_row="1" />
 
+    <ImageButton
+        android:id="@+id/profile_setting_button"
+        android:layout_width="56dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:text="Creator's Mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toEndOf="@+id/profile_creator_button"
+        app:layout_constraintTop_toBottomOf="@+id/profile_wishes_count"
+        android:src="@drawable/ic_settings_white_24dp"
+        android:tint="@color/cardview_dark_background"
+        android:background="?android:selectableItemBackground" />
+
     <Button
         android:id="@+id/profile_creator_button"
         android:layout_width="wrap_content"
@@ -85,11 +101,11 @@
         android:id="@+id/profile_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_creator_button"
+        app:layout_constraintTop_toBottomOf="@+id/profile_setting_button"
         app:tabGravity="fill"
         app:tabMode="fixed">
 

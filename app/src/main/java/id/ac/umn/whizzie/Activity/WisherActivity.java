@@ -32,7 +32,8 @@ public class WisherActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()){
                 case R.id.home_bottom_menu: {
-                    setFragment(new HomeFragment());
+                    //setFragment(new HomeFragment());
+                    setFragment(new ProfileFragment());
                     search_product = true;
                     break;
                 }
@@ -112,7 +113,8 @@ public class WisherActivity extends AppCompatActivity {
         frameLayout = findViewById(R.id.wisher_frame_layout);
 
         //Set Initial Fragment
-        setFragment(new HomeFragment());
+        setFragment(new ProfileFragment());
+        //setFragment(new HomeFragment());
     }
 
     public void hideActionBar(){

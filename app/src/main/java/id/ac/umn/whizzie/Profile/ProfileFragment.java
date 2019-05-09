@@ -1,6 +1,8 @@
 package id.ac.umn.whizzie.Profile;
 
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +12,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import id.ac.umn.whizzie.Activity.SettingActivity;
 import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
 
@@ -31,6 +36,7 @@ public class ProfileFragment extends Fragment {
     TabLayout tl;
     FrameLayout fl;
     TextView tvName;
+    ImageButton profile_setting_button;
 
     DatabaseReference dbrf = FirebaseDatabase.getInstance().getReference();
 
@@ -53,8 +59,15 @@ public class ProfileFragment extends Fragment {
 
         tl = view.findViewById(R.id.profile_tab_layout);
         fl = view.findViewById(R.id.profile_fragment_holder);
+
+        // Button for setting
+        profile_setting_button = view.findViewById(R.id.profile_setting_button);
+
+
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -95,6 +108,16 @@ public class ProfileFragment extends Fragment {
         });
 
         setFragment(new ProfileWishFragment());
+
+        // Button Setting Intent
+        profile_setting_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     private void setFragment(Fragment fragment) {
