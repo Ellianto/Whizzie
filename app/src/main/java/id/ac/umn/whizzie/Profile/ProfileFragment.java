@@ -2,10 +2,23 @@ package id.ac.umn.whizzie.Profile;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import id.ac.umn.whizzie.Activity.WisherActivity;
 import id.ac.umn.whizzie.R;
@@ -15,7 +28,13 @@ import id.ac.umn.whizzie.R;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
+    TabLayout tl;
+    FrameLayout fl;
+    TextView tvName;
 
+    DatabaseReference dbrf = FirebaseDatabase.getInstance().getReference();
+
+    String currUid, dispName;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -30,7 +49,69 @@ public class ProfileFragment extends Fragment {
 
         ((WisherActivity) getActivity()).hideActionBar();
 
+        tvName = view.findViewById(R.id.profile_display_name);
+
+        tl = view.findViewById(R.id.profile_tab_layout);
+        fl = view.findViewById(R.id.profile_fragment_holder);
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        currUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        dbrf.child("users").child(currUid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                setDisplayName(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        tl.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0: setFragment(new ProfileWishFragment()); break;
+                    case 1: setFragment(new ProfileTransactionFragment()); break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        setFragment(new ProfileWishFragment());
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        Bundle b = new Bundle();
+
+        b.putString("dispName", dispName);
+        b.putString("currUid", currUid);
+
+        fragment.setArguments(b);
+        fragmentTransaction.replace(fl.getId(), fragment);
+
+        fragmentTransaction.commit();
+    }
+
+    private void setDisplayName(DataSnapshot ds){
+        dispName = ds.child("name").getValue().toString();
+        tvName.setText(dispName);
+    }
 }

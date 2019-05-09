@@ -7,7 +7,7 @@ public class Wishes {
     private String timeWish;
     private String titleWish;
     private String uidUpWish;
-    private int offerCount;
+    private long offerCount;
 
     public Wishes() {
     }
@@ -71,11 +71,11 @@ public class Wishes {
         this.uidUpWish = uidUpWish;
     }
 
-    public int getOfferCount() {
+    public long getOfferCount() {
         return offerCount;
     }
 
-    public void setOfferCount(int offerCount) {
+    public void setOfferCount(long offerCount) {
         this.offerCount = offerCount;
     }
 }
