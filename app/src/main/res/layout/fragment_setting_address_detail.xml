@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_address_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_receiver_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -35,10 +35,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.063"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_address_name" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -48,10 +48,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_receiver_name" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_province_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -61,10 +61,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.063"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_city_name" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_detail_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -74,10 +74,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.063"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText4" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_province_name" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tv_postal_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -87,10 +87,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText5" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_detail_address" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tv_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -100,10 +100,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_postal_code" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/setting_address_name"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -115,10 +115,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_address_name" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/setting_receiver_name"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -130,10 +130,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_receiver_name" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/setting_city_name"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -145,10 +145,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_city_name" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/setting_province_name"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -160,10 +160,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_province_name" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/setting_detail_address"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -175,10 +175,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_address" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/setting_postal_code"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -190,10 +190,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_postal_code" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/setting_phone_number"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -205,10 +205,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_phone_number" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/store_bool_switch"
             android:layout_width="168dp"
             android:layout_height="20dp"
             android:layout_marginStart="8dp"
@@ -218,10 +218,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.079"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText7" />
+            app:layout_constraintTop_toBottomOf="@+id/setting_phone_number" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -231,7 +231,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switch1" />
+            app:layout_constraintTop_toBottomOf="@+id/store_bool_switch" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

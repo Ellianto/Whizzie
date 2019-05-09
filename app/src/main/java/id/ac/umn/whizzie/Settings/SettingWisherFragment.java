@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import id.ac.umn.whizzie.R;
 
+//TODO: Layout awal untuk Setting. Belum dikasi OnClickListener untuk button 'Addresses', 'Change Password', dan 'Log Out'
+
 /**
  * A simple {@link Fragment} subclass.
  */

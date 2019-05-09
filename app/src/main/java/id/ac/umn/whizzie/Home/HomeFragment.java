@@ -38,7 +38,6 @@ import id.ac.umn.whizzie.R;
 public class HomeFragment extends Fragment {
 
     RecyclerView home_middle_category, home_bottom_grid;
-    ImageView home_top_banner;
 
     private List<CategoryCard> ccList;
     private List<FeaturedGenieCard> fgList;
@@ -47,14 +46,14 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    ///////////// Banner Slider
+    // Banner Slider //
     private ViewPager bannerSliderViewPager;
     private List<SliderModel> sliderModelList;
     private int currentPage = 2;
     private Timer timer;
     final private long DELAY_TIME = 3000;
     final private long PERIOD_TIME = 3000;
-    ///////////// Banner Slider
+    // Banner Slider //
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,14 +61,13 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        home_top_banner = view.findViewById(R.id.home_top_banner);
         home_middle_category = view.findViewById(R.id.home_middle_category);
         home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);
         // Button onClick for setting
 
         ((WisherActivity) getActivity()).showActionBar();
 
-        ///////////// Banner Slider
+        // Banner Slider //
         bannerSliderViewPager =  view.findViewById(R.id.banner_slider_view_pager);
         sliderModelList = new ArrayList<SliderModel>();
 
@@ -84,7 +82,6 @@ public class HomeFragment extends Fragment {
 
         sliderModelList.add(new SliderModel(R.mipmap.landscapes));
         sliderModelList.add(new SliderModel(R.mipmap.landscapes2));
-
 
         SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
         bannerSliderViewPager.setAdapter(sliderAdapter);
@@ -123,13 +120,12 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
-
-        ///////////// Banner Slider
+        // Banner Slider //
 
         return view;
     }
 
-    ///////////// Banner Slider
+    // Banner Slider //
     private void pageLooper(){
         if (currentPage == sliderModelList.size() - 2){
             currentPage = 2;
@@ -163,7 +159,7 @@ public class HomeFragment extends Fragment {
     private void stopBannerSlideShow(){
         timer.cancel();
     }
-    ///////////// Banner Slider
+    // Banner Slider //
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -220,8 +216,6 @@ public class HomeFragment extends Fragment {
         home_bottom_grid.setAdapter(fgAdapter);
 
         // TODO : Set on click listener of Search
-
-
 
 
     }

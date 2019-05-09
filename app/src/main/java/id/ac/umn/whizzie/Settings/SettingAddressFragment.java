@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import id.ac.umn.whizzie.R;
 
+//TODO: List dari semua Addresses
+
 /**
  * A simple {@link Fragment} subclass.
  */

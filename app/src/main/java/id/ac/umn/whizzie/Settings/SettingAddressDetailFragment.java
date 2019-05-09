@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import id.ac.umn.whizzie.R;
 
+//TODO: Bisa dipake buat Edit Address, bisa juga buat Add New Address
+
 /**
  * A simple {@link Fragment} subclass.
  */
