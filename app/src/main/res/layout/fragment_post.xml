@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Post.PostFragment">
+    tools:context=".Wisher.Post.PostFragment">
 
     <android.support.v7.widget.CardView
         android:id="@+id/post_card_view_image_uploads"
