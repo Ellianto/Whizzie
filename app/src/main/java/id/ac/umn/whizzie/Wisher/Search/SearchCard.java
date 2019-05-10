@@ -3,19 +3,22 @@ package id.ac.umn.whizzie.Wisher.Search;
 public class SearchCard {
     private String profileName;
     private String cardName;
-    private String cardDesc;
     private long cardCount;
     private long cardPrice;
+    private boolean isProduct;
+    private String itemKey;
+
 
     public SearchCard() {
     }
 
-    public SearchCard(String profileName, String cardName, String cardDesc, long cardCount, long cardPrice) {
+    public SearchCard(String profileName, String cardName, long cardCount, long cardPrice, boolean isProduct, String itemKey) {
         this.profileName = profileName;
         this.cardName = cardName;
-        this.cardDesc = cardDesc;
         this.cardCount = cardCount;
         this.cardPrice = cardPrice;
+        this.isProduct = isProduct;
+        this.itemKey = itemKey;
     }
 
     public String getProfileName() {
@@ -34,14 +37,6 @@ public class SearchCard {
         this.cardName = cardName;
     }
 
-    public String getCardDesc() {
-        return cardDesc;
-    }
-
-    public void setCardDesc(String cardDesc) {
-        this.cardDesc = cardDesc;
-    }
-
     public long getCardCount() {
         return cardCount;
     }
@@ -56,5 +51,21 @@ public class SearchCard {
 
     public void setCardPrice(long cardPrice) {
         this.cardPrice = cardPrice;
+    }
+
+    public boolean isProduct() {
+        return isProduct;
+    }
+
+    public void setProduct(boolean product) {
+        isProduct = product;
+    }
+
+    public String getItemKey() {
+        return itemKey;
+    }
+
+    public void setItemKey(String itemKey) {
+        this.itemKey = itemKey;
     }
 }

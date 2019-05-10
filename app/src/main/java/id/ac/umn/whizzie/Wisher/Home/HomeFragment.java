@@ -70,17 +70,18 @@ public class HomeFragment extends Fragment {
 
         // TODO : Add Mipmaps
 
-//        sliderModelList.add(new Slider(R.mipmap.landscapes));
-//        sliderModelList.add(new Slider(R.mipmap.landscapes4));
-//
-//        sliderModelList.add(new Slider(R.mipmap.landscapes3));
-//        sliderModelList.add(new Slider(R.mipmap.landscapes2));
-//
-//        sliderModelList.add(new Slider(R.mipmap.landscapes3));
-//        sliderModelList.add(new Slider(R.mipmap.landscapes4));
-//
-//        sliderModelList.add(new Slider(R.mipmap.landscapes));
-//        sliderModelList.add(new Slider(R.mipmap.landscapes2));
+        sliderModelList.add(new Slider(R.mipmap.cart));
+        sliderModelList.add(new Slider(R.mipmap.chat));
+
+        sliderModelList.add(new Slider(R.mipmap.cart));
+        sliderModelList.add(new Slider(R.mipmap.chat));
+        sliderModelList.add(new Slider(R.mipmap.cart));
+        sliderModelList.add(new Slider(R.mipmap.chat));
+        sliderModelList.add(new Slider(R.mipmap.cart));
+        sliderModelList.add(new Slider(R.mipmap.chat));
+
+        sliderModelList.add(new Slider(R.mipmap.cart));
+        sliderModelList.add(new Slider(R.mipmap.chat));
 
         SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
         bannerSliderViewPager.setAdapter(sliderAdapter);

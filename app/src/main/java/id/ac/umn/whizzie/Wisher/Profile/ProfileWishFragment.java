@@ -62,7 +62,6 @@ public class ProfileWishFragment extends Fragment {
         lsc = new ArrayList<>();
 
         dbrf.child("wishes").addListenerForSingleValueEvent(new ValueEventListener() {
-            long offerCount = 0;
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -71,17 +70,17 @@ public class ProfileWishFragment extends Fragment {
                     if(ds.child("uidUpWish").getValue().toString().equals(currUid)){
                         final String wishID = ds.getKey();
                         final String wish_title = ds.child("titleWish").getValue().toString();
-                        final String wish_desc = ds.child("descWish").getValue().toString();
 
                         dbrf.child("wishRelation").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot datass) {
-                                setCount(offerCount = datass.child(wishID).getChildrenCount());
 
                                 lsc.add(new SearchCard(dispName,
                                         wish_title,
-                                        wish_desc,
-                                        offerCount, 0));
+                                        datass.child(wishID).getChildrenCount(),
+                                        0,
+                                        false,
+                                        wishID));
 
                                 setRecView();
                             }
@@ -95,17 +94,11 @@ public class ProfileWishFragment extends Fragment {
                 }
             }
 
-            private void setCount(long count){
-                offerCount = count;
-            }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-//        Log.d("DEBUG", "COUNT = " + String.valueOf(lsc.size()));
     }
 
     private void setRecView(){

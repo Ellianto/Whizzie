@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Wisher.Activity.SettingActivity">
+    tools:context=".Wisher.Activity.GenieProfileActivity">
 
+
+    <!-- TODO : Ganti App Bar Assignment -->
     <include
-        android:id="@+id/wisher_app_setting"
+        android:id="@+id/genie_profile_app_bar"
         layout="@layout/app_bar_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wisher_app_setting"
+        app:layout_constraintTop_toBottomOf="@+id/genie_profile_app_bar"
         app:layout_constraintVertical_bias="0.505" />
 
 </android.support.constraint.ConstraintLayout>

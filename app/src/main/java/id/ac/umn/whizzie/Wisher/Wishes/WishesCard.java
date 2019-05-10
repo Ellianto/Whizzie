@@ -5,21 +5,14 @@ public class WishesCard {
     private String wishesDesc;
     private String wishesName;
     private int wishesBudget;
-    private int wishesCount;
+    private long wishesCount;
 
-    public WishesCard(String profileName, String wishesDesc, String wishesName, int wishesBudget) {
+    public WishesCard(String profileName, String wishesDesc, String wishesName, int wishesBudget, long wishesCount) {
         this.profileName = profileName;
         this.wishesDesc = wishesDesc;
         this.wishesName = wishesName;
         this.wishesBudget = wishesBudget;
-    }
-
-    public String getWishesName() {
-        return wishesName;
-    }
-
-    public void setWishesName(String wishesName) {
-        this.wishesName = wishesName;
+        this.wishesCount = wishesCount;
     }
 
     public String getProfileName() {
@@ -38,6 +31,14 @@ public class WishesCard {
         this.wishesDesc = wishesDesc;
     }
 
+    public String getWishesName() {
+        return wishesName;
+    }
+
+    public void setWishesName(String wishesName) {
+        this.wishesName = wishesName;
+    }
+
     public int getWishesBudget() {
         return wishesBudget;
     }
@@ -46,12 +47,11 @@ public class WishesCard {
         this.wishesBudget = wishesBudget;
     }
 
-    public int getWishesCount() {
-        // TODO : Implement query to get counts here
+    public long getWishesCount() {
         return wishesCount;
     }
 
-    public void setWishesCount(int wishesCount) {
+    public void setWishesCount(long wishesCount) {
         this.wishesCount = wishesCount;
     }
 }

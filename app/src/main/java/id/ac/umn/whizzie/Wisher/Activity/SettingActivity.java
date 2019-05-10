@@ -24,7 +24,7 @@ public class SettingActivity extends AppCompatActivity {
         setSupportActionBar(toolbarSetting);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        frameLayout = findViewById(R.id.wisher_frame_layout_setting);
+        frameLayout = findViewById(R.id.genie_profile_fragment_holder);
         setFragment(new SettingWisherFragment());
     }
 

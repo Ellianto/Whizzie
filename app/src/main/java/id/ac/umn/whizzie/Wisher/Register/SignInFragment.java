@@ -90,7 +90,7 @@ public class SignInFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in successful
-                                Intent mainIntent = new Intent(getActivity(), WisherActivity.class);
+                                Intent mainIntent = new Intent(getContext(), WisherActivity.class);
                                 startActivity(mainIntent);
                                 getActivity().finish();
                             } else {

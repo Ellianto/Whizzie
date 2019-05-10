@@ -49,11 +49,12 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
 
         holder.tvCardPrice.setText(priceText);
         holder.tvCardCount.setText(String.valueOf(temp.getCardCount()));
+        holder.tvKey.setText(temp.getItemKey());
     }
 
     class SearchCardHolder extends RecyclerView.ViewHolder{
         ImageView profPic, cardPic;
-        TextView tvDispName, tvCardTitle, tvCardCount, tvCardPrice;
+        TextView tvDispName, tvCardTitle, tvCardCount, tvCardPrice, tvKey;
 
         public SearchCardHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +66,8 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
             tvCardTitle = itemView.findViewById(R.id.search_card_title);
             tvCardCount = itemView.findViewById(R.id.search_badge_count);
             tvCardPrice = itemView.findViewById(R.id.search_card_price);
+
+            tvKey = itemView.findViewById(R.id.search_card_key);
         }
     }
 }

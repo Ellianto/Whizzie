@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -13,13 +14,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import id.ac.umn.whizzie.Wisher.Model.Product;
-import id.ac.umn.whizzie.Wisher.Model.Wishes;
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.Wisher.Search.SearchCard;
 import id.ac.umn.whizzie.Wisher.Search.SearchCardAdapter;
@@ -115,19 +115,66 @@ public class SearchActivity extends AppCompatActivity {
 
     private void loadProductCard(DataSnapshot ds){
         for(DataSnapshot product : ds.getChildren()){
-            Product temp = product.getValue(Product.class);
+            final String itemKey = product.getKey();
+            Log.d("DEBUG",itemKey);
+            final String uid = product.child("uidUpProduct").getValue().toString();
+            Log.d("DEBUG",uid);
 
-            scList.add(new SearchCard(unamePair.get(temp.getUidUpProduct()), temp.getNameProduct(), temp.getDescProduct(), temp.getWishesCount(), temp.getPriceProduct()));
+            final String prodName = product.child("nameProduct").getValue().toString();
+            Log.d("DEBUG",prodName);
+
+            GenericTypeIndicator<Long> gti = new GenericTypeIndicator<Long>() {};
+            final long prodPrice = product.child("priceProduct").getValue(gti);
+
+            dbRef.child("productRelation").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    scList.add(new SearchCard(
+                            unamePair.get(uid),
+                            prodName,
+                            dataSnapshot.getChildrenCount(),
+                            prodPrice,
+                            true,
+                            itemKey
+                    ));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+//            Product temp = product.getValue(Product.class);
+
+//            scList.add(new SearchCard(unamePair.get(temp.getUidUpProduct()), temp.getNameProduct(), wishCount, temp.getPriceProduct()));
         }
     }
 
     private void loadWishesCard(DataSnapshot ds){
         for(DataSnapshot wishes : ds.getChildren()){
-            Wishes temp = wishes.getValue(Wishes.class);
+            final String itemKey = wishes.getKey();
+            final String uid = wishes.child("uidUpWish").getValue().toString();
+            final String wishName = wishes.child("titleWish").getValue().toString();
 
-            // Untuk Wish, harganya kosong
-            // TODO : Implement if(Price == 0) hide TextView
-            scList.add(new SearchCard(unamePair.get(temp.getUidUpWish()), temp.getTitleWish(), temp.getDescWish(), temp.getOfferCount(), 0));
+            dbRef.child("wishRelation").child(wishes.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    scList.add(new SearchCard(
+                       unamePair.get(uid),
+                       wishName,
+                       dataSnapshot.getChildrenCount(),
+                       0,
+                false,
+                        itemKey
+                    ));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 }

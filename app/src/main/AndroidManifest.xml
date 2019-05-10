@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Genie.Activity.GenieActivity"></activity>
+        <activity android:name=".Wisher.Activity.GenieProfileActivity"></activity>
+        <activity android:name="Genie.Activity.GenieActivity" />
         <activity android:name=".Wisher.Activity.SettingActivity" />
         <activity android:name=".Wisher.Activity.SearchActivity" />
         <activity android:name=".Wisher.Activity.WisherActivity" />
