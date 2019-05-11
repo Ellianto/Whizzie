@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.main_search_icon: {
                 Intent i = new Intent(this, SearchActivity.class);
-
+                i.putExtra("category", "all");
                 if(search_product) i.putExtra("type", "product");
                 else i.putExtra("type", "wish");
 
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(), fragment);
         fragmentTransaction.commit();

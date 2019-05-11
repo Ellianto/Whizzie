@@ -1,6 +1,7 @@
 package id.ac.umn.whizzie.main.Home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -26,6 +27,8 @@ import java.net.URL;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.MainActivity;
+import id.ac.umn.whizzie.main.Activity.SearchActivity;
 
 public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapter.CategoryCardHolder> {
     Context ctx;
@@ -52,21 +55,26 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
     @Override
     public void onBindViewHolder(@NonNull final CategoryCardHolder view, int i) {
         CategoryCard temp = lcc.get(i);
+        final String catKey = temp.getCategoryName();
 
         view.category_card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(ctx, SearchActivity.class);
+                if(((MainActivity)ctx).getMode())
+                    i.putExtra("type", "wish");
+                else i.putExtra("type", "product");
 
+                i.putExtra("category", catKey);
+                ctx.startActivity(i);
             }
         });
 
-        // TODO : Implement fetch image from Firebase Storage Here
 
-        // view.category_image_view
+        // TODO : Gambar masih ajep-ajep, investigate
         sr.child(temp.getImageID()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-//                Log.d("DEBUG", "Download URI : " + uri);
                     new loadImage().execute(uri.toString());
             }
 

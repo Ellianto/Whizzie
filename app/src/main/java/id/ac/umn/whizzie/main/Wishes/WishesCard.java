@@ -4,14 +4,17 @@ public class WishesCard {
     private String profileName;
     private String wishesDesc;
     private String wishesName;
-    private int wishesBudget;
+    private String wishPic;
     private long wishesCount;
 
-    public WishesCard(String profileName, String wishesDesc, String wishesName, int wishesBudget, long wishesCount) {
+    public WishesCard() {
+    }
+
+    public WishesCard(String profileName, String wishesDesc, String wishesName, String wishPic, long wishesCount) {
         this.profileName = profileName;
         this.wishesDesc = wishesDesc;
         this.wishesName = wishesName;
-        this.wishesBudget = wishesBudget;
+        this.wishPic = wishPic;
         this.wishesCount = wishesCount;
     }
 
@@ -39,12 +42,12 @@ public class WishesCard {
         this.wishesName = wishesName;
     }
 
-    public int getWishesBudget() {
-        return wishesBudget;
+    public String getWishPic() {
+        return wishPic;
     }
 
-    public void setWishesBudget(int wishesBudget) {
-        this.wishesBudget = wishesBudget;
+    public void setWishPic(String wishPic) {
+        this.wishPic = wishPic;
     }
 
     public long getWishesCount() {

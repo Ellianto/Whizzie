@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_wisher, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         home_middle_category = view.findViewById(R.id.home_middle_category);
         home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);

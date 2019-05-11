@@ -1,5 +1,6 @@
 package id.ac.umn.whizzie.main.Register;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,12 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import id.ac.umn.whizzie.main.Activity.MainActivity;
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.MainActivity;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -31,13 +33,13 @@ import static android.support.constraint.Constraints.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class SignInFragment extends Fragment {
-
+    Context ctx;
 
     public SignInFragment() {
         // Required empty public constructor
     }
 
-    private TextView dontHaveAnAccount;
+    private TextView dontHaveAnAccount, forgotPass;
     private FrameLayout parentFrameLayout;
     private ImageButton closeButton;
     private Button signInBtn;
@@ -55,12 +57,35 @@ public class SignInFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_btn);
         edtPass = view.findViewById(R.id.sign_in_password);
         edtEmail = view.findViewById(R.id.sign_in_email);
+        forgotPass = view.findViewById(R.id.sign_in_forgot_password);
+
+        ctx = this.getContext();
+
+        forgotPass.setClickable(true);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edtEmail.getText().toString().isEmpty()){
+                    Toast.makeText(ctx, "Please fill in the Email Address Field First", Toast.LENGTH_LONG).show();
+                } else{
+                    final String emailAddr = edtEmail.getText().toString();
+
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(emailAddr).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(ctx, "An email has been sent to " + emailAddr, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+        });
 
         dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +97,7 @@ public class SignInFragment extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//          startActivity(new Intent(getContext(), MainActivity.class));
+                System.exit(0);
             }
         });
 

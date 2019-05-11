@@ -16,11 +16,11 @@ import id.ac.umn.whizzie.R;
 public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.TimelineCardHolder> {
 
     private Context ctx;
-    List<WishesCard> tcList;
+    List<WishesCard> wcList;
 
-    public WishesCardAdapter(Context ctx, List<WishesCard> tcList) {
+    public WishesCardAdapter(Context ctx, List<WishesCard> wcList) {
         this.ctx = ctx;
-        this.tcList = tcList;
+        this.wcList = wcList;
     }
 
     @NonNull
@@ -34,7 +34,7 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Ti
 
     @Override
     public void onBindViewHolder(@NonNull TimelineCardHolder viewHolder, int i) {
-        WishesCard temp = tcList.get(i);
+        WishesCard temp = wcList.get(i);
 
         viewHolder.tvDispName.setText(temp.getProfileName());
         viewHolder.tvWishTitle.setText(temp.getWishesName());
@@ -42,7 +42,7 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Ti
 
     @Override
     public int getItemCount() {
-        return tcList.size();
+        return wcList.size();
     }
 
     class TimelineCardHolder extends RecyclerView.ViewHolder{

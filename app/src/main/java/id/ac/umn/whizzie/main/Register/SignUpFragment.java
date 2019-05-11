@@ -222,7 +222,7 @@ public class SignUpFragment extends Fragment {
                                 }
                             }
                         });
-            }else {
+            } else {
                 confirmPassword.setError("Password doesn't matched!");
             }
         }else{
