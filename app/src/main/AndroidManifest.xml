@@ -12,14 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Wisher.Activity.GenieProfileActivity"></activity>
-        <activity android:name="Genie.Activity.GenieActivity" />
-        <activity android:name=".Wisher.Activity.SettingActivity" />
-        <activity android:name=".Wisher.Activity.SearchActivity" />
-        <activity android:name=".Wisher.Activity.WisherActivity" />
-        <activity android:name=".Wisher.Activity.RegisterActivity" />
+        <activity android:name=".main.Activity.GenieProfileActivity" />
+        <activity android:name=".main.Activity.SettingActivity" />
+        <activity android:name=".main.Activity.SearchActivity" />
+        <activity android:name=".main.Activity.MainActivity" />
+        <activity android:name=".main.Activity.RegisterActivity" />
         <activity
-            android:name=".Wisher.Activity.SplashActivity"
+            android:name=".main.Activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

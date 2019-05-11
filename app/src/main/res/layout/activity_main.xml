@@ -4,26 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.Activity.SettingActivity">
+    tools:context=".main.Activity.MainActivity">
 
     <include
-        android:id="@+id/wisher_app_setting"
-        layout="@layout/app_bar_setting"
+        android:id="@+id/wisher_app_bar"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <FrameLayout
-        android:id="@+id/genie_profile_fragment_holder"
-        android:layout_width="0dp"
+        android:id="@+id/wisher_frame_layout"
+        android:layout_width="414dp"
         android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/wisher_bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wisher_app_bar">
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/wisher_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wisher_app_setting"
-        app:layout_constraintVertical_bias="0.505" />
+        app:menu="@menu/navigation" />
 
 </android.support.constraint.ConstraintLayout>

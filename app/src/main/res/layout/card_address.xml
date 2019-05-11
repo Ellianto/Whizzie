@@ -14,7 +14,9 @@
         app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03">
+        app:layout_constraintVertical_bias="0.03"
+        android:clickable="true"
+        android:id = "@+id/address_card_view">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
