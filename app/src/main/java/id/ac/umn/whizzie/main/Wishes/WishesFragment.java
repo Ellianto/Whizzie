@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,19 +50,18 @@ public class WishesFragment extends Fragment {
 
         ctx = this.getContext();
 
-        unamePair = new ArrayMap<>();
-        wcList = new ArrayList<>();
-
-        loadUsernameList();
-        loadRecentWishes();
-        Log.d("DEBUG", "SELESAI FETCH");
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        unamePair = new ArrayMap<>();
+        wcList = new ArrayList<>();
+
+        loadUsernameList();
+        loadRecentWishes();
 
         wishes_recview.setHasFixedSize(true);
         wishes_recview.setLayoutManager(new GridLayoutManager(ctx, 1, GridLayoutManager.VERTICAL, false));
@@ -72,28 +70,31 @@ public class WishesFragment extends Fragment {
     }
 
     private void loadRecentWishes(){
-        // TODO : Investigate and Check this
         dbrf.child("wishes").orderByChild("timeWish").limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    final String upName = unamePair.get(ds.child("uidUpWish").getValue().toString());
+                    final String userKey = ds.child("uidUpWish").getValue().toString();
+                    final String upName = unamePair.get(userKey);
                     final String wishDesc = ds.child("descWish").getValue().toString();
                     final String wishTitle = ds.child("titleWish").getValue().toString();
-                    final String imgPath = ds.child("pictureWish").getValue().toString();
 
-                    dbrf.child("wishRelation").child(ds.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    final String wishKey = ds.getKey();
+
+                    dbrf.child("wishRelation").child(wishKey).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSS) {
                             wcList.add(new WishesCard(
                                     upName,
+                                    userKey,
                                     wishDesc,
                                     wishTitle,
-                                    imgPath,
+                                    wishKey + ".jpg",
+                                    wishKey,
                                     dataSS.getChildrenCount()
                             ));
 
-                            Log.d("DEBUG", "NAMBAH 1");
+                            setRecView();
                         }
 
                         @Override
@@ -107,7 +108,7 @@ public class WishesFragment extends Fragment {
         });
     }
 
-    // Pre-load the UID-Username mapping to render the usernames in the Search Card;
+    // Pre-load the UID-Username mapping to render the usernames;
     private void loadUsernameList(){
         dbrf.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -123,5 +124,13 @@ public class WishesFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+    }
+
+    private void setRecView(){
+        WishesCardAdapter sca = new WishesCardAdapter(getActivity(), wcList);
+        wishes_recview.setHasFixedSize(true);
+        wishes_recview.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.VERTICAL, false));
+
+        wishes_recview.setAdapter(sca);
     }
 }

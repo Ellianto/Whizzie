@@ -34,6 +34,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
+    // TODO : Show Genie Names when showing products
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,10 +81,7 @@ public class SearchActivity extends AppCompatActivity {
 
         searchBtn.setOnClickListener(lookForItems);
 
-        SearchCardAdapter scAdapter = new SearchCardAdapter(this, scList);
-        rcSearch.setHasFixedSize(true);
-        rcSearch.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
-        rcSearch.setAdapter(scAdapter);
+        setRecView();
     }
 
     // Pre-load the UID-Username mapping to render the usernames in the Search Card;
@@ -116,9 +115,8 @@ public class SearchActivity extends AppCompatActivity {
 
                     final String itemKey = product.getKey();
                     final String uid = product.child("uidUpProduct").getValue().toString();
-
                     final String prodName = product.child("nameProduct").getValue().toString();
-
+                    final String prodImg = product.child("pictureProduct").getValue().toString();
                     final long prodPrice = product.child("priceProduct").getValue(long.class);
 
                     dbRef.child("productRelation").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -126,7 +124,9 @@ public class SearchActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             scList.add(new SearchCard(
                                     unamePair.get(uid),
+                                    uid + "/profile.jpg",
                                     prodName,
+                                    prodImg,
                                     dataSnapshot.getChildrenCount(),
                                     prodPrice,
                                     true,
@@ -158,6 +158,7 @@ public class SearchActivity extends AppCompatActivity {
                     final String itemKey = wishes.getKey();
                     final String uid = wishes.child("uidUpWish").getValue().toString();
                     final String wishName = wishes.child("titleWish").getValue().toString();
+                    final String wishImage = wishes.child("pictureWish").getValue().toString();
 
                     // Fetch Offer Counts for this wishes
                     dbRef.child("wishRelation").child(wishes.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -166,7 +167,9 @@ public class SearchActivity extends AppCompatActivity {
                             // Add to List
                             scList.add(new SearchCard(
                                     unamePair.get(uid),
+                                    uid + "/profile.jpg",
                                     wishName,
+                                    wishImage,
                                     dataSnapshot.getChildrenCount(),
                                     0,
                                     false,
@@ -183,5 +186,19 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    private void setRecView(){
+        SearchCardAdapter sca = new SearchCardAdapter(this, scList);
+        rcSearch.setHasFixedSize(true);
+        rcSearch.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
+
+        rcSearch.setAdapter(sca);
     }
 }

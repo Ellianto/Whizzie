@@ -84,7 +84,6 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    Log.d("DEBUG", "Fetching...");
                 }
 
                 @Override
@@ -100,7 +99,6 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
                         h.post(new Runnable() {
                             @Override
                             public void run() {
-                                Log.d("DEBUG", "testing");
                                 view.category_image_view.setImageBitmap(pic);
                             }
                         });
@@ -120,8 +118,6 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
     public int getItemCount() {
         return lcc.size();
     }
-
-
 
     class CategoryCardHolder extends RecyclerView.ViewHolder{
         CardView category_card_view;

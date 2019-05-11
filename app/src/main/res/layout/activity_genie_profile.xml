@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".main.Activity.GenieProfileActivity">
 
-
-    <!-- TODO : Ganti App Bar Assignment -->
     <include
         android:id="@+id/genie_profile_app_bar"
         layout="@layout/app_bar_setting"

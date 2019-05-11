@@ -2,7 +2,9 @@ package id.ac.umn.whizzie.main.Search;
 
 public class SearchCard {
     private String profileName;
+    private String profilePic;
     private String cardName;
+    private String cardImage;
     private long cardCount;
     private long cardPrice;
     private boolean isProduct;
@@ -12,13 +14,23 @@ public class SearchCard {
     public SearchCard() {
     }
 
-    public SearchCard(String profileName, String cardName, long cardCount, long cardPrice, boolean isProduct, String itemKey) {
+    public SearchCard(String profileName, String profilePic, String cardName, String cardImage, long cardCount, long cardPrice, boolean isProduct, String itemKey) {
         this.profileName = profileName;
+        this.profilePic = profilePic;
         this.cardName = cardName;
+        this.cardImage = cardImage;
         this.cardCount = cardCount;
         this.cardPrice = cardPrice;
         this.isProduct = isProduct;
         this.itemKey = itemKey;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
     public String getProfileName() {
@@ -35,6 +47,14 @@ public class SearchCard {
 
     public void setCardName(String cardName) {
         this.cardName = cardName;
+    }
+
+    public String getCardImage() {
+        return cardImage;
+    }
+
+    public void setCardImage(String cardImage) {
+        this.cardImage = cardImage;
     }
 
     public long getCardCount() {

@@ -8,8 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO : Fix This -->
-
     <ImageView
         android:id="@+id/banner_slide"
         android:layout_width="match_parent"

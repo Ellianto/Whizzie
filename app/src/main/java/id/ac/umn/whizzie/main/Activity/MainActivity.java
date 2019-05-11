@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import id.ac.umn.whizzie.main.Home.HomeFragment;
 import id.ac.umn.whizzie.main.Notifications.NotificationFragment;
-import id.ac.umn.whizzie.main.Post.PostFragment;
+import id.ac.umn.whizzie.main.Post.PostWishFragment;
 import id.ac.umn.whizzie.main.Profile.ProfileFragment;
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Wishes.WishesFragment;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 case R.id.post_bottom_menu:{
-                    setFragment(new PostFragment());
+                    setFragment(new PostWishFragment());
                     break;
                 }
 
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 else i.putExtra("type", "wish");
 
                 startActivity(i);
-
                 break;
             }
             case R.id.main_cart_icon: {
@@ -97,12 +96,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
-    }
-
-    public void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout.getId(), fragment);
-        fragmentTransaction.commit();
     }
 
     @Override
@@ -123,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Set Initial Fragment
         setFragment(new HomeFragment());
+    }
+
+    // TODO : Image doesn't reload when refreshing fragment, investigate
+    public void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout.getId(), fragment);
+        fragmentTransaction.commit();
     }
 
     public void hideActionBar(){

@@ -2,20 +2,40 @@ package id.ac.umn.whizzie.main.Wishes;
 
 public class WishesCard {
     private String profileName;
+    private String userKey;
     private String wishesDesc;
     private String wishesName;
     private String wishPic;
+    private String wishKey;
     private long wishesCount;
 
     public WishesCard() {
     }
 
-    public WishesCard(String profileName, String wishesDesc, String wishesName, String wishPic, long wishesCount) {
+    public WishesCard(String profileName, String userKey, String wishesDesc, String wishesName, String wishPic, String wishKey, long wishesCount) {
         this.profileName = profileName;
+        this.userKey = userKey;
         this.wishesDesc = wishesDesc;
         this.wishesName = wishesName;
         this.wishPic = wishPic;
+        this.wishKey = wishKey;
         this.wishesCount = wishesCount;
+    }
+
+    public String getUserKey() {
+        return userKey;
+    }
+
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
+    }
+
+    public String getWishKey() {
+        return wishKey;
+    }
+
+    public void setWishKey(String wishKey) {
+        this.wishKey = wishKey;
     }
 
     public String getProfileName() {

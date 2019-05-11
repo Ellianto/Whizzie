@@ -12,6 +12,8 @@ import id.ac.umn.whizzie.main.Settings.SettingWisherFragment;
 
 public class SettingActivity extends AppCompatActivity {
 
+    // TODO : Prepare for Multi Mode Access
+
     private FrameLayout frameLayout;
 
     @Override
@@ -28,9 +30,17 @@ public class SettingActivity extends AppCompatActivity {
         setFragment(new SettingWisherFragment());
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     public void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(), fragment);
         fragmentTransaction.commit();
     }
+
+
 }

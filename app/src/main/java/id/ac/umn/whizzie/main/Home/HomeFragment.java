@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,11 +42,6 @@ public class HomeFragment extends Fragment {
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
     // Banner Slider //
     private ViewPager bannerSliderViewPager;
     private List<Slider> sliderModelList;
@@ -57,9 +51,12 @@ public class HomeFragment extends Fragment {
     final private long PERIOD_TIME = 3000;
     // Banner Slider //
 
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -118,8 +115,6 @@ public class HomeFragment extends Fragment {
         });
 
         return view;
-
-        // TODO : Reimplement Adapters
     }
 
     // Banner Slider //
@@ -164,12 +159,10 @@ public class HomeFragment extends Fragment {
 
         // Middle Category List Data Load
         home_middle_category.setHasFixedSize(true);
-
+        home_middle_category.setItemViewCacheSize(15);
         home_middle_category.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
 
         ccList = new ArrayList<>();
-
-        Log.d("R ID", "FASHION : " + R.drawable.fashion);
 
         // Query Must be done using Event Listeners
         dbRef.child("categories").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -184,16 +177,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // TODO: Load Featured Genies Grid
         // Middle Category List Data Load
         home_bottom_grid.setHasFixedSize(true);
 
         home_bottom_grid.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
 
         fgList = new ArrayList<>();
-
-        // TODO : Implement featured genie kalau sudah diubah di database
-        // Untuk sekarang, fetch semua yang punya toko
 
         unamePair = new ArrayMap<>();
 
@@ -211,19 +200,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void loadFeaturedGenie(DataSnapshot dataSS){
-        for(DataSnapshot temp : dataSS.getChildren()){
-            fgList.add(new FeaturedGenieCard(temp.getKey(),
-                    unamePair.get(temp.getKey()),
-                    "" ));
-
-            Log.d("DEBUG", unamePair.get(temp.getKey()));
-        }
-
-        FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
-        home_bottom_grid.setAdapter(fgAdapter);
-    }
-
     private void loadCategoryCard(DataSnapshot dataSS){
         for(DataSnapshot temp : dataSS.getChildren()) {
             String catName = temp.getKey();
@@ -237,7 +213,6 @@ public class HomeFragment extends Fragment {
         }
 
         CategoryCardAdapter ccAdapter = new CategoryCardAdapter(this.getContext(), ccList);
-
         home_middle_category.setAdapter(ccAdapter);
     }
 
@@ -260,5 +235,16 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    private void loadFeaturedGenie(DataSnapshot dataSS){
+        for(DataSnapshot temp : dataSS.getChildren()){
+            fgList.add(new FeaturedGenieCard(temp.getKey(),
+                    unamePair.get(temp.getKey()),
+                    temp.getKey() + "/profile.jpg" ));
+        }
+
+        FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
+        home_bottom_grid.setAdapter(fgAdapter);
     }
 }

@@ -37,9 +37,7 @@ import id.ac.umn.whizzie.R;
  * A simple {@link Fragment} subclass.
  */
 
-// TODO : Fix the sign up button
 public class SignUpFragment extends Fragment {
-
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -199,8 +197,6 @@ public class SignUpFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    // TODO: Auto Login And Insert to Database
-
                                     firebaseAuth.signInWithEmailAndPassword(textEmail, textPass);
 
                                     String uid = firebaseAuth.getCurrentUser().getUid();
@@ -209,11 +205,14 @@ public class SignUpFragment extends Fragment {
 
                                     fdb.child("users").child(uid).child("email").setValue(textEmail);
                                     fdb.child("users").child(uid).child("name").setValue(fullName.getText().toString());
+                                    fdb.child("users").child(uid).child("storeAddress").setValue("");
+                                    fdb.child("users").child(uid).child("imgBackground").setValue("");
+                                    fdb.child("users").child(uid).child("imgProfilePicture").setValue("");
 
                                     Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                                     startActivity(mainIntent);
                                     getActivity().finish();
-                                }else{
+                                } else {
                                     progressBar.setVisibility(View.INVISIBLE);
                                     signUpBtn.setEnabled(true);
                                     signUpBtn.setTextColor(Color.rgb(255,255,255));
@@ -223,7 +222,7 @@ public class SignUpFragment extends Fragment {
                             }
                         });
             } else {
-                confirmPassword.setError("Password doesn't matched!");
+                confirmPassword.setError("Password doesn't match!");
             }
         }else{
             email.setError("Invalid Email!");

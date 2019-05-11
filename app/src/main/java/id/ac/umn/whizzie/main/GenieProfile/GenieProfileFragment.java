@@ -17,11 +17,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
@@ -55,6 +55,7 @@ public class GenieProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_genie_profile, container, false);
 
         ctx = this.getContext();
+        prodList = new ArrayList<>();
 
         rv = view.findViewById(R.id.genie_profile_products_list);
         dispName = view.findViewById(R.id.genie_profile_display_name);
@@ -68,9 +69,7 @@ public class GenieProfileFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
         return view;
@@ -81,51 +80,49 @@ public class GenieProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        loadGenieProducts();
+
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new GridLayoutManager(ctx, 2, GridLayoutManager.VERTICAL, false));
+        SearchCardAdapter sca = new SearchCardAdapter(ctx, prodList);
+        rv.setAdapter(sca);
 
+        // TODO : Fetch Images Here
+    }
+
+    private void loadGenieProducts(){
         dbrf.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                loadGenieProducts(dataSnapshot);
-                SearchCardAdapter sca = new SearchCardAdapter(ctx, prodList);
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    final String itemKey = ds.getKey();
+                    final String prodName = ds.child("nameProduct").getValue().toString();
+                    final String prodImg = ds.child("pictureProduct").getValue().toString();
+                    final long prodPrice = ds.child("priceProduct").getValue(long.class);
 
-                rv.setAdapter(sca);
+                    dbrf.child("productRelation").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSS) {
+                            prodList.add(new SearchCard(
+                                    genieName,
+                                    genieUid + "/profile.jpg",
+                                    prodName,
+                                    prodImg,
+                                    dataSS.getChildrenCount(),
+                                    prodPrice,
+                                    true,
+                                    itemKey
+                            ));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError ds) {}
+                    });
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
-    }
-
-    private void loadGenieProducts(DataSnapshot dataSnapshot){
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            final String itemKey = dataSnapshot.getKey();
-            final String prodName = dataSnapshot.child("nameProduct").getValue().toString();
-
-            GenericTypeIndicator<Long> gti = new GenericTypeIndicator<Long>() {};
-            final long prodPrice = dataSnapshot.child("priceProduct").getValue(gti);
-
-            dbrf.child("productRelation").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot ds) {
-                    prodList.add(new SearchCard(
-                            genieName,
-                            prodName,
-                            ds.getChildrenCount(),
-                            prodPrice,
-                            true,
-                            itemKey
-                    ));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError ds) {
-
-                }
-            });
-        }
     }
 }

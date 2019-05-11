@@ -13,21 +13,23 @@ public class GenieProfileActivity extends AppCompatActivity {
 
     FrameLayout fl;
 
+    // TODO : Implement This
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genie_profile);
 
-        // TODO : Toolbar Initiation
-
         String genieId = getIntent().getStringExtra("genieUid");
+        String genieName = getIntent().getStringExtra("genieName");
 
         fl = findViewById(R.id.genie_profile_fragment_holder);
 
         Fragment fr = new GenieProfileFragment();
 
         Bundle b = new Bundle();
-        b.putString("genieID",genieId);
+        b.putString("genieUid",genieId);
+        b.putString("genieName", genieName);
 
         fr.setArguments(b);
 
@@ -36,4 +38,9 @@ public class GenieProfileActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
