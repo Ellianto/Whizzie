@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Profile.ProfileFragment">
+    tools:context=".main.Profile.ProfileFragment">
 
     <ImageView
         android:id="@+id/profile_display_image"
-        android:layout_width="99dp"
-        android:layout_height="101dp"
+        android:layout_width="156dp"
+        android:layout_height="145dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.101"
@@ -20,81 +20,62 @@
         tools:srcCompat="@tools:sample/avatars[15]" />
 
     <TextView
-        android:id="@+id/profile_user_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="\@jennlaw"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toEndOf="@+id/profile_display_image"
-        app:layout_constraintTop_toBottomOf="@+id/profile_display_name" />
-
-    <TextView
         android:id="@+id/profile_display_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Jennifer Lawrence"
+        android:layout_marginBottom="8dp"
+        android:text="Display Name"
+        android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/profile_creator_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/profile_display_image"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/profile_text_view_wishes"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:text="Wishes"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/profile_display_image"
-        app:layout_constraintTop_toBottomOf="@+id/profile_user_tag" />
-
-    <TextView
-        android:id="@+id/profile_wishes_count"
-        android:layout_width="47dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="20dp"
-        android:text="9"
-        android:textAlignment="center"
-        app:layout_column="1"
-        app:layout_constraintStart_toEndOf="@+id/profile_display_image"
-        app:layout_constraintTop_toBottomOf="@+id/profile_text_view_wishes"
-        app:layout_row="1" />
+    <ImageButton
+        android:id="@+id/profile_setting_button"
+        android:layout_width="56dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:selectableItemBackground"
+        android:src="@drawable/ic_settings_white_24dp"
+        android:text="Creator's Mode"
+        android:tint="@color/cardview_dark_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toEndOf="@+id/profile_creator_button"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/profile_creator_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Creator's Mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.591"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_display_image" />
+        android:layout_width="128dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="112dp"
+        android:text="Genie Mode"
+        app:layout_constraintStart_toEndOf="@+id/profile_display_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/profile_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_creator_button"
+        app:layout_constraintTop_toBottomOf="@+id/profile_setting_button"
         app:tabGravity="fill"
         app:tabMode="fixed">
 
         <android.support.design.widget.TabItem
-            android:id="@+id/profile_tab_my_wishes"
+            android:id="@+id/profile_tab_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Wishes" />
