@@ -43,7 +43,9 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PostWishFragment extends Fragment {
+
+// TODO: Implement Upload Product as well
+public class PostFragment extends Fragment {
     ImageButton upImage;
     Button postBtn;
     EditText wish_name, wish_desc;
@@ -60,7 +62,7 @@ public class PostWishFragment extends Fragment {
     DatabaseReference dbrf = FirebaseDatabase.getInstance().getReference();
     StorageReference strf = FirebaseStorage.getInstance().getReference();
 
-    public PostWishFragment() {
+    public PostFragment() {
         // Required empty public constructor
     }
 
@@ -68,7 +70,6 @@ public class PostWishFragment extends Fragment {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             wishCount = dataSnapshot.getChildrenCount();
-            Log.d("DEBUG", "Wish Count : " + String.valueOf(wishCount));
         }
 
         @Override
@@ -82,18 +83,18 @@ public class PostWishFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_post_wisher, container, false);
+        View view = inflater.inflate(R.layout.fragment_post, container, false);
 
         ctx = container.getContext();
 
         ((MainActivity) getActivity()).showActionBar();
 
         upImage = view.findViewById(R.id.post_image_button_add);
-        combo_box = view.findViewById(R.id.post_combo_box);
+        combo_box = view.findViewById(R.id.post_wish_combo_box);
         postBtn = view.findViewById(R.id.post_button_wish);
 
-        wish_name   = view.findViewById(R.id.post_edit_text_item_name);
-        wish_desc = view.findViewById(R.id.post_edit_text_desc);
+        wish_name   = view.findViewById(R.id.post_wish_edit_text_wish_name);
+        wish_desc = view.findViewById(R.id.post_wish_edit_text_desc);
 
         return view;
     }

@@ -17,7 +17,6 @@ public class CategoryCard {
         return categoryName;
     }
 
-
     public void setCategoryName(String categoryName) {this.categoryName = categoryName;}
 
     public String getImageID() {
@@ -26,3 +25,5 @@ public class CategoryCard {
 
     public void setImageID(String imageID) {this.imageID = imageID;}
 }
+
+//

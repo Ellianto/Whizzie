@@ -2,10 +2,12 @@ package id.ac.umn.whizzie.main.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -34,7 +37,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
-    // TODO : Show Genie Names when showing products
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,40 +50,47 @@ public class SearchActivity extends AppCompatActivity {
         categoryFilter = getIntent().getStringExtra("category");
 
         unamePair = new ArrayMap<>();
-
         loadUsernameList();
 
-        scList = new ArrayList<>();
+        rcSearch.setHasFixedSize(true);
+        rcSearch.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
+
         View.OnClickListener lookForItems;
 
-        // Load Initial and set On Click Listener on Search Button
+        //TODO: Empty the Recycler View before refilling with searched items
         if(getIntent().getStringExtra("type").equals("product")){
             // Kalau Search Product
-            loadProductCard();
+            loadProductCard("");
 
             lookForItems = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO : Setelah implement Overload/Nullable, add here
+                    String keyword = edtKeyword.getText().toString();
+
+                    Log.d("DEBUG", keyword);
+
+                    loadProductCard(keyword);
                 }
             };
 
         } else {
             // Kalau Search Wishes
-            loadWishesCard();
+            loadWishesCard("");
 
             lookForItems = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO : Setelah implement Overload/Nullable, add here
 
+                    String keyword = edtKeyword.getText().toString();
+
+                    Log.d("DEBUG", keyword);
+
+                    loadWishesCard(keyword);
                 }
             };
         }
 
         searchBtn.setOnClickListener(lookForItems);
-
-        setRecView();
     }
 
     // Pre-load the UID-Username mapping to render the usernames in the Search Card;
@@ -102,22 +111,31 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    // TODO : Try to implement Nullable or Overloading
-    private void loadProductCard(){
+    private void loadProductCard(final String keyword){
+        scList = new ArrayList<>();
+
         // Fetch Products
         dbRef.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 for(DataSnapshot product : ds.getChildren()){
+                    Log.d("DEBUG", product.getKey());
+
                     // If a category filter exists and doesn't match, continue the loop
                     if(!categoryFilter.equals("all") && !categoryFilter.equals(product.child("category").getValue().toString()))
                         continue;
 
+                    final String prodName = product.child("nameProduct").getValue().toString();
+
+                    if(!keyword.isEmpty() && !prodName.toLowerCase().contains(keyword.toLowerCase()))
+                        continue;
+
                     final String itemKey = product.getKey();
                     final String uid = product.child("uidUpProduct").getValue().toString();
-                    final String prodName = product.child("nameProduct").getValue().toString();
                     final String prodImg = product.child("pictureProduct").getValue().toString();
-                    final long prodPrice = product.child("priceProduct").getValue(long.class);
+
+
+                    final long prodPrice = Long.parseLong(product.child("priceProduct").getValue().toString());
 
                     dbRef.child("productRelation").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -143,9 +161,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+
+        setRecView();
     }
 
-    private void loadWishesCard(){
+    private void loadWishesCard(final String keyword){
+        scList = new ArrayList<>();
+
         // Fetch Wishes
         dbRef.child("wishes").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -155,9 +177,13 @@ public class SearchActivity extends AppCompatActivity {
                     if(!categoryFilter.equals("all") && !categoryFilter.equals(wishes.child("category").getValue().toString()))
                         continue;
 
+                    final String wishName = wishes.child("titleWish").getValue().toString();
+
+                    if(!keyword.isEmpty() && !wishName.toLowerCase().contains(keyword.toLowerCase()))
+                        continue;
+
                     final String itemKey = wishes.getKey();
                     final String uid = wishes.child("uidUpWish").getValue().toString();
-                    final String wishName = wishes.child("titleWish").getValue().toString();
                     final String wishImage = wishes.child("pictureWish").getValue().toString();
 
                     // Fetch Offer Counts for this wishes
@@ -186,6 +212,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+
+        setRecView();
     }
 
     @Override
@@ -196,8 +224,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setRecView(){
         SearchCardAdapter sca = new SearchCardAdapter(this, scList);
-        rcSearch.setHasFixedSize(true);
-        rcSearch.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
 
         rcSearch.setAdapter(sca);
     }

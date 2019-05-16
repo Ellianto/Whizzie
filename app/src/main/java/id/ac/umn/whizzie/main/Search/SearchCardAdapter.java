@@ -98,7 +98,15 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
 
         holder.cardHolder.setOnClickListener(ocl);
 
-        strf.child(imagePath + temp.getItemKey() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        String imageRefPath = "";
+
+        if(temp.getCardImage().isEmpty())
+            imageRefPath = "whizzie_assets/empty/empty.jpg";
+        else
+            imageRefPath = imagePath + temp.getCardImage();
+
+        // Set Item Picture
+        strf.child(imageRefPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 new loadImage().execute(uri.toString());
@@ -137,7 +145,15 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
             }
         });
 
-        strf.child("users/" + temp.getProfilePic()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        String profileRefPath = "";
+
+        if(temp.getProfilePic().isEmpty())
+            profileRefPath = "whizzie_assets/empty/empty_profile.jpg";
+        else
+            profileRefPath = "users/" + temp.getProfilePic();
+
+        // Fetch profile picture image
+        strf.child(profileRefPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 new loadImage().execute(uri.toString());

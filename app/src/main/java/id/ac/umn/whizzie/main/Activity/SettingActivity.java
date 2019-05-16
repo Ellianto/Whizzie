@@ -41,6 +41,4 @@ public class SettingActivity extends AppCompatActivity {
         fragmentTransaction.replace(frameLayout.getId(), fragment);
         fragmentTransaction.commit();
     }
-
-
 }

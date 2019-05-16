@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +28,8 @@ import java.util.TimerTask;
 
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Activity.MainActivity;
+import id.ac.umn.whizzie.main.Search.SearchCard;
+import id.ac.umn.whizzie.main.Search.SearchCardAdapter;
 
 
 /**
@@ -34,10 +37,11 @@ import id.ac.umn.whizzie.main.Activity.MainActivity;
  */
 public class HomeFragment extends Fragment {
 
-    RecyclerView home_middle_category, home_bottom_grid;
+    RecyclerView home_middle_category, home_bottom_grid, home_bottom_featured_products;
 
     private List<CategoryCard> ccList;
     private List<FeaturedGenieCard> fgList;
+    private List<SearchCard> scList;
     private ArrayMap<String, String> unamePair;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
@@ -62,6 +66,7 @@ public class HomeFragment extends Fragment {
 
         home_middle_category = view.findViewById(R.id.home_middle_category);
         home_bottom_grid = view.findViewById(R.id.home_bottom_featured_genies);
+        home_bottom_featured_products = view.findViewById(R.id.home_bottom_featured_products);
         // Button onClick for setting
 
         ((MainActivity) getActivity()).showActionBar();
@@ -81,9 +86,7 @@ public class HomeFragment extends Fragment {
 
         ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
+            public void onPageScrolled(int i, float v, int i1) {}
 
             @Override
             public void onPageSelected(int i) {
@@ -101,7 +104,6 @@ public class HomeFragment extends Fragment {
 
         startBannerSlideShow();
 
-        // TODO: Kemungkinan ada yg harus di override, investigate
         bannerSliderViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -148,6 +150,7 @@ public class HomeFragment extends Fragment {
             }
         }, DELAY_TIME, PERIOD_TIME);
     }
+
     private void stopBannerSlideShow(){
         timer.cancel();
     }
@@ -172,17 +175,11 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
-        // Middle Category List Data Load
         home_bottom_grid.setHasFixedSize(true);
-
         home_bottom_grid.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
-
-        fgList = new ArrayList<>();
 
         unamePair = new ArrayMap<>();
 
@@ -193,9 +190,34 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
 
+        fgList = new ArrayList<>();
+
+        dbRef.child("featured").child("featuredGenies").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loadFeaturedGenie(dataSnapshot);
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
+
+        home_bottom_featured_products.setHasFixedSize(true);
+        home_bottom_featured_products.setLayoutManager(new GridLayoutManager(this.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
+
+        scList = new ArrayList<>();
+
+        dbRef.child("featured").child("featuredProducts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loadFeaturedProduct(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
     }
@@ -223,18 +245,6 @@ public class HomeFragment extends Fragment {
 
             unamePair.put(user_id, username);
         }
-
-        dbRef.child("featured").child("featuredGenies").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                loadFeaturedGenie(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     private void loadFeaturedGenie(DataSnapshot dataSS){
@@ -246,5 +256,47 @@ public class HomeFragment extends Fragment {
 
         FeaturedGenieCardAdapter fgAdapter = new FeaturedGenieCardAdapter(this.getContext(), fgList);
         home_bottom_grid.setAdapter(fgAdapter);
+    }
+
+    private void loadFeaturedProduct(DataSnapshot ds){
+        for(DataSnapshot temp : ds.getChildren()){
+            // Fetch Products
+            dbRef.child("products/" + temp.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot product) {
+                    final String itemKey = product.getKey();
+                    final String uid = product.child("uidUpProduct").getValue().toString();
+                    final String prodName = product.child("nameProduct").getValue().toString();
+                    final String prodImg = product.child("pictureProduct").getValue().toString();
+
+                    final long prodPrice = Long.parseLong(product.child("priceProduct").getValue().toString());
+
+                    dbRef.child("productRelation").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            scList.add(new SearchCard(
+                                    unamePair.get(uid),
+                                    uid + "/profile.jpg",
+                                    prodName,
+                                    prodImg,
+                                    dataSnapshot.getChildrenCount(),
+                                    prodPrice,
+                                    true,
+                                    itemKey
+                            ));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {}
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+        }
+
+        SearchCardAdapter sca = new SearchCardAdapter(this.getContext(), scList);
+        home_bottom_featured_products.setAdapter(sca);
     }
 }

@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import id.ac.umn.whizzie.main.Home.HomeFragment;
 import id.ac.umn.whizzie.main.Notifications.NotificationFragment;
-import id.ac.umn.whizzie.main.Post.PostWishFragment;
+import id.ac.umn.whizzie.main.Post.PostFragment;
 import id.ac.umn.whizzie.main.Profile.ProfileFragment;
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Wishes.WishesFragment;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 case R.id.post_bottom_menu:{
-                    setFragment(new PostWishFragment());
+                    setFragment(new PostFragment());
                     break;
                 }
 
@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         setFragment(new HomeFragment());
     }
 
-    // TODO : Image doesn't reload when refreshing fragment, investigate
     public void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(), fragment);

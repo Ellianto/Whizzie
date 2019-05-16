@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.Profile.ProfileFragment">
 
+    <!-- TODO: Redesign -->
+
     <ImageView
         android:id="@+id/profile_display_image"
         android:layout_width="156dp"
@@ -62,41 +64,29 @@
         app:layout_constraintStart_toEndOf="@+id/profile_display_image"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/profile_tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+    <TextView
+        android:id="@+id/profile_recview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:text="My Items"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_setting_button"
-        app:tabGravity="fill"
-        app:tabMode="fixed">
+        app:layout_constraintTop_toBottomOf="@+id/profile_display_image" />
 
-        <android.support.design.widget.TabItem
-            android:id="@+id/profile_tab_items"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Wishes" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/profile_tab_transactions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Transactions" />
-
-    </android.support.design.widget.TabLayout>
-
-    <FrameLayout
-        android:id="@+id/profile_fragment_holder"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/profile_recview_items"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tab_layout">
-
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/profile_recview_title" />
 
 </android.support.constraint.ConstraintLayout>
