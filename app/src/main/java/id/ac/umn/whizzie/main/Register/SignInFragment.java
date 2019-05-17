@@ -120,7 +120,6 @@ public class SignInFragment extends Fragment {
                                 getActivity().finish();
                             } else {
                                 // Sign in failed
-                                Log.e(TAG, "Authentication failed!");
                                 Toast.makeText(getContext(), "Invalid Credentials!", Toast.LENGTH_SHORT).show();
                             }
                         }

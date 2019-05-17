@@ -13,8 +13,6 @@ public class GenieProfileActivity extends AppCompatActivity {
 
     FrameLayout fl;
 
-    // TODO : Implement This
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

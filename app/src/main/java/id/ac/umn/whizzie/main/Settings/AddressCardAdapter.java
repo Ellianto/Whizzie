@@ -42,8 +42,7 @@ public class AddressCardAdapter extends RecyclerView.Adapter<AddressCardAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull AddressCardHolder v, int i) {
-        AddressCard temp = lac.get(i);
-
+        AddressCard temp = lac.get(i); //Masukkan ListAddressCard
 
         final String addrKey = temp.getNameAddress();
 

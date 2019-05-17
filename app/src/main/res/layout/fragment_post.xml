@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.Post.PostFragment">
+    android:layout_height="match_parent">
 
 
     <android.support.constraint.ConstraintLayout
@@ -16,7 +15,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/post_card_view_image_uploads"
             android:layout_width="385dp"
-            android:layout_height="135dp"
+            android:layout_height="385dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -27,8 +26,8 @@
 
             <ImageButton
                 android:id="@+id/post_image_button_add"
-                android:layout_width="117dp"
-                android:layout_height="119dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 app:srcCompat="@android:drawable/ic_input_add" />
         </android.support.v7.widget.CardView>
@@ -62,7 +61,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:paddingTop="8dp"
-                    android:text="Wish Name"
+                    android:text="Name"
                     android:textAlignment="textStart"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +177,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:paddingTop="8dp"
-                    android:text="Wish Name"
+                    android:text="Name"
                     android:textAlignment="textStart"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"

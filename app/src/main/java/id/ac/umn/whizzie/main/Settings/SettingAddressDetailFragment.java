@@ -1,7 +1,9 @@
 package id.ac.umn.whizzie.main.Settings;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,16 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Activity.SettingActivity;
-import id.ac.umn.whizzie.main.Model.Address;
-
-//TODO: Bisa dipake buat Edit Address, bisa juga buat Add New Address
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingAddressDetailFragment extends Fragment {
     EditText addrName, addrRec, addrCity, addrProv, addrDetail, addrPostal, addrPhone;
-    Button btnSave;
+    Button btnSave, btnDelete;
     Switch storeSwitch;
 
     Context ctx;
@@ -69,6 +68,7 @@ public class SettingAddressDetailFragment extends Fragment {
         addrPhone = view.findViewById(R.id.setting_phone_number);
 
         btnSave = view.findViewById(R.id.address_detail_save);
+        btnDelete = view.findViewById(R.id.address_detail_delete);
 
         storeSwitch = view.findViewById(R.id.store_bool_switch);
 
@@ -112,6 +112,48 @@ public class SettingAddressDetailFragment extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {}
             });
+
+            btnDelete.setVisibility(View.VISIBLE);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                    builder.setTitle("Confirm Delete Item");
+                    builder.setMessage("Are you sure you want to delete the item?");
+                    builder.setCancelable(true);
+
+                    builder.setPositiveButton("Delete Address", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dbrf.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.child("storeAddress").getChildren().toString().equals(currAddrKey));
+                                    dbrf.child("users").child(uid).child("storeAddress").setValue("");
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {}
+                            });
+
+                            dbrf.child("users").child(uid).child("alamat").child(currAddrKey).removeValue();
+
+                            ((SettingActivity) ctx).setFragment(new SettingAddressFragment());
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {dialog.cancel();}
+                    });
+
+                    builder.show();
+
+
+                }
+            });
+        } else {
+            btnDelete.setVisibility(View.GONE);
         }
 
         btnSave.setOnClickListener(new View.OnClickListener() {

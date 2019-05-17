@@ -37,11 +37,6 @@
         android:title="Wish It!" />
 
     <item
-        android:id="@+id/notification_bottom_menu"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="Notifications" />
-
-    <item
         android:id="@+id/profile_bottom_menu"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="Profile" />

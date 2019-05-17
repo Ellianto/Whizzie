@@ -1,15 +1,18 @@
 package id.ac.umn.whizzie.main.Search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +27,13 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.DetailActivity;
+import id.ac.umn.whizzie.main.Activity.MainActivity;
 
 public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.SearchCardHolder> {
     private Context ctx;
@@ -56,20 +63,24 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull final SearchCardHolder holder, int i) {
-        SearchCard temp = scList.get(i);
+        final SearchCard temp = scList.get(i);
 
         holder.tvCardTitle.setText(temp.getCardName());
         holder.tvDispName.setText(temp.getProfileName());
 
         String priceText = "";
 
-        if(temp.getCardPrice() != 0) priceText = String.valueOf(temp.getCardPrice());
+        if(temp.getCardPrice() != 0){
+            priceText = String.valueOf(temp.getCardPrice());
+        }
 
         holder.tvCardPrice.setText(priceText);
         holder.tvCardCount.setText(String.valueOf(temp.getCardCount()));
         holder.tvKey.setText(temp.getItemKey());
 
-        String imagePath = "";
+        final long itemKey = Long.parseLong(temp.getItemKey());
+
+        String imagePath;
 
         View.OnClickListener ocl;
 
@@ -80,32 +91,48 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
             ocl = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO : Redirect to Product Details
+                    Intent i = new Intent(ctx, DetailActivity.class);
+                    Bundle b = new Bundle();
+
+                    b.putBoolean("isProduct", true);
+                    b.putLong("itemKey", itemKey);
+
+                    i.putExtras(b);
+                    ctx.startActivity(i);
                 }
             };
 
-        } else {
+        }
+        else {
             // Kalau sebuah wish,
             imagePath = "wishes/";
 
             ocl = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO : Redirect to Wish Details
+                    Intent i = new Intent(ctx, DetailActivity.class);
+
+                    i.putExtra("isProduct", false);
+                    i.putExtra("itemKey", itemKey);
+
+                    if(ctx.getClass().equals(MainActivity.class))
+                        i.putExtra("genieMode", ((MainActivity)  ctx).getMode());
+                    else if(ctx.getClass().equals(DetailActivity.class))
+                        i.putExtra("genieMode", ((DetailActivity)ctx).getMode());
+
+                    ctx.startActivity(i);
                 }
             };
         }
 
         holder.cardHolder.setOnClickListener(ocl);
 
-        String imageRefPath = "";
-
-        if(temp.getCardImage().isEmpty())
-            imageRefPath = "whizzie_assets/empty/empty.jpg";
-        else
-            imageRefPath = imagePath + temp.getCardImage();
-
         // Set Item Picture
+        String imageRefPath;
+
+        if(temp.getCardImage().isEmpty()) imageRefPath = "whizzie_assets/empty/empty.jpg";
+        else imageRefPath = imagePath + temp.getCardImage();
+
         strf.child(imageRefPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -145,14 +172,12 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
             }
         });
 
-        String profileRefPath = "";
+        // Set Profile Picture
+        String profileRefPath;
 
-        if(temp.getProfilePic().isEmpty())
-            profileRefPath = "whizzie_assets/empty/empty_profile.jpg";
-        else
-            profileRefPath = "users/" + temp.getProfilePic();
+        if(temp.getProfilePic().isEmpty()) profileRefPath = "whizzie_assets/empty/empty_profile.jpg";
+        else profileRefPath = "users/" + temp.getProfilePic();
 
-        // Fetch profile picture image
         strf.child(profileRefPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -180,7 +205,7 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
                         h.post(new Runnable() {
                             @Override
                             public void run() {
-                                holder.cardPic.setImageBitmap(pic);
+                                holder.profPic.setImageBitmap(pic);
                             }
                         });
                     } catch (IOException e){
@@ -191,7 +216,6 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
                 }
             }
         });
-
     }
 
     class SearchCardHolder extends RecyclerView.ViewHolder{

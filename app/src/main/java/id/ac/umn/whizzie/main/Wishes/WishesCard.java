@@ -9,8 +9,7 @@ public class WishesCard {
     private String wishKey;
     private long wishesCount;
 
-    public WishesCard() {
-    }
+    public WishesCard() {}
 
     public WishesCard(String profileName, String userKey, String wishesDesc, String wishesName, String wishPic, String wishKey, long wishesCount) {
         this.profileName = profileName;

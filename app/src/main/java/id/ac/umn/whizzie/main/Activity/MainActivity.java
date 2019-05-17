@@ -8,12 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import id.ac.umn.whizzie.main.Home.HomeFragment;
-import id.ac.umn.whizzie.main.Notifications.NotificationFragment;
 import id.ac.umn.whizzie.main.Post.PostFragment;
 import id.ac.umn.whizzie.main.Profile.ProfileFragment;
 import id.ac.umn.whizzie.R;
@@ -21,7 +21,7 @@ import id.ac.umn.whizzie.main.Wishes.WishesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView btmNavView;
+    public BottomNavigationView btmNavView;
     private FrameLayout frameLayout;
     private boolean search_product = true;
 
@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         return genie_mode;
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -58,11 +57,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
 
-                case R.id.notification_bottom_menu: {
-                    setFragment(new NotificationFragment());
-                    break;
-                }
-
                 case R.id.profile_bottom_menu:{
                     setFragment(new ProfileFragment());
                     break;
@@ -79,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_search_icon: {
                 Intent i = new Intent(this, SearchActivity.class);
                 i.putExtra("category", "all");
+
                 if(search_product) i.putExtra("type", "product");
                 else i.putExtra("type", "wish");
 
@@ -86,11 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.main_cart_icon: {
-                // TODO : Implement Move to Cart Activity
-                break;
-            }
-            case R.id.main_chat: {
-                // TODO : Implement Chat function
+                Intent i = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(i);
                 break;
             }
         }

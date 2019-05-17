@@ -1,6 +1,7 @@
 package id.ac.umn.whizzie.main.Wishes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,8 @@ import java.net.URL;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.DetailActivity;
+import id.ac.umn.whizzie.main.Activity.MainActivity;
 
 public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.WishesCardHolder> {
 
@@ -48,7 +52,7 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Wi
 
     @Override
     public void onBindViewHolder(@NonNull final WishesCardHolder viewHolder, int i) {
-        WishesCard temp = wcList.get(i);
+        final WishesCard temp = wcList.get(i);
 
         viewHolder.tvDispName.setText(temp.getProfileName());
         viewHolder.tvWishTitle.setText(temp.getWishesName());
@@ -56,6 +60,19 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Wi
         viewHolder.tvDesc.setText(temp.getWishesDesc());
         viewHolder.tvWishKey.setText(temp.getWishKey());
         viewHolder.tvUserKey.setText(temp.getUserKey());
+
+        viewHolder.cardViewHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, DetailActivity.class);
+
+                i.putExtra("isProduct", false);
+                i.putExtra("itemKey", temp.getWishKey());
+                i.putExtra("genieMode", ((MainActivity)  ctx).getMode());
+
+                ctx.startActivity(i);
+            }
+        });
 
         // Fetch Wish Image
         strf.child("wishes/" + temp.getWishPic()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -144,11 +161,14 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Wi
     }
 
     class WishesCardHolder extends RecyclerView.ViewHolder{
+        CardView cardViewHolder;
         ImageView profPic, wishImg;
         TextView tvDispName, tvWishTitle, tvOfferCount, tvDesc, tvWishKey, tvUserKey;
 
         public WishesCardHolder(@NonNull View itemView){
             super(itemView);
+
+            cardViewHolder = itemView.findViewById(R.id.card_wishes);
 
             profPic = itemView.findViewById(R.id.wishes_card_profile_picture);
             wishImg = itemView.findViewById(R.id.wishes_card_image);

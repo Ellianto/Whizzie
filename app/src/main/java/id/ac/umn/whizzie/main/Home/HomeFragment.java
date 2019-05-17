@@ -78,6 +78,12 @@ public class HomeFragment extends Fragment {
         sliderModelList.add(new Slider(R.mipmap.slider1));
         sliderModelList.add(new Slider(R.mipmap.slider2));
         sliderModelList.add(new Slider(R.mipmap.slider3));
+        sliderModelList.add(new Slider(R.mipmap.slider1));
+        sliderModelList.add(new Slider(R.mipmap.slider2));
+        sliderModelList.add(new Slider(R.mipmap.slider3));
+        sliderModelList.add(new Slider(R.mipmap.slider1));
+        sliderModelList.add(new Slider(R.mipmap.slider2));
+        sliderModelList.add(new Slider(R.mipmap.slider3));
 
         SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
         bannerSliderViewPager.setAdapter(sliderAdapter);

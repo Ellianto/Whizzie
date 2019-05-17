@@ -15,10 +15,5 @@
         android:iconTint="@color/colorWhite"
         android:title="cart"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/main_chat"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_chat_white_24dp"
-        android:title="chat"
-        app:showAsAction="always" />
+
 </menu>

@@ -18,6 +18,8 @@
         <activity android:name=".main.Activity.SearchActivity" />
         <activity android:name=".main.Activity.MainActivity" />
         <activity android:name=".main.Activity.RegisterActivity" />
+        <activity android:name=".main.Activity.DetailActivity" />
+        <activity android:name=".main.Activity.CartActivity" />
         <activity
             android:name=".main.Activity.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -28,5 +30,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

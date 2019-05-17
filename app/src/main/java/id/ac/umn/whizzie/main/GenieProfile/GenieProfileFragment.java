@@ -77,6 +77,14 @@ public class GenieProfileFragment extends Fragment {
 
         genieUid = getArguments().getString("genieUid");
 
+        return view;
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         dbrf.child("users").child(genieUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -86,115 +94,106 @@ public class GenieProfileFragment extends Fragment {
                 bgPath = dataSnapshot.child("imgBackground").getValue().toString();
 
                 dispName.setText(genieName);
+
+                loadGenieProducts();
+
+                if(profPicPath.isEmpty())
+                    profPicPath = "whizzie_assets/empty/empty_profile.jpg";
+                else profPicPath = "users/" + genieUid + "/profile.jpg";
+
+                if(bgPath.isEmpty())
+                    bgPath = "whiizzie_assets/empty/empty.jpg";
+                else bgPath = "users/" + genieUid + "/backdrop.jpg";
+
+                // Fetch Profile Picture Image
+                strf.child(profPicPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        new loadImage().execute(uri.toString());
+                    }
+
+                    // Cara Fetch Image from Firebase Storage
+                    // Operasi-operasi network harus dilakukan di thread berbeda
+                    class loadImage extends AsyncTask<String, String, String> {
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                        }
+
+                        @Override
+                        protected String doInBackground(String... strings) {
+                            try{
+                                URL url = new URL(strings[0]);
+                                final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                                Handler h = new Handler(Looper.getMainLooper());
+
+                                // Operasi yang mengubah View harus di Main Thread
+                                // Karena akan dijalankan di dalam fragment, pakai handler
+                                h.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        profilePicture.setImageBitmap(pic);
+                                    }
+                                });
+                            } catch (IOException e){
+                                e.printStackTrace();
+                            }
+
+                            return null;
+                        }
+                    }
+                });
+
+                //Fetch Background Picture Image
+                strf.child(bgPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        new loadImage().execute(uri.toString());
+                    }
+
+                    // Cara Fetch Image from Firebase Storage
+                    // Operasi-operasi network harus dilakukan di thread berbeda
+                    class loadImage extends AsyncTask<String, String, String> {
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                        }
+
+                        @Override
+                        protected String doInBackground(String... strings) {
+                            try{
+                                URL url = new URL(strings[0]);
+                                final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                                Handler h = new Handler(Looper.getMainLooper());
+
+                                // Operasi yang mengubah View harus di Main Thread
+                                // Karena akan dijalankan di dalam fragment, pakai handler
+                                h.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        backgroundPicture.setImageBitmap(pic);
+                                    }
+                                });
+                            } catch (IOException e){
+                                e.printStackTrace();
+                            }
+
+                            return null;
+                        }
+                    }
+                });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
-        return view;
-    }
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        loadGenieProducts();
-
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new GridLayoutManager(ctx, 2, GridLayoutManager.VERTICAL, false));
         SearchCardAdapter sca = new SearchCardAdapter(ctx, prodList);
         rv.setAdapter(sca);
-
-        if(profPicPath.isEmpty())
-            profPicPath = "whizzie_assets/empty/empty_profile.jpg";
-        else profPicPath = "users/" + genieUid + "/profile.jpg";
-
-        if(bgPath.isEmpty())
-            bgPath = "whiizzie_assets/empty/empty.jpg";
-        else bgPath = "users/" + genieUid + "/backdrop.jpg";
-
-        // Fetch Profile Picture Image
-        strf.child(profPicPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                new loadImage().execute(uri.toString());
-            }
-
-            // Cara Fetch Image from Firebase Storage
-            // Operasi-operasi network harus dilakukan di thread berbeda
-            class loadImage extends AsyncTask<String, String, String> {
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                }
-
-                @Override
-                protected String doInBackground(String... strings) {
-                    try{
-                        URL url = new URL(strings[0]);
-                        final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-
-                        Handler h = new Handler(Looper.getMainLooper());
-
-                        // Operasi yang mengubah View harus di Main Thread
-                        // Karena akan dijalankan di dalam fragment, pakai handler
-                        h.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                profilePicture.setImageBitmap(pic);
-                            }
-                        });
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-                    return null;
-                }
-            }
-        });
-
-        //Fetch Background Picture Image
-        strf.child(bgPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                new loadImage().execute(uri.toString());
-            }
-
-            // Cara Fetch Image from Firebase Storage
-            // Operasi-operasi network harus dilakukan di thread berbeda
-            class loadImage extends AsyncTask<String, String, String> {
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                }
-
-                @Override
-                protected String doInBackground(String... strings) {
-                    try{
-                        URL url = new URL(strings[0]);
-                        final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-
-                        Handler h = new Handler(Looper.getMainLooper());
-
-                        // Operasi yang mengubah View harus di Main Thread
-                        // Karena akan dijalankan di dalam fragment, pakai handler
-                        h.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                 backgroundPicture.setImageBitmap(pic);
-                            }
-                        });
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-                    return null;
-                }
-            }
-        });
-
     }
 
     private void loadGenieProducts(){

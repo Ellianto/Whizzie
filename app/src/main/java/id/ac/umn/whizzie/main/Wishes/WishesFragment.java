@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.MainActivity;
 
 
 /**
@@ -49,6 +50,7 @@ public class WishesFragment extends Fragment {
         wishes_recview = view.findViewById(R.id.wishes_recycler_view);
 
         ctx = this.getContext();
+        ((MainActivity)  ctx).showActionBar();
 
         return view;
     }

@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -85,12 +86,14 @@ public class SettingAddressFragment extends Fragment {
                     notFound.setVisibility(View.GONE);
 
                     for(DataSnapshot ds : dataSnapshot.child("alamat").getChildren()){
+                        GenericTypeIndicator<Integer> gti = new GenericTypeIndicator<Integer>() {};
+
                         lac.add(new AddressCard(
                             ds.getKey(),
                                 ds.child("cityName").getValue().toString(),
                                 ds.child("detailAddress").getValue().toString(),
                                 ds.child("phoneNum").getValue().toString(),
-                                String.valueOf(ds.child("postalCode").getValue(int.class)),
+                                String.valueOf(ds.child("postalCode").getValue(gti)),
                                 ds.child("provinceName").getValue().toString(),
                                 ds.child("cityName").getValue().toString(),
                                 storeAddress.equals(ds.getKey())

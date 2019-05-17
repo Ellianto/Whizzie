@@ -8,13 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import id.ac.umn.whizzie.R;
-import id.ac.umn.whizzie.main.Settings.SettingWisherFragment;
+import id.ac.umn.whizzie.main.Settings.SettingFragment;
 
 public class SettingActivity extends AppCompatActivity {
 
     // TODO : Prepare for Multi Mode Access
 
     private FrameLayout frameLayout;
+    boolean genieMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,17 @@ public class SettingActivity extends AppCompatActivity {
         Toolbar toolbarSetting = findViewById(R.id.toolbarSetting);
         setSupportActionBar(toolbarSetting);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        genieMode = getIntent().getBooleanExtra("genie_mode", false);
 
         frameLayout = findViewById(R.id.genie_profile_fragment_holder);
-        setFragment(new SettingWisherFragment());
+        Fragment fr = new SettingFragment();
+        Bundle b = new Bundle();
+
+        b.putBoolean("genieMode", genieMode);
+
+        fr.setArguments(b);
+
+        setFragment(fr);
     }
 
     @Override

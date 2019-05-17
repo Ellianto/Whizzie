@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.Settings.SettingWisherFragment">
+    android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/setting_background_image"
             android:layout_width="0dp"
             android:layout_height="200dp"
@@ -20,7 +19,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/backdrop" />
+            tools:srcCompat="@mipmap/backdrop2" />
 
         <ImageView
             android:id="@+id/setting_profile_picture"
@@ -34,20 +33,7 @@
             app:layout_constraintHorizontal_bias="0.142"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/setting_background_image"
-            tools:srcCompat="@drawable/profile" />
-
-        <TextView
-            android:id="@+id/setting_text_view_change_background"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="8dp"
-            android:text="Click to change Background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/setting_profile_picture" />
+            tools:srcCompat="@mipmap/elon_musk" />
 
         <TextView
             android:id="@+id/setting_text_view_display_name"
@@ -57,6 +43,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:text="Display Name"
+android:fontFamily="@font/product_sans_reg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +56,9 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:textSize="14sp"
+            android:fontFamily="@font/product_sans_reg"
+            android:hint="Your name here"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.066"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +69,14 @@
             android:layout_width="360dp"
             android:layout_height="43dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="216dp"
             android:layout_marginEnd="8dp"
+            android:background="#401447"
+            android:fontFamily="@font/product_sans_reg"
             android:text="Change Display Name"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/setting_display_name" />
 
@@ -94,7 +87,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:background="#401447"
+            android:fontFamily="@font/product_sans_reg"
             android:text="Addresses"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +103,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:background="#401447"
+            android:fontFamily="@font/product_sans_reg"
             android:text="Change Password"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +120,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="#FF5722"
+            android:fontFamily="@font/product_sans_reg"
             android:text="Log Out"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.542"
