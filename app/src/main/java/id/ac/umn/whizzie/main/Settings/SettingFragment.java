@@ -36,9 +36,6 @@ import id.ac.umn.whizzie.main.Activity.SplashActivity;
  * A simple {@link Fragment} subclass.
  */
 
-    // TODO: Implement Multimode here
-
-    // TODO: Fetch images here
 public class SettingFragment extends Fragment {
     Context ctx;
     Button editAddress, changePass, logOut, changeName;

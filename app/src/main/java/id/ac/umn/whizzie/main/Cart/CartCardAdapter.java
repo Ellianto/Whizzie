@@ -13,8 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,7 +52,7 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.CartCa
     @Override
     public CartCardHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.card_cart, null);
+        View view = inflater.inflate(R.layout.card_store_cart, null);
         CartCardHolder holder = new CartCardHolder(view);
         return holder;
     }
@@ -175,8 +172,8 @@ public class CartCardAdapter extends RecyclerView.Adapter<CartCardAdapter.CartCa
         public CartCardHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvName = itemView.findViewById(R.id.cart_card_item_name);
-            tvPrice = itemView.findViewById(R.id.cart_card_item_price);
+            tvName = itemView.findViewById(R.id.cart_store_card_item_name);
+            tvPrice = itemView.findViewById(R.id.cart_store_card_item_price);
             edtQty = itemView.findViewById(R.id.cart_card_item_qty);
             imgProduct = itemView.findViewById(R.id.cart_card_item_image);
             deleteButton = itemView.findViewById(R.id.cart_card_delete_button);

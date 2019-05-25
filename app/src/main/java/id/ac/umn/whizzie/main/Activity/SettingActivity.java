@@ -12,8 +12,6 @@ import id.ac.umn.whizzie.main.Settings.SettingFragment;
 
 public class SettingActivity extends AppCompatActivity {
 
-    // TODO : Prepare for Multi Mode Access
-
     private FrameLayout frameLayout;
     boolean genieMode;
 
@@ -25,7 +23,7 @@ public class SettingActivity extends AppCompatActivity {
         // Toolbar Initation
         Toolbar toolbarSetting = findViewById(R.id.toolbarSetting);
         setSupportActionBar(toolbarSetting);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         genieMode = getIntent().getBooleanExtra("genie_mode", false);
 
         frameLayout = findViewById(R.id.genie_profile_fragment_holder);
