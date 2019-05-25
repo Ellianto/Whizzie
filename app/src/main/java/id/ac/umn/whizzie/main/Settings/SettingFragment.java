@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,6 +41,11 @@ public class SettingFragment extends Fragment {
     Context ctx;
     Button editAddress, changePass, logOut, changeName;
     TextView dispName;
+
+    private static final String PREFERENCE_FILENAME = "user_credentials";
+    private static final int PREFERENCE_MODE        = Context.MODE_PRIVATE;
+    private static final String KEY_UNAME           = "this_username";
+    private static final String KEY_PASSWORD        = "this_password";
 
     boolean genieMode;
 
@@ -113,6 +119,14 @@ public class SettingFragment extends Fragment {
     View.OnClickListener logOutEvent = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            SharedPreferences shp = ctx.getSharedPreferences(PREFERENCE_FILENAME, PREFERENCE_MODE);
+            SharedPreferences.Editor shpEditor = shp.edit();
+            shpEditor.remove(KEY_PASSWORD);
+            shpEditor.remove(KEY_UNAME);
+
+            shpEditor.apply();
+
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(ctx, SplashActivity.class));
             ((SettingActivity) ctx).finish();

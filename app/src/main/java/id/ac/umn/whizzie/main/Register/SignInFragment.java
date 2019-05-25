@@ -2,6 +2,7 @@ package id.ac.umn.whizzie.main.Register;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,12 @@ public class SignInFragment extends Fragment {
     private Button signInBtn;
     private EditText edtEmail, edtPass;
 
+    private static final String PREFERENCE_FILENAME = "user_credentials";
+    private static final int PREFERENCE_MODE        = Context.MODE_PRIVATE;
+    private static final String KEY_UNAME           = "this_username";
+    private static final String KEY_PASSWORD        = "this_password";
+
+    FirebaseAuth fbA = FirebaseAuth.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +76,26 @@ public class SignInFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        final SharedPreferences shp = ctx.getSharedPreferences(PREFERENCE_FILENAME, PREFERENCE_MODE);
+
+        String uname = shp.getString(KEY_UNAME, "");
+        String passwd = shp.getString(KEY_PASSWORD, "");
+        if(!uname.isEmpty() && !uname.equals(null) && !passwd.isEmpty() && !passwd.equals(null)){
+            fbA.signInWithEmailAndPassword(uname, passwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in successful
+                        Intent mainIntent = new Intent(getContext(), MainActivity.class);
+                        startActivity(mainIntent);
+                        getActivity().finish();
+                    }
+                }
+            });
+        }
+
         super.onViewCreated(view, savedInstanceState);
+
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,8 +132,6 @@ public class SignInFragment extends Fragment {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth fbA = FirebaseAuth.getInstance();
-
                 if(edtEmail.getText().toString().isEmpty() || edtPass.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Please fill the email and password field", Toast.LENGTH_SHORT).show();
                 }
@@ -116,6 +141,12 @@ public class SignInFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in successful
+                                SharedPreferences.Editor shpEditor = shp.edit();
+                                shpEditor.putString(KEY_UNAME, edtEmail.getText().toString());
+                                shpEditor.putString(KEY_PASSWORD, edtPass.getText().toString());
+
+                                shpEditor.apply();
+
                                 Intent mainIntent = new Intent(getContext(), MainActivity.class);
                                 startActivity(mainIntent);
                                 getActivity().finish();

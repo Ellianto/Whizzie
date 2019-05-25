@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Cart.CartItemCard;
+import id.ac.umn.whizzie.main.Cart.CartStoreAdapter;
 import id.ac.umn.whizzie.main.Cart.CartStoreCard;
 
 public class CartActivity extends AppCompatActivity {
@@ -89,7 +91,6 @@ public class CartActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for(DataSnapshot dataSS : dataSnapshot.getChildren()){
-
                                 // Bikin Card Item Cart List baru
                                 cicList = new ArrayList<>();
                                 storeTotal = 0;
@@ -116,6 +117,8 @@ public class CartActivity extends AppCompatActivity {
                                 dbrf.child("users").child(dataSS.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snap) {
+                                        Log.d("TEST", snap.child("imgProfilePicture").getValue().toString());
+
                                         cscList.add(new CartStoreCard(
                                             snap.child("toko").child("name").getValue().toString(),
                                             snap.getKey() + "/" + snap.child("imgProfilePicture").getValue().toString(),
@@ -128,6 +131,9 @@ public class CartActivity extends AppCompatActivity {
                                     public void onCancelled(@NonNull DatabaseError databaseError) {}
                                 });
                             }
+
+                            CartStoreAdapter csa = new CartStoreAdapter(CartActivity.this, cscList);
+                            rvItems.setAdapter(csa);
                         }
 
                         @Override
