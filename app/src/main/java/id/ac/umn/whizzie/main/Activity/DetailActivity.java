@@ -77,4 +77,6 @@ public class DetailActivity extends AppCompatActivity {
     public boolean getMode(){ return genieMode; }
 
     public boolean getIsProduct(){ return isProduct;}
+
+    public String getItemKey(){ return itemKey;}
 }

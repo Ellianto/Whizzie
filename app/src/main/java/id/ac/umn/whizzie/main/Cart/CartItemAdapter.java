@@ -1,6 +1,8 @@
 package id.ac.umn.whizzie.main.Cart;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,10 +15,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -25,12 +36,14 @@ import java.net.URL;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.CartActivity;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemHolder> {
 
     Context ctx;
     List<CartItemCard> cicList;
 
+    DatabaseReference dbrf = FirebaseDatabase.getInstance().getReference();
     StorageReference strf = FirebaseStorage.getInstance().getReference();
 
     public CartItemAdapter(Context ctx, List<CartItemCard> cicList) {
@@ -45,7 +58,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
     @Override
     public void onBindViewHolder(@NonNull final CartItemAdapter.CartItemHolder viewHolder, int i) {
-        CartItemCard temp = cicList.get(i);
+        final CartItemCard temp = cicList.get(i);
 
         viewHolder.itemName.setText(temp.getItemName());
         viewHolder.itemPrice.setText(String.valueOf(temp.getItemPrice()));
@@ -90,13 +103,59 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
                 }
             }
         });
+
+        if(!ctx.getClass().equals(CartActivity.class)) viewHolder.deleteBtn.setVisibility(View.GONE);
+        else {
+            viewHolder.deleteBtn.setVisibility(View.VISIBLE);
+
+            viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                    builder.setTitle("Remove Item From Cart");
+                    builder.setMessage("Are you sure you want to remove this item?");
+                    builder.setCancelable(true);
+
+                    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dbrf.child("products").child(temp.getItemID()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    dbrf.child("cart").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                                            child(dataSnapshot.child("uidUpProduct").getValue().toString()).
+                                            child(dataSnapshot.getKey()).
+                                            removeValue();
+
+                                    Toast.makeText(ctx, "Removed item from cart", Toast.LENGTH_SHORT).show();
+                                    ((CartActivity)ctx).finish();
+                                    ctx.startActivity(((CartActivity)ctx).getIntent());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {}
+                            });
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.show();
+                }
+            });
+        }
     }
 
     @NonNull
     @Override
     public CartItemAdapter.CartItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.card_address, null);
+        View view = inflater.inflate(R.layout.card_item_cart, null);
         CartItemAdapter.CartItemHolder holder = new CartItemAdapter.CartItemHolder(view);
         return holder;
     }
@@ -104,16 +163,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     class CartItemHolder extends RecyclerView.ViewHolder{
         ImageView itemImage;
         TextView itemName, itemPrice, itemQty;
-        Button deleteBtn;
+        ImageButton deleteBtn;
 
         public CartItemHolder(@NonNull View itemView) {
             super(itemView);
 
-            itemImage = itemView.findViewById(R.id.cart_item_card_image);
-            itemName = itemView.findViewById(R.id.cart_item_card_name);
-            itemPrice= itemView.findViewById(R.id.cart_item_card_price);
-            itemQty = itemView.findViewById(R.id.cart_item_card_qty);
-            deleteBtn = itemView.findViewById(R.id.cart_item_card_delete_btn);
+            itemImage   = itemView.findViewById(R.id.cart_item_card_image);
+            itemName    = itemView.findViewById(R.id.cart_item_card_name);
+            itemPrice   = itemView.findViewById(R.id.cart_item_card_price);
+            itemQty     = itemView.findViewById(R.id.cart_item_card_qty);
+            deleteBtn   = itemView.findViewById(R.id.cart_item_card_delete_btn);
         }
     }
 }

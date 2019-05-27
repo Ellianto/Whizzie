@@ -1,6 +1,8 @@
 package id.ac.umn.whizzie.main.Settings;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Activity.ChooseAddressActivity;
 import id.ac.umn.whizzie.main.Activity.SettingActivity;
 
 public class AddressCardAdapter extends RecyclerView.Adapter<AddressCardAdapter.AddressCardHolder> {
@@ -56,21 +59,32 @@ public class AddressCardAdapter extends RecyclerView.Adapter<AddressCardAdapter.
         if(temp.isStore()) v.store_status.setVisibility(View.VISIBLE);
         else v.store_status.setVisibility(View.GONE);
 
-        v.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("DEBUG", addrKey);
+        if(ctx.getClass().equals(ChooseAddressActivity.class)){
+            v.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent();
+                    i.putExtra("alamat", addrKey);
+                    ((ChooseAddressActivity)ctx).setResult(Activity.RESULT_OK, i);
+                    ((ChooseAddressActivity)ctx).finish();
+                }
+            });
+        }
+        else {
+            v.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle b = new Bundle();
+                    b.putBoolean("edit", true);
+                    b.putString("addrKey", addrKey);
 
-                Bundle b = new Bundle();
-                b.putBoolean("edit", true);
-                b.putString("addrKey", addrKey);
+                    Fragment fr = new SettingAddressDetailFragment();
+                    fr.setArguments(b);
 
-                Fragment fr = new SettingAddressDetailFragment();
-                fr.setArguments(b);
-
-                ((SettingActivity)ctx).setFragment(fr);
-            }
-        });
+                    ((SettingActivity)ctx).setFragment(fr);
+                }
+            });
+        }
     }
 
     @Override

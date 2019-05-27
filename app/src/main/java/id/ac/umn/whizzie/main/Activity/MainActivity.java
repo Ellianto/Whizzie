@@ -17,6 +17,7 @@ import id.ac.umn.whizzie.main.Home.HomeFragment;
 import id.ac.umn.whizzie.main.Post.PostFragment;
 import id.ac.umn.whizzie.main.Profile.ProfileFragment;
 import id.ac.umn.whizzie.R;
+import id.ac.umn.whizzie.main.Transaction.TransactionFragment;
 import id.ac.umn.whizzie.main.Wishes.WishesFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.home_bottom_menu: {
                     setFragment(new HomeFragment());
                     search_product = true;
+                    break;
+                }
+
+                case R.id.transaction_bottom_menu:{
+                    setFragment(new TransactionFragment());
                     break;
                 }
 

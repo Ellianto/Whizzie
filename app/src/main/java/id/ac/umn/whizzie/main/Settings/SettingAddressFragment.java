@@ -82,8 +82,8 @@ public class SettingAddressFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("alamat")){
-                    final String storeAddress = dataSnapshot.child("storeAddress").getValue().toString();
                     notFound.setVisibility(View.GONE);
+                    String storeAddress = dataSnapshot.child("storeAddress").getValue().toString();
 
                     for(DataSnapshot ds : dataSnapshot.child("alamat").getChildren()){
                         GenericTypeIndicator<Integer> gti = new GenericTypeIndicator<Integer>() {};

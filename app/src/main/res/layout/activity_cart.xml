@@ -9,7 +9,7 @@
         android:id="@+id/cart_recview_items"
         android:layout_width="385dp"
         android:layout_height="553dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +23,27 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="108dp"
-        android:text="Total Rp 0"
+        android:fontFamily="@font/product_sans_reg"
+        android:text="Rp. 900.000,-"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvTotal"
         app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="0.814" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/cart_text_view_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="108dp"
+        android:fontFamily="@font/product_sans_reg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvAddress"
+        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/cart_checkout_button"
@@ -37,10 +51,43 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="44dp"
+        android:fontFamily="@font/product_sans_reg"
         android:text="Check Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toEndOf="@+id/cart_address_button" />
+
+    <Button
+        android:id="@+id/cart_address_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="44dp"
+        android:fontFamily="@font/product_sans_reg"
+        android:text="Choose Address"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/product_sans_reg"
+        android:text="Alamat :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/product_sans_reg"
+        android:text="Total :"
+        app:layout_constraintStart_toEndOf="@+id/cart_text_view_address"
+        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items" />
 </android.support.constraint.ConstraintLayout>

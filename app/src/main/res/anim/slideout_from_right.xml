@@ -3,10 +3,10 @@
     android:duration="250"
     android:interpolator="@android:anim/accelerate_decelerate_interpolator">
 
-    <translate
-        android:fromXDelta="0%"
-        android:toXDelta="100%"
-        android:fromYDelta="0%"
-        android:toYDelta="0%" />
+  <translate
+      android:fromXDelta="0%"
+      android:toXDelta="100%"
+      android:fromYDelta="0%"
+      android:toYDelta="0%" />
 
 </set>

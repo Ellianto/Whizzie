@@ -38,17 +38,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/cart_store_card_store_name"
+                android:id="@+id/cart_store_card_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="Nama Toko"
+                android:text="Nama Toko / Pembeli"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.432"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cart_store_card_item_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -57,12 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
                 android:text="Total"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.359"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart_store_card_store_name" />
+                app:layout_constraintStart_toEndOf="@+id/cart_store_card_item_image"
+                app:layout_constraintTop_toBottomOf="@+id/cart_store_card_name" />
 
             <TextView
                 android:id="@+id/cart_store_card_total"
@@ -71,11 +65,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="Rp 26.000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tv_total"
-                app:layout_constraintTop_toBottomOf="@+id/cart_store_card_store_name" />
+                app:layout_constraintTop_toBottomOf="@+id/cart_store_card_name" />
 
             <ImageView
                 android:id="@+id/cart_store_card_item_image"
@@ -90,7 +83,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/cart_store_card_items"
                 android:layout_width="370dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -101,6 +94,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cart_store_card_item_image"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/resi_store_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/cart_store_card_item_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_total" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>

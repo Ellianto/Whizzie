@@ -1,12 +1,17 @@
 package id.ac.umn.whizzie.main.Settings;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +34,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
+import java.net.URL;
+
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Activity.SettingActivity;
 import id.ac.umn.whizzie.main.Activity.SplashActivity;
@@ -40,6 +49,7 @@ import id.ac.umn.whizzie.main.Activity.SplashActivity;
 public class SettingFragment extends Fragment {
     Context ctx;
     Button editAddress, changePass, logOut, changeName;
+    ImageView profPic, bgPic;
     TextView dispName;
 
     private static final String PREFERENCE_FILENAME = "user_credentials";
@@ -53,12 +63,40 @@ public class SettingFragment extends Fragment {
     DatabaseReference dbrf = FirebaseDatabase.getInstance().getReference();
     StorageReference strf = FirebaseStorage.getInstance().getReference();
 
+    OnSuccessListener loadProfilePicture = new OnSuccessListener<Uri>() {
+        @Override
+        public void onSuccess(Uri uri) {
+            new loadImage(profPic).execute(uri.toString());
+        }
+    };
+
+    OnSuccessListener loadBackgroundImage = new OnSuccessListener<Uri>() {
+        @Override
+        public void onSuccess(Uri uri) {
+            new loadImage(bgPic).execute(uri.toString());
+        }
+    };
+
     // Value event listeners
     ValueEventListener setupProfile = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if(genieMode) dispName.setText(dataSnapshot.child("toko").child("name").getValue().toString());
             else dispName.setText(dataSnapshot.child("name").getValue().toString());
+
+            String profPicRef = "whizzie_assets/empty/empty_profile.jpg";
+
+            if(!dataSnapshot.child("imgProfilePicture").getValue().toString().isEmpty())
+                profPicRef = "users/" + currUid + "/" + dataSnapshot.child("imgProfilePicture").getValue().toString();
+
+            strf.child(profPicRef).getDownloadUrl().addOnSuccessListener(loadProfilePicture);
+
+            String bgPicRef = "whizzie_assets/empty/empty.jpg";
+
+            if(!dataSnapshot.child("imgBackground").getValue().toString().isEmpty())
+                bgPicRef = "users/" + currUid + "/" + dataSnapshot.child("imgBackground").getValue().toString();
+
+            strf.child(bgPicRef).getDownloadUrl().addOnSuccessListener(loadBackgroundImage);
         }
 
         @Override
@@ -156,7 +194,10 @@ public class SettingFragment extends Fragment {
         logOut      = v.findViewById(R.id.setting_log_out);
         changeName  = v.findViewById(R.id.setting_change_display_name);
 
-        genieMode = Boolean.getBoolean(getArguments().get("genieMode").toString());
+        profPic     = v.findViewById(R.id.setting_profile_picture);
+        bgPic       = v.findViewById(R.id.setting_background_image);
+
+        genieMode = ((SettingActivity)ctx).getMode();
 
         return v;
     }
@@ -174,5 +215,41 @@ public class SettingFragment extends Fragment {
         changePass.setOnClickListener(sendEmailChangePass);
 
         logOut.setOnClickListener(logOutEvent);
+    }
+
+    class loadImage extends AsyncTask<String, String, String> {
+        ImageView temp;
+
+        public loadImage(ImageView temp) {
+            this.temp = temp;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                URL url = new URL(strings[0]);
+                final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                Handler h = new Handler(Looper.getMainLooper());
+
+                // Operasi yang mengubah View harus di Main Thread
+                // Karena akan dijalankan di dalam fragment, pakai handler
+                h.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        temp.setImageBitmap(pic);
+                    }
+                });
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 }

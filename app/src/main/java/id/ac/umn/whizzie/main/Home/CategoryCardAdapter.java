@@ -75,7 +75,7 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
         sr.child(temp.getImageID()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                    new loadImage().execute(uri.toString());
+                new loadImage().execute(uri.toString());
             }
 
             // Cara Fetch Image from Firebase Storage

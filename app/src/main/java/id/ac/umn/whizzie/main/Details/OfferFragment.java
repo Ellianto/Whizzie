@@ -13,8 +13,6 @@ import id.ac.umn.whizzie.R;
  * A simple {@link Fragment} subclass.
  */
 public class OfferFragment extends Fragment {
-
-
     public OfferFragment() {
         // Required empty public constructor
     }

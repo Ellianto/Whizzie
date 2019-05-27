@@ -5,15 +5,25 @@ public class CartItemCard{
     private String imageURL;
     private long itemPrice;
     private long itemQty;
+    private String itemID;
 
     public CartItemCard() {
     }
 
-    public CartItemCard(String itemName, String imageURL, long itemPrice, long itemQty) {
+    public CartItemCard(String itemName, String imageURL, long itemPrice, long itemQty, String itemID) {
         this.itemName = itemName;
         this.imageURL = imageURL;
         this.itemPrice = itemPrice;
         this.itemQty = itemQty;
+        this.itemID = itemID;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 
     public String getItemName() {

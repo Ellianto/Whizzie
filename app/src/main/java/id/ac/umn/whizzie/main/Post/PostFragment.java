@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -39,7 +37,6 @@ import java.util.List;
 
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Activity.MainActivity;
-import id.ac.umn.whizzie.main.Home.HomeFragment;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -88,20 +85,20 @@ public class PostFragment extends Fragment {
         upImage = view.findViewById(R.id.post_image_button_add);
 
         // Wish Section View Linking
-        wish_cardview   = view.findViewById(R.id.post_card_view_wish);
-        wish_name       = view.findViewById(R.id.post_wish_edit_text_wish_name);
-        wish_desc       = view.findViewById(R.id.post_wish_edit_text_desc);
-        wish_combo_box  = view.findViewById(R.id.post_wish_combo_box);
-        postWishButton  = view.findViewById(R.id.post_button_wish);
+        wish_cardview   = view.findViewById(R.id.edit_card_view_wish);
+        wish_name       = view.findViewById(R.id.edit_wish_edit_text_wish_name);
+        wish_desc       = view.findViewById(R.id.edit_wish_edit_text_desc);
+        wish_combo_box  = view.findViewById(R.id.edit_wish_combo_box);
+        postWishButton  = view.findViewById(R.id.edit_button_wish);
 
         // Product Section View Linking
-        prod_cardview    = view.findViewById(R.id.post_card_view_product);
-        prod_name        = view.findViewById(R.id.post_product_edit_text_product_name);
-        prod_mass        = view.findViewById(R.id.post_product_edit_text_product_mass);
-        prod_price       = view.findViewById(R.id.post_product_edit_text_product_price);
-        prod_desc        = view.findViewById(R.id.post_product_edit_text_desc);
-        prod_combo_box   = view.findViewById(R.id.post_product_combo_box);
-        postProductButton= view.findViewById(R.id.post_button_product);
+        prod_cardview    = view.findViewById(R.id.edit_card_view_product);
+        prod_name        = view.findViewById(R.id.edit_product_edit_text_product_name);
+        prod_mass        = view.findViewById(R.id.edit_product_edit_text_product_mass);
+        prod_price       = view.findViewById(R.id.edit_product_edit_text_product_price);
+        prod_desc        = view.findViewById(R.id.edit_product_edit_text_desc);
+        prod_combo_box   = view.findViewById(R.id.edit_product_combo_box);
+        postProductButton= view.findViewById(R.id.edit_button_product);
 
         // Largest Key of the item
         keyCount = 0;
@@ -113,7 +110,7 @@ public class PostFragment extends Fragment {
         else keyPath = "wishes";
 
         // Makes sure that new items' keys are incremental
-        dbrf.child(keyPath).addListenerForSingleValueEvent(incrementKey);
+        dbrf.child(keyPath).addValueEventListener(incrementKey);
 
         return view;
     }

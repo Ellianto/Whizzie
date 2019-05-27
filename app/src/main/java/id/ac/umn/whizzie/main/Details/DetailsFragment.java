@@ -370,13 +370,7 @@ public class DetailsFragment extends Fragment {
     View.OnClickListener editItem = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Fragment fr = new EditFragment();
-
-            Bundle b = new Bundle();
-            b.putString("itemKey", itemKey);
-            fr.setArguments(b);
-
-           ((DetailActivity) ctx).setFragment(fr);
+           ((DetailActivity) ctx).setFragment(new EditFragment());
         }
     };
 
@@ -422,7 +416,28 @@ public class DetailsFragment extends Fragment {
     View.OnClickListener addToCart = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            dbrf.child("cart").child(currUid).child(itemKey).setValue(1);
+            dbrf.child("products").child(itemKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(final @NonNull DataSnapshot dataSnapshot) {
+                    dbrf.child("cart").child(currUid).child(dataSnapshot.child("uidUpProduct").getValue().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot ss) {
+                            if(ss.hasChild(itemKey)){
+                                Toast.makeText(ctx, "This item is already in your cart!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                dbrf.child("cart").child(currUid).child(dataSnapshot.child("uidUpProduct").getValue().toString()).child(itemKey).setValue(1);
+                                Toast.makeText(ctx, "Successfully Added to cart!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {}
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
         }
     };
 
@@ -444,7 +459,7 @@ public class DetailsFragment extends Fragment {
 
         isProduct   = ((DetailActivity) ctx).getIsProduct();
         genieMode   = ((DetailActivity) ctx).getMode();
-        itemKey     = getArguments().get("itemKey").toString();
+        itemKey     = ((DetailActivity) ctx).getItemKey();
         currUid     = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Layout Linking

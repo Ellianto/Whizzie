@@ -54,19 +54,21 @@
 
         <ImageButton
             android:id="@+id/profile_setting_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="128dp"
             android:layout_marginBottom="8dp"
-            android:background="?android:selectableItemBackground"
+            android:background="#411446"
+            android:backgroundTint="#411446"
             android:fontFamily="@font/product_sans_reg"
             android:src="@drawable/ic_settings_white_24dp"
             android:text="Creator's Mode"
             android:tint="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/profile_genie_desc"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_background_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_display_name" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_display_name"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/profile_creator_button"
@@ -74,7 +76,7 @@
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="12dp"
             android:background="#411446"
             android:fontFamily="@font/product_sans_reg"
             android:text="Genie Mode"

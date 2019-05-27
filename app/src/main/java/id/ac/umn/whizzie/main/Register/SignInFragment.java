@@ -70,32 +70,14 @@ public class SignInFragment extends Fragment {
 
         ctx = this.getContext();
 
+
         forgotPass.setClickable(true);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final SharedPreferences shp = ctx.getSharedPreferences(PREFERENCE_FILENAME, PREFERENCE_MODE);
-
-        String uname = shp.getString(KEY_UNAME, "");
-        String passwd = shp.getString(KEY_PASSWORD, "");
-        if(!uname.isEmpty() && !uname.equals(null) && !passwd.isEmpty() && !passwd.equals(null)){
-            fbA.signInWithEmailAndPassword(uname, passwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        // Sign in successful
-                        Intent mainIntent = new Intent(getContext(), MainActivity.class);
-                        startActivity(mainIntent);
-                        getActivity().finish();
-                    }
-                }
-            });
-        }
-
         super.onViewCreated(view, savedInstanceState);
-
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +123,7 @@ public class SignInFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in successful
+                                SharedPreferences shp = ctx.getSharedPreferences(PREFERENCE_FILENAME, PREFERENCE_MODE);
                                 SharedPreferences.Editor shpEditor = shp.edit();
                                 shpEditor.putString(KEY_UNAME, edtEmail.getText().toString());
                                 shpEditor.putString(KEY_PASSWORD, edtPass.getText().toString());
