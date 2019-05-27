@@ -47,7 +47,7 @@ public class GenieProfileFragment extends Fragment {
     List<SearchCard> prodList;
 
     RecyclerView rv;
-    TextView dispName;
+    TextView dispName, descToko;
     ImageView profilePicture, backgroundPicture;
 
     DatabaseReference dbrf = FirebaseDatabase.getInstance().getReference();
@@ -71,6 +71,7 @@ public class GenieProfileFragment extends Fragment {
 
         rv = view.findViewById(R.id.genie_profile_products_list);
         dispName = view.findViewById(R.id.genie_profile_display_name);
+        descToko = view.findViewById(R.id.genie_profile_description);
 
         profilePicture = view.findViewById(R.id.genie_profile_profile_picture);
         backgroundPicture = view.findViewById(R.id.genie_profile_background_image);
@@ -88,12 +89,13 @@ public class GenieProfileFragment extends Fragment {
         dbrf.child("users").child(genieUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                genieName = dataSnapshot.child("name").getValue().toString();
+                genieName = dataSnapshot.child("toko").child("name").getValue().toString();
 
                 profPicPath = dataSnapshot.child("imgProfilePicture").getValue().toString();
                 bgPath = dataSnapshot.child("imgBackground").getValue().toString();
 
                 dispName.setText(genieName);
+                descToko.setText(dataSnapshot.child("toko").child("description").getValue().toString());
 
                 loadGenieProducts();
 

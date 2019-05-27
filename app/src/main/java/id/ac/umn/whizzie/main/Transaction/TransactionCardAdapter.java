@@ -65,7 +65,6 @@ public class TransactionCardAdapter extends RecyclerView.Adapter<TransactionCard
                     ((MainActivity)ctx).setFragment(new TransactionFragment());
                 }
             });
-
         }
         else {
             holder.transStatus.setVisibility(View.GONE);

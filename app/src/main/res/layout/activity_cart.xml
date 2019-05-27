@@ -7,22 +7,26 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cart_recview_items"
-        android:layout_width="385dp"
-        android:layout_height="553dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/cart_text_view_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="575dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/cart_text_view_total"
+        android:layout_width="92dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/product_sans_reg"
         android:text="Rp. 900.000,-"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,20 +34,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvTotal"
         app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.074" />
 
     <TextView
         android:id="@+id/cart_text_view_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="108dp"
+        android:layout_width="8dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
         android:fontFamily="@font/product_sans_reg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvAddress"
         app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <Button
         android:id="@+id/cart_checkout_button"
@@ -72,22 +74,24 @@
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="56dp"
         android:fontFamily="@font/product_sans_reg"
         android:text="Alamat :"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items" />
+        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
+        app:layout_constraintVertical_bias="0.13" />
 
     <TextView
         android:id="@+id/tvTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="39dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="120dp"
         android:fontFamily="@font/product_sans_reg"
         android:text="Total :"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cart_text_view_address"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items" />
+        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
+        app:layout_constraintVertical_bias="0.132" />
 </android.support.constraint.ConstraintLayout>

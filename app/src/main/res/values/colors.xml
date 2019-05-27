@@ -5,6 +5,7 @@
     <color name="colorAccent">#C70039</color>
     <color name="colorOrange">#FF5733</color>
     <color name="colorYellow">#FFC300</color>
+    <color name="colorYellowLight">#FFF1C5</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDarkGrey">#343434</color>
 </resources>

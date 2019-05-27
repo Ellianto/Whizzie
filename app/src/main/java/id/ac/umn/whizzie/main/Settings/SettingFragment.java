@@ -138,7 +138,8 @@ public class SettingFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                     String new_disp_name = newDispName.getText().toString();
 
-                    dbrf.child("users").child(currUid).child("name").setValue(new_disp_name);
+                    if(!genieMode) dbrf.child("users").child(currUid).child("name").setValue(new_disp_name);
+                    else dbrf.child("users").child(currUid).child("toko").child("name").setValue(new_disp_name);
                     Toast.makeText(ctx, "Display Name Changed Successfully!", Toast.LENGTH_SHORT).show();
                 }
             });

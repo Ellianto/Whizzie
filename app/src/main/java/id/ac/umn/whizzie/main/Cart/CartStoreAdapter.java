@@ -103,71 +103,92 @@ public class CartStoreAdapter extends RecyclerView.Adapter<CartStoreAdapter.Cart
                                     child(temp.getStoreKey()).
                                     child("statusDiterima").
                                     setValue(new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date()));
+
+                            ((MainActivity)ctx).setFragment(new TransactionFragment());
                         }
                     });
                 } else { // Sudah dikirim dan sudah diterima
                     holder.status.setText("Transaksi Selesai!");
                     holder.status.setClickable(false);
                 }
-            } else { // Genie
-                if(!temp.isSent()){ // Belum Dikirim
-                    holder.status.setText("Kirim Barang");
-                    holder.status.setClickable(true);
+            }
+            else { // Genie
+                dbrf.child("transaction").child(temp.getTransKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("statusPembayaran").getValue().toString().isEmpty()){
+                            holder.status.setText("Menunggu Pembayaran");
+                            holder.status.setClickable(false);
+                        } else {
+                            if(!temp.isSent() && !temp.isReceived()){ // Belum Dikirim
+                                holder.status.setText("Kirim Barang");
+                                holder.status.setClickable(true);
 
-                    holder.status.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                            builder.setTitle("Input No Resi");
+                                holder.status.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                                        builder.setTitle("Input No Resi");
 
-                            View dialogContent = LayoutInflater.from(ctx).inflate(R.layout.card_input_resi, null);
+                                        View dialogContent = LayoutInflater.from(ctx).inflate(R.layout.card_input_resi, null);
 
-                            final EditText noResiField = dialogContent.findViewById(R.id.input_no_resi);
+                                        final EditText noResiField = dialogContent.findViewById(R.id.input_no_resi);
 
-                            builder.setView(dialogContent);
-                            builder.setCancelable(true);
+                                        builder.setView(dialogContent);
+                                        builder.setCancelable(true);
 
-                            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    String noResi = noResiField.getText().toString();
+                                        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                String noResi = noResiField.getText().toString();
 
-                                    dbrf.child("transaction").
-                                            child(temp.getTransKey()).
-                                            child("pembelian").
-                                            child(temp.getStoreKey()).
-                                            child("noResi").
-                                            setValue(noResi);
+                                                dbrf.child("transaction").
+                                                        child(temp.getTransKey()).
+                                                        child("pembelian").
+                                                        child(temp.getStoreKey()).
+                                                        child("noResi").
+                                                        setValue(noResi);
 
-                                    dbrf.child("transaction").
-                                            child(temp.getTransKey()).
-                                            child("pembelian").
-                                            child(temp.getStoreKey()).
-                                            child("statusDikirim").
-                                            setValue(new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date()));
+                                                dbrf.child("transaction").
+                                                        child(temp.getTransKey()).
+                                                        child("pembelian").
+                                                        child(temp.getStoreKey()).
+                                                        child("statusDikirim").
+                                                        setValue(new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date()));
 
-                                    Toast.makeText(ctx, "Barang Berhasil Dikirim!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                                Toast.makeText(ctx, "Barang Berhasil Dikirim!", Toast.LENGTH_SHORT).show();
+                                                ((MainActivity)ctx).setFragment(new TransactionFragment());
+                                            }
+                                        });
 
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
 
-                            builder.show();
+                                        builder.show();
+                                    }
+                                });
+
+                            }
+                            else if(temp.isSent() && !temp.isReceived()){ // Sudah dikirim, tepi belum diterima
+                                holder.status.setText("Menunggu Penerimaan");
+                                holder.status.setClickable(false);
+                            }
+                            else if(temp.isSent() && temp.isReceived()){ // Sudah dikirim dan sudah diterima
+                                holder.status.setText("Transaksi Selesai!");
+                                holder.status.setClickable(false);
+                            }
                         }
-                    });
+                    }
 
-                } else if(!temp.isReceived()){ // Sudah dikirim, tepi belum diterima
-                    holder.status.setText("Menunggu Penerimaan");
-                    holder.status.setClickable(false);
-                } else { // Sudah dikirim dan sudah diterima
-                    holder.status.setText("Transaksi Selesai!");
-                    holder.status.setClickable(false);
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         }
 

@@ -85,20 +85,20 @@ public class PostFragment extends Fragment {
         upImage = view.findViewById(R.id.post_image_button_add);
 
         // Wish Section View Linking
-        wish_cardview   = view.findViewById(R.id.edit_card_view_wish);
-        wish_name       = view.findViewById(R.id.edit_wish_edit_text_wish_name);
-        wish_desc       = view.findViewById(R.id.edit_wish_edit_text_desc);
-        wish_combo_box  = view.findViewById(R.id.edit_wish_combo_box);
-        postWishButton  = view.findViewById(R.id.edit_button_wish);
+        wish_cardview   = view.findViewById(R.id.post_card_view_wish);
+        wish_name       = view.findViewById(R.id.post_wish_edit_text_wish_name);
+        wish_desc       = view.findViewById(R.id.post_wish_edit_text_desc);
+        wish_combo_box  = view.findViewById(R.id.post_wish_combo_box);
+        postWishButton  = view.findViewById(R.id.post_button_wish);
 
         // Product Section View Linking
-        prod_cardview    = view.findViewById(R.id.edit_card_view_product);
-        prod_name        = view.findViewById(R.id.edit_product_edit_text_product_name);
-        prod_mass        = view.findViewById(R.id.edit_product_edit_text_product_mass);
-        prod_price       = view.findViewById(R.id.edit_product_edit_text_product_price);
-        prod_desc        = view.findViewById(R.id.edit_product_edit_text_desc);
-        prod_combo_box   = view.findViewById(R.id.edit_product_combo_box);
-        postProductButton= view.findViewById(R.id.edit_button_product);
+        prod_cardview    = view.findViewById(R.id.post_card_view_product);
+        prod_name        = view.findViewById(R.id.post_product_edit_text_product_name);
+        prod_mass        = view.findViewById(R.id.post_product_edit_text_product_mass);
+        prod_price       = view.findViewById(R.id.post_product_edit_text_product_price);
+        prod_desc        = view.findViewById(R.id.post_product_edit_text_desc);
+        prod_combo_box   = view.findViewById(R.id.post_product_combo_box);
+        postProductButton= view.findViewById(R.id.post_button_product);
 
         // Largest Key of the item
         keyCount = 0;

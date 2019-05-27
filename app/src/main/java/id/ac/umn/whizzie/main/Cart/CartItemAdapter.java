@@ -107,6 +107,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         if(!ctx.getClass().equals(CartActivity.class)) viewHolder.deleteBtn.setVisibility(View.GONE);
         else {
             viewHolder.deleteBtn.setVisibility(View.VISIBLE);
+            viewHolder.itemQty.setEnabled(false);
 
             viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
