@@ -49,7 +49,7 @@ public class AddressCardAdapter extends RecyclerView.Adapter<AddressCardAdapter.
 
         final String addrKey = temp.getNameAddress();
 
-        v.receiver_name.setText(temp.getReceiverName());
+        v.receiver_name.setText(addrKey);
         v.postal_code.setText(temp.getPostalCode());
         v.province_name.setText(temp.getProvinceName());
         v.city_name.setText(temp.getCityName());

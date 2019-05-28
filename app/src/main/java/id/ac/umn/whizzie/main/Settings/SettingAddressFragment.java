@@ -89,13 +89,13 @@ public class SettingAddressFragment extends Fragment {
                         GenericTypeIndicator<Integer> gti = new GenericTypeIndicator<Integer>() {};
 
                         lac.add(new AddressCard(
-                            ds.getKey(),
+                                ds.getKey(),
                                 ds.child("cityName").getValue().toString(),
                                 ds.child("detailAddress").getValue().toString(),
                                 ds.child("phoneNum").getValue().toString(),
                                 String.valueOf(ds.child("postalCode").getValue(gti)),
                                 ds.child("provinceName").getValue().toString(),
-                                ds.child("cityName").getValue().toString(),
+                                ds.child("receiverName").getValue().toString(),
                                 storeAddress.equals(ds.getKey())
                         ));
                     }

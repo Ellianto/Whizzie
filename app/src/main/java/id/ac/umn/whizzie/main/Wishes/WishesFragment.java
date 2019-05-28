@@ -78,6 +78,7 @@ public class WishesFragment extends Fragment {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     final String userKey = ds.child("uidUpWish").getValue().toString();
                     final String upName = unamePair.get(userKey);
+                    final String upImage = ds.child("pictureWish").getValue().toString();
                     final String wishDesc = ds.child("descWish").getValue().toString();
                     final String wishTitle = ds.child("titleWish").getValue().toString();
 
@@ -91,7 +92,7 @@ public class WishesFragment extends Fragment {
                                     userKey,
                                     wishDesc,
                                     wishTitle,
-                                    wishKey + ".jpg",
+                                    upImage,
                                     wishKey,
                                     dataSS.getChildrenCount()
                             ));

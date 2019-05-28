@@ -15,6 +15,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,6 +45,7 @@ import java.util.List;
 
 import id.ac.umn.whizzie.R;
 import id.ac.umn.whizzie.main.Activity.DetailActivity;
+import id.ac.umn.whizzie.main.GenieProfile.GenieProfileFragment;
 import id.ac.umn.whizzie.main.Search.SearchCard;
 import id.ac.umn.whizzie.main.Search.SearchCardAdapter;
 
@@ -51,9 +53,10 @@ import id.ac.umn.whizzie.main.Search.SearchCardAdapter;
  * A simple {@link Fragment} subclass.
  */
 public class DetailsFragment extends Fragment {
-    ImageView dtlImage;
+    ImageView dtlImage, uploaderImage;
     Button dtlOffer, dtlATC, dtlEdit, dtlDelete;
-    TextView dtlTitle, dtlDesc, dtlRVTitle;
+    TextView dtlTitle, dtlDesc, dtlRVTitle, uploaderName;
+    CardView uploaderCard;
     RecyclerView rvItems;
 
     Context ctx;
@@ -131,6 +134,57 @@ public class DetailsFragment extends Fragment {
                 dtlEdit.setVisibility(View.GONE);
                 dtlDelete.setVisibility(View.GONE);
             }
+
+            dbrf.child("users").child(itemUploader).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    uploaderName.setText(dataSnapshot.child("toko").child("name").getValue().toString());
+
+                    String profPicPath;
+
+                    if(dataSnapshot.child("imgProfilePicture").getValue().toString().isEmpty()) profPicPath = "whizzie_assets/empty/empty.jpg";
+                    else profPicPath = "products/" + dataSnapshot.child("imgProfilePicture").getValue().toString();
+
+                    // Set Product Image
+                    strf.child(profPicPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) { new loadImage().execute(uri.toString()); }
+
+                        // Cara Fetch Image from Firebase Storage
+                        // Operasi-operasi network harus dilakukan di thread berbeda
+                        class loadImage extends AsyncTask<String, String, String> {
+                            @Override
+                            protected void onPreExecute() {
+                                super.onPreExecute();
+                            }
+
+                            @Override
+                            protected String doInBackground(String... strings) {
+                                try{
+                                    URL url = new URL(strings[0]);
+                                    final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                                    Handler h = new Handler(Looper.getMainLooper());
+
+                                    // Operasi yang mengubah View harus di Main Thread
+                                    // Karena akan dijalankan di dalam fragment, pakai handler
+                                    h.post(new Runnable() {
+                                        @Override
+                                        public void run() { uploaderImage.setImageBitmap(pic); }
+                                    });
+                                } catch (IOException e){ e.printStackTrace(); }
+
+                                return null;
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 
         @Override
@@ -206,6 +260,57 @@ public class DetailsFragment extends Fragment {
                 dtlEdit.setVisibility(View.GONE);
                 dtlDelete.setVisibility(View.GONE);
             }
+
+            dbrf.child("users").child(itemUploader).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    uploaderName.setText(dataSnapshot.child("name").getValue().toString());
+
+                    String profPicPath;
+
+                    if(dataSnapshot.child("imgProfilePicture").getValue().toString().isEmpty()) profPicPath = "whizzie_assets/empty/empty.jpg";
+                    else profPicPath = "products/" + dataSnapshot.child("imgProfilePicture").getValue().toString();
+
+                    // Set Product Image
+                    strf.child(profPicPath).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) { new loadImage().execute(uri.toString()); }
+
+                        // Cara Fetch Image from Firebase Storage
+                        // Operasi-operasi network harus dilakukan di thread berbeda
+                        class loadImage extends AsyncTask<String, String, String> {
+                            @Override
+                            protected void onPreExecute() {
+                                super.onPreExecute();
+                            }
+
+                            @Override
+                            protected String doInBackground(String... strings) {
+                                try{
+                                    URL url = new URL(strings[0]);
+                                    final Bitmap pic = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                                    Handler h = new Handler(Looper.getMainLooper());
+
+                                    // Operasi yang mengubah View harus di Main Thread
+                                    // Karena akan dijalankan di dalam fragment, pakai handler
+                                    h.post(new Runnable() {
+                                        @Override
+                                        public void run() { uploaderImage.setImageBitmap(pic); }
+                                    });
+                                } catch (IOException e){ e.printStackTrace(); }
+
+                                return null;
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 
         @Override
@@ -369,9 +474,11 @@ public class DetailsFragment extends Fragment {
     // On Click Listeners
     View.OnClickListener editItem = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-           ((DetailActivity) ctx).setFragment(new EditFragment());
-        }
+        public void onClick(View v) {((DetailActivity) ctx).setFragment(new EditFragment());}
+    };
+    View.OnClickListener offerProduct = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {((DetailActivity) ctx).setFragment(new OfferFragment());}
     };
 
     View.OnClickListener deleteItem = new View.OnClickListener() {
@@ -441,9 +548,18 @@ public class DetailsFragment extends Fragment {
         }
     };
 
-    View.OnClickListener offerProduct = new View.OnClickListener() {
+    View.OnClickListener goToGenieProfile = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {((DetailActivity) ctx).setFragment(new EditFragment());}
+        public void onClick(View v) {
+            Fragment fr = new GenieProfileFragment();
+
+            Bundle b = new Bundle();
+            b.putString("genieUid", itemUploader);
+
+            fr.setArguments(b);
+
+            ((DetailActivity)ctx).setFragment(fr);
+        }
     };
 
     public DetailsFragment() {
@@ -474,6 +590,10 @@ public class DetailsFragment extends Fragment {
         dtlEdit         = view.findViewById(R.id.detail_edit_button);
         dtlDelete       = view.findViewById(R.id.detail_delete_button);
 
+        uploaderCard    = view.findViewById(R.id.uploader_card);
+        uploaderImage   = view.findViewById(R.id.detail_uploader_image);
+        uploaderName    = view.findViewById(R.id.detail_uploader_name);
+
         rvItems         = view.findViewById(R.id.detail_recview_items);
 
         return view;
@@ -493,6 +613,8 @@ public class DetailsFragment extends Fragment {
         // Render Offered Stuffs
         if(isProduct){
             itemPath = "products";
+            uploaderCard.setClickable(true);
+            uploaderCard.setOnClickListener(goToGenieProfile);
             dtlRVTitle.setText("Offered Wishes");
 
             dtlOffer.setVisibility(View.GONE);
@@ -505,6 +627,7 @@ public class DetailsFragment extends Fragment {
         }
         else{
             itemPath = "wishes";
+            uploaderCard.setClickable(false);
             dtlRVTitle.setText("Offered Products");
 
             dtlOffer.setVisibility(View.VISIBLE);

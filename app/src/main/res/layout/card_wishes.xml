@@ -90,7 +90,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wishes_card_image"
-            tools:srcCompat="@drawable/ic_christmas_star" />
+            android:src="@drawable/ic_christmas_star" />
 
         <TextView
             android:id="@+id/wishes_card_title"

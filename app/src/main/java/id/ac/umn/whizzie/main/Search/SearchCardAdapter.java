@@ -74,6 +74,7 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
             priceText = String.valueOf(temp.getCardPrice());
         }
 
+
         holder.tvCardPrice.setText(priceText);
         holder.tvCardCount.setText(String.valueOf(temp.getCardCount()));
         holder.tvKey.setText(temp.getItemKey());
@@ -92,12 +93,15 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(ctx, DetailActivity.class);
-                    Bundle b = new Bundle();
 
-                    b.putBoolean("isProduct", true);
-                    b.putLong("itemKey", itemKey);
+                    i.putExtra("isProduct", true);
+                    i.putExtra("itemKey", String.valueOf(itemKey));
 
-                    i.putExtras(b);
+                    if(ctx.getClass().equals(MainActivity.class))
+                        i.putExtra("genieMode", ((MainActivity)  ctx).getMode());
+                    else if(ctx.getClass().equals(DetailActivity.class))
+                        i.putExtra("genieMode", ((DetailActivity)ctx).getMode());
+
                     ctx.startActivity(i);
                 }
             };
@@ -113,7 +117,7 @@ public class SearchCardAdapter extends RecyclerView.Adapter<SearchCardAdapter.Se
                     Intent i = new Intent(ctx, DetailActivity.class);
 
                     i.putExtra("isProduct", false);
-                    i.putExtra("itemKey", itemKey);
+                    i.putExtra("itemKey", String.valueOf(itemKey));
 
                     if(ctx.getClass().equals(MainActivity.class))
                         i.putExtra("genieMode", ((MainActivity)  ctx).getMode());

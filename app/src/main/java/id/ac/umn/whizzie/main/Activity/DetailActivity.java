@@ -56,16 +56,9 @@ public class DetailActivity extends AppCompatActivity {
 
         genieMode = getIntent().getBooleanExtra("genieMode", false);
         isProduct = getIntent().getBooleanExtra("isProduct", false);
-        itemKey = String.valueOf(getIntent().getLongExtra("itemKey", 0));
+        itemKey = getIntent().getStringExtra("itemKey");
 
-        Fragment dtl = new DetailsFragment();
-
-        Bundle b = new Bundle();
-
-        b.putString("itemKey", itemKey);
-
-        dtl.setArguments(b);
-        setFragment(dtl);
+        setFragment(new DetailsFragment());
     }
 
     public void setFragment(Fragment fragment) {

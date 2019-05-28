@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,8 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Wi
         viewHolder.tvWishKey.setText(temp.getWishKey());
         viewHolder.tvUserKey.setText(temp.getUserKey());
 
+        Log.d("DEBUG", temp.getWishKey());
+
         viewHolder.cardViewHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +71,7 @@ public class WishesCardAdapter extends RecyclerView.Adapter<WishesCardAdapter.Wi
 
                 i.putExtra("isProduct", false);
                 i.putExtra("itemKey", temp.getWishKey());
-                i.putExtra("genieMode", ((MainActivity)  ctx).getMode());
+                i.putExtra("genieMode", ((MainActivity) ctx).getMode());
 
                 ctx.startActivity(i);
             }

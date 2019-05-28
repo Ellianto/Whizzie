@@ -22,76 +22,91 @@
 
     <TextView
         android:id="@+id/cart_text_view_total"
-        android:layout_width="92dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="92dp"
         android:fontFamily="@font/product_sans_reg"
         android:text="Rp. 900.000,-"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvTotal"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="0.074" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/cart_text_view_address"
-        android:layout_width="8dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="112dp"
         android:fontFamily="@font/product_sans_reg"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvAddress"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddress"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/cart_checkout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="36dp"
+        android:background="#FF5722"
         android:fontFamily="@font/product_sans_reg"
         android:text="Check Out"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cart_address_button" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_text_view_total" />
 
     <Button
         android:id="@+id/cart_address_button"
-        android:layout_width="wrap_content"
+        android:layout_width="142dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="36dp"
+        android:background="#411446"
         android:fontFamily="@font/product_sans_reg"
         android:text="Choose Address"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_text_view_address" />
 
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_marginStart="56dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="120dp"
         android:fontFamily="@font/product_sans_reg"
         android:text="Alamat :"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvTotal"
         android:layout_width="39dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="216dp"
+        android:layout_marginBottom="120dp"
         android:fontFamily="@font/product_sans_reg"
         android:text="Total :"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cart_text_view_address"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recview_items"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -196,7 +196,7 @@ public class TransactionFragment extends Fragment {
 
                                                         storeTotal += snap.getValue(gti) * datass.child("priceProduct").getValue(gti);
 
-                                                        if(icList.size() <= productCount){
+                                                        if(icList.size() == productCount){
                                                             scList.add(new CartStoreCard(
                                                                     ss.child("toko").child("name").getValue().toString(),
                                                                     ss.getKey() + "/" + ss.child("imgProfilePicture").getValue().toString(),
@@ -210,7 +210,7 @@ public class TransactionFragment extends Fragment {
                                                                     genieMode
                                                             ));
 
-                                                            if(storeCount >= scList.size()){
+                                                            if(storeCount == scList.size()){
                                                                 tcList.add(new TransactionCard(
                                                                         dataSnap.getKey(),
                                                                         dataSnap.child("address").getValue().toString(),

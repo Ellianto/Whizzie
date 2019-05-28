@@ -58,6 +58,8 @@
                 android:layout_marginEnd="28dp"
                 android:text="Bayar"
                 android:textSize="12sp"
+                android:background="#411446"
+                android:textColor="#FFFFFF"
                 android:fontFamily="@font/product_sans_reg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

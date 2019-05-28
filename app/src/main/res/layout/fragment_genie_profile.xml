@@ -26,13 +26,13 @@
             android:id="@+id/genie_profile_profile_picture"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
             android:background="@drawable/image_rounded_corner"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/genie_profile_background_image"
             tools:srcCompat="@mipmap/elon_musk" />
@@ -58,18 +58,21 @@
         <TextView
             android:id="@+id/genie_profile_description"
             android:layout_width="0dp"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/product_sans_reg"
             android:text="Descriptions Store"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/genie_profile_products_list"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genie_profile_display_name" />
+            app:layout_constraintTop_toBottomOf="@+id/genie_profile_display_name"
+            app:layout_constraintVertical_bias="0.0" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/genie_profile_products_list"

@@ -332,7 +332,11 @@ public class ProfileFragment extends Fragment {
         profile_setting_button.setOnClickListener(goToSettings);
 
         if(genieMode) modeSwitch.setText("Wisher Mode");
-        else modeSwitch.setText("Genie Mode");
+        else {
+            modeSwitch.setText("Genie Mode");
+            modeSwitch.setBackgroundColor(getResources().getColor(R.color.colorOrange));
+        }
+
         modeSwitch.setOnClickListener(switchMode);
     }
 
